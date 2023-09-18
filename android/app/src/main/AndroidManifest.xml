@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ez_trip">
+    package="com.example.terminal">
    <application
-        android:label="ez_trip"
+        android:label="terminal"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -3,11 +3,11 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ez_trip/shared/components/buttons.dart';
-import 'package:ez_trip/shared/components/radius.dart';
-import 'package:ez_trip/shared/utils/index.dart';
-import 'package:ez_trip/shared/utils/sizing.dart';
-import 'package:ez_trip/theme/colors.dart';
+import 'package:terminal/shared/components/buttons.dart';
+import 'package:terminal/shared/components/radius.dart';
+import 'package:terminal/shared/utils/index.dart';
+import 'package:terminal/shared/utils/sizing.dart';
+import 'package:terminal/theme/colors.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

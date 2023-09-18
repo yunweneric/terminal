@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import 'package:ez_trip/shared/components/buttons.dart';
-import 'package:ez_trip/shared/components/radius.dart';
-import 'package:ez_trip/shared/utils/index.dart';
-import 'package:ez_trip/shared/utils/sizing.dart';
+import 'package:terminal/shared/components/buttons.dart';
+import 'package:terminal/shared/components/radius.dart';
+import 'package:terminal/shared/utils/index.dart';
+import 'package:terminal/shared/utils/sizing.dart';
 
 baseAlert({
   required BuildContext context,

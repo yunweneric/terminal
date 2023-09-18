@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ez_trip/shared/components/radius.dart';
-import 'package:ez_trip/shared/utils/sizing.dart';
-import 'package:ez_trip/theme/colors.dart';
+import 'package:terminal/shared/components/radius.dart';
+import 'package:terminal/shared/utils/sizing.dart';
+import 'package:terminal/theme/colors.dart';
 
 Widget submitButton(
     {required BuildContext context,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ez_trip/shared/components/radius.dart';
+import 'package:terminal/shared/components/radius.dart';
 
 InputDecoration authInputDecoration({required String hintText, required BuildContext context, label, prefixIcon, suffix}) {
   return InputDecoration(

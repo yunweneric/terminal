@@ -1,4 +1,4 @@
-package com.example.ez_trip
+package com.example.terminal
 
 import io.flutter.embedding.android.FlutterActivity
 

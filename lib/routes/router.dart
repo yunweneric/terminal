@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ez_trip/screens/auth/login_screen.dart';
-import 'package:ez_trip/screens/auth/register_screen.dart';
-import 'package:ez_trip/screens/home/home_screen.dart';
-import 'package:ez_trip/screens/start/splash_screen.dart';
-import 'package:ez_trip/screens/start/start_screen.dart';
+import 'package:terminal/screens/auth/login_screen.dart';
+import 'package:terminal/screens/auth/register_screen.dart';
+import 'package:terminal/screens/home/home_screen.dart';
+import 'package:terminal/screens/start/splash_screen.dart';
+import 'package:terminal/screens/start/start_screen.dart';
 
 import 'index.dart';
 

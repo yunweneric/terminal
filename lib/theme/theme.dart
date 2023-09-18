@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ez_trip/shared/widgets/app_input.dart';
+import 'package:terminal/shared/widgets/app_input.dart';
 
 import 'colors.dart';
 

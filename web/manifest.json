@@ -1,6 +1,6 @@
 {
-    "name": "ez_trip",
-    "short_name": "ez_trip",
+    "name": "terminal",
+    "short_name": "terminal",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

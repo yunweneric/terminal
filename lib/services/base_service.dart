@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:ez_trip/models/base/base_res_model.dart';
-import 'package:ez_trip/shared/utils/local_storage.dart';
-import 'package:ez_trip/shared/utils/logger_util.dart';
+import 'package:terminal/models/base/base_res_model.dart';
+import 'package:terminal/shared/utils/local_storage.dart';
+import 'package:terminal/shared/utils/logger_util.dart';
 
 String baseUrl = "";
 

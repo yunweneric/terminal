@@ -3,10 +3,10 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ez_trip/routes/index.dart';
-import 'package:ez_trip/shared/utils/image_assets.dart';
-import 'package:ez_trip/shared/utils/local_storage.dart';
-import 'package:ez_trip/shared/utils/sizing.dart';
+import 'package:terminal/routes/index.dart';
+import 'package:terminal/shared/utils/image_assets.dart';
+import 'package:terminal/shared/utils/local_storage.dart';
+import 'package:terminal/shared/utils/sizing.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

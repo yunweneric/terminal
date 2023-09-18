@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ez_trip/routes/index.dart';
-import 'package:ez_trip/shared/components/buttons.dart';
-import 'package:ez_trip/shared/components/clippers.dart';
-import 'package:ez_trip/shared/components/radius.dart';
-import 'package:ez_trip/shared/utils/index.dart';
-import 'package:ez_trip/shared/utils/sizing.dart';
-import 'package:ez_trip/theme/colors.dart';
+import 'package:terminal/routes/index.dart';
+import 'package:terminal/shared/components/buttons.dart';
+import 'package:terminal/shared/components/clippers.dart';
+import 'package:terminal/shared/components/radius.dart';
+import 'package:terminal/shared/utils/index.dart';
+import 'package:terminal/shared/utils/sizing.dart';
+import 'package:terminal/theme/colors.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});

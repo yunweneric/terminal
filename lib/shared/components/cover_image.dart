@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:ez_trip/shared/utils/index.dart';
-import 'package:ez_trip/shared/utils/sizing.dart';
-import 'package:ez_trip/theme/colors.dart';
+import 'package:terminal/shared/utils/index.dart';
+import 'package:terminal/shared/utils/sizing.dart';
+import 'package:terminal/theme/colors.dart';
 
 Widget coverImage({
   required BuildContext context,

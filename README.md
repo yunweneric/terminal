@@ -1,4 +1,4 @@
-# ez_trip
+# terminal
 
 A new Flutter project.
 
