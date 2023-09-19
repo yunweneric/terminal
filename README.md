@@ -1,4 +1,4 @@
-# terminal
+# xoecollect
 
 A new Flutter project.
 

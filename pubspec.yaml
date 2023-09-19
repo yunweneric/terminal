@@ -1,4 +1,4 @@
-name: terminal
+name: xoecollect
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -11,9 +11,11 @@ environment:
 
 dependencies:
   animate_do: ^3.0.2
+  awesome_dialog: ^3.1.0
   cached_network_image: ^3.2.3
   cupertino_icons: ^1.0.2
   easy_localization: ^3.0.1
+  faker: ^2.1.0
   flutter:
     sdk: flutter
   flutter_animate: ^4.1.1+1
@@ -33,8 +35,10 @@ dependencies:
   logger: ^1.3.0
   lottie: ^2.3.2
   modal_bottom_sheet: ^3.0.0-pre
+  pinput: ^3.0.1
   shared_preferences: ^2.0.18
   shimmer: ^2.0.0
+  url_launcher: ^6.1.14
   uuid: ^3.0.7
 
 dev_dependencies:

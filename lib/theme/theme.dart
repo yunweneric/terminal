@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:terminal/shared/widgets/app_input.dart';
+import 'package:xoecollect/shared/widgets/app_input.dart';
 
 import 'colors.dart';
 
-class ZappyMealAppTheme {
+class AppTheme {
   // 1
   static TextTheme lightTextTheme = TextTheme(
-    bodyLarge: GoogleFonts.merriweather(fontSize: 14.0.sp, fontWeight: FontWeight.w700, color: kDark),
+    bodyLarge: GoogleFonts.openSans(fontSize: 14.0.sp, fontWeight: FontWeight.w700, color: kDark),
     bodyMedium: GoogleFonts.openSans(fontSize: 14.0.sp, fontWeight: FontWeight.normal, color: kDark),
-    displayLarge: GoogleFonts.merriweather(fontSize: 28.0.sp, fontWeight: FontWeight.bold, color: kDark),
-    displayMedium: GoogleFonts.merriweather(fontSize: 20.0.sp, fontWeight: FontWeight.w500, color: kDark),
-    displaySmall: GoogleFonts.merriweather(fontSize: 14.0.sp, fontWeight: FontWeight.w600, color: kDark),
-    titleMedium: GoogleFonts.merriweather(fontSize: 16.0.sp, fontWeight: FontWeight.w600, color: kDark),
+    displayLarge: GoogleFonts.openSans(fontSize: 28.0.sp, fontWeight: FontWeight.bold, color: kDark),
+    displayMedium: GoogleFonts.openSans(fontSize: 16.0.sp, fontWeight: FontWeight.w500, color: kDark),
+    displaySmall: GoogleFonts.openSans(fontSize: 12.0.sp, fontWeight: FontWeight.w600, color: kDark),
+    titleMedium: GoogleFonts.openSans(fontSize: 16.0.sp, fontWeight: FontWeight.w600, color: kDark),
     labelMedium: TextStyle(fontSize: 14.0.sp, color: kGrey, fontWeight: FontWeight.w500),
   );
 
   // 2
   static TextTheme darkTextTheme = TextTheme(
-    bodyLarge: GoogleFonts.merriweather(fontSize: 14.0.sp, fontWeight: FontWeight.w700, color: kWhite),
+    bodyLarge: GoogleFonts.openSans(fontSize: 14.0.sp, fontWeight: FontWeight.w700, color: kWhite),
     bodyMedium: GoogleFonts.openSans(fontSize: 14.0.sp, fontWeight: FontWeight.normal, color: kWhite),
-    displayLarge: GoogleFonts.merriweather(fontSize: 28.0.sp, fontWeight: FontWeight.bold, color: kWhite),
-    displayMedium: GoogleFonts.merriweather(fontSize: 20.0.sp, fontWeight: FontWeight.w500, color: kWhite),
-    displaySmall: GoogleFonts.merriweather(fontSize: 14.0.sp, fontWeight: FontWeight.w600, color: kWhite),
-    titleMedium: GoogleFonts.merriweather(fontSize: 16.0.sp, fontWeight: FontWeight.w600, color: kWhite),
+    displayLarge: GoogleFonts.openSans(fontSize: 28.0.sp, fontWeight: FontWeight.bold, color: kWhite),
+    displayMedium: GoogleFonts.openSans(fontSize: 20.0.sp, fontWeight: FontWeight.w500, color: kWhite),
+    displaySmall: GoogleFonts.openSans(fontSize: 14.0.sp, fontWeight: FontWeight.w600, color: kWhite),
+    titleMedium: GoogleFonts.openSans(fontSize: 16.0.sp, fontWeight: FontWeight.w600, color: kWhite),
     labelMedium: TextStyle(fontSize: 14.0.sp, color: kGrey, fontWeight: FontWeight.w500),
   );
 

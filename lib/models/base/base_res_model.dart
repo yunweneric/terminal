@@ -1,17 +1,15 @@
-// To parse this JSON data, do
+// // To parse this JSON data, do
 //
-//     final baseResponse = baseResponseFromJson(jsonString);
+//     final AppbaseResponse = AppbaseResponseFromJson(jsonString);
 
 import 'dart:convert';
 
-import 'package:flutter/src/widgets/framework.dart';
+AppBaseResponse appbaseResponseFromJson(String str) => AppBaseResponse.fromJson(json.decode(str));
 
-BaseResponse baseResponseFromJson(String str) => BaseResponse.fromJson(json.decode(str));
+String appbaseResponseToJson(AppBaseResponse data) => json.encode(data.toJson());
 
-String baseResponseToJson(BaseResponse data) => json.encode(data.toJson());
-
-class BaseResponse {
-  BaseResponse({
+class AppBaseResponse {
+  AppBaseResponse({
     required this.statusCode,
     required this.message,
     required this.data,
@@ -21,7 +19,7 @@ class BaseResponse {
   final String message;
   Map<String, dynamic> data;
 
-  factory BaseResponse.fromJson(Map<String, dynamic> json) => BaseResponse(
+  factory AppBaseResponse.fromJson(Map<String, dynamic> json) => AppBaseResponse(
         statusCode: json["statusCode"],
         message: json["message"],
         data: json["data"],
@@ -32,6 +30,4 @@ class BaseResponse {
         "message": message,
         "data": data,
       };
-
-  googleLogin(BuildContext context) {}
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:terminal/shared/components/radius.dart';
-import 'package:terminal/shared/utils/sizing.dart';
-import 'package:terminal/theme/colors.dart';
+import 'package:xoecollect/shared/components/radius.dart';
+import 'package:xoecollect/shared/utils/sizing.dart';
+import 'package:xoecollect/theme/colors.dart';
 
 Widget submitButton(
     {required BuildContext context,
@@ -23,7 +23,7 @@ Widget submitButton(
     bool loading = false,
     bool isReversed = false}) {
   return SizedBox(
-    width: width == null ? kwidth(context) : width,
+    width: width == null ? kWidth(context) : width,
     child: ElevatedButton(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: borderRadius ?? radiusSm(), side: borderSide == null ? BorderSide.none : borderSide),

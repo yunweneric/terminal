@@ -3,10 +3,10 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
-import 'package:terminal/routes/index.dart';
-import 'package:terminal/shared/utils/image_assets.dart';
-import 'package:terminal/shared/utils/local_storage.dart';
-import 'package:terminal/shared/utils/sizing.dart';
+import 'package:xoecollect/routes/index.dart';
+import 'package:xoecollect/shared/utils/image_assets.dart';
+import 'package:xoecollect/shared/utils/local_storage.dart';
+import 'package:xoecollect/shared/utils/sizing.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -23,10 +23,10 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   reRouteUser() async {
-    bool hasInit = await LocalPrefs.getInit();
+    bool hasInit = await LocalPreferences.getInit();
     if (!hasInit) {
       Future.delayed(1200.ms, () {
-        context.go(AppRoutes.start);
+        context.go(AppRoutes.login);
       });
     }
   }
@@ -35,8 +35,8 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: kheight(context),
-        width: kwidth(context),
+        height: kHeight(context),
+        width: kWidth(context),
         child: Bounce(child: Image.asset(ImageAssets.logo_and_name, scale: 2)),
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor.withOpacity(1),

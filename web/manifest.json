@@ -1,6 +1,6 @@
 {
-    "name": "terminal",
-    "short_name": "terminal",
+    "name": "xoecollect",
+    "short_name": "xoecollect",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

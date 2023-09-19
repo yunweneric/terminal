@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:terminal/screens/auth/login_screen.dart';
-import 'package:terminal/screens/auth/register_screen.dart';
-import 'package:terminal/screens/home/home_screen.dart';
-import 'package:terminal/screens/start/splash_screen.dart';
-import 'package:terminal/screens/start/start_screen.dart';
+import 'package:xoecollect/models/others/routing_models.dart';
+import 'package:xoecollect/screens/auth/login_screen.dart';
+import 'package:xoecollect/screens/auth/pin_screen.dart';
+import 'package:xoecollect/screens/auth/verify_screen.dart';
+import 'package:xoecollect/screens/home/home_screen.dart';
+import 'package:xoecollect/screens/start/splash_screen.dart';
+import 'package:xoecollect/screens/start/start_screen.dart';
 
 import 'index.dart';
 
@@ -40,8 +42,15 @@ final routes = GoRouter(
       pageBuilder: (context, state) => transitionEffect(state: state, child: LoginScreen()),
     ),
     GoRoute(
-      path: AppRoutes.register,
-      pageBuilder: (context, state) => transitionEffect(state: state, child: RegisterScreen()),
+      path: AppRoutes.add_pin_screen,
+      pageBuilder: (context, state) => transitionEffect(state: state, child: AddPinScreen(fromSplashScreen: false)),
+    ),
+    GoRoute(
+      path: AppRoutes.verify_screen,
+      pageBuilder: (context, state) => transitionEffect(
+        state: state,
+        child: VerifyScreen(verify_data: state.extra as VerificationRoutingModel),
+      ),
     ),
   ],
 );

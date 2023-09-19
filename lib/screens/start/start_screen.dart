@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:terminal/routes/index.dart';
-import 'package:terminal/shared/components/buttons.dart';
-import 'package:terminal/shared/components/clippers.dart';
-import 'package:terminal/shared/components/radius.dart';
-import 'package:terminal/shared/utils/index.dart';
-import 'package:terminal/shared/utils/sizing.dart';
-import 'package:terminal/theme/colors.dart';
+import 'package:xoecollect/routes/index.dart';
+import 'package:xoecollect/shared/components/buttons.dart';
+import 'package:xoecollect/shared/components/clippers.dart';
+import 'package:xoecollect/shared/components/radius.dart';
+import 'package:xoecollect/shared/utils/index.dart';
+import 'package:xoecollect/shared/utils/sizing.dart';
+import 'package:xoecollect/theme/colors.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -24,9 +24,8 @@ class _StartScreenState extends State<StartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: kheight(context),
-        width: kwidth(context),
-        child: page(context: context),
+        height: kHeight(context),
+        width: kWidth(context),
       ),
     );
   }
@@ -36,8 +35,8 @@ class _StartScreenState extends State<StartScreen> {
       children: [
         Builder(builder: (context) {
           return Container(
-            width: kwidth(context),
-            height: kheight(context) * 0.7,
+            width: kWidth(context),
+            height: kHeight(context) * 0.7,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(ImageAssets.base_splash + "${current_index}.png"),
@@ -52,8 +51,8 @@ class _StartScreenState extends State<StartScreen> {
           child: ClipPath(
             clipper: AppCustomClipper(),
             child: Container(
-              height: kheight(context) * 0.5,
-              width: kwidth(context),
+              height: kHeight(context) * 0.5,
+              width: kWidth(context),
               decoration: BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -120,7 +119,7 @@ class _StartScreenState extends State<StartScreen> {
                           onPressed: () {
                             context.go(AppRoutes.login);
                           },
-                          padding: kpadding(10.w, 15.h),
+                          padding: kPadding(10.w, 15.h),
                           text: "Login",
                         ),
                       ),
@@ -128,7 +127,7 @@ class _StartScreenState extends State<StartScreen> {
                       SlideInUp(
                         delay: 400.ms,
                         child: submitButton(
-                          padding: kpadding(10.w, 12.h),
+                          padding: kPadding(10.w, 12.h),
                           width: 180.w,
                           context: context,
                           onPressed: () {},
@@ -151,7 +150,7 @@ class _StartScreenState extends State<StartScreen> {
   Widget textWidget({required BuildContext context, required String first_text, required String second_text, required String description}) {
     return FadeIn(
       child: Container(
-        padding: kpadding(50.w, 0),
+        padding: kPadding(50.w, 0),
         child: Column(
           children: [
             RichText(

@@ -7,6 +7,8 @@ class AppRoutes {
   static const auth = "/auth";
   static const login = "/login";
   static const register = "/register";
+  static const verify_screen = "/verify_screen";
+  static const add_pin_screen = "/add_pin_screen";
 
   // ** Layout routes
   static const base = "/base";

@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:terminal/shared/utils/index.dart';
-import 'package:terminal/shared/utils/sizing.dart';
-import 'package:terminal/theme/colors.dart';
+import 'package:xoecollect/shared/utils/index.dart';
+import 'package:xoecollect/shared/utils/sizing.dart';
+import 'package:xoecollect/theme/colors.dart';
 
 Widget coverImage({
   required BuildContext context,
@@ -23,14 +23,14 @@ Widget coverImage({
         borderRadius: borderRadius != null ? BorderRadius.circular(borderRadius) : BorderRadius.circular(0),
         child: CachedNetworkImage(
           imageUrl: url == null || url == "" ? ImageAssets.cover_error : url,
-          width: kwidth(context),
+          width: kWidth(context),
           height: height,
           alignment: alignment ?? Alignment.center,
           progressIndicatorBuilder: (context, url, downloadProgress) => Shimmer.fromColors(
             baseColor: Theme.of(context).highlightColor,
             highlightColor: Theme.of(context).cardColor,
             child: Container(
-              width: kwidth(context),
+              width: kWidth(context),
               height: height,
               color: Theme.of(context).cardColor,
               child: Center(
@@ -40,7 +40,7 @@ Widget coverImage({
           ),
           fit: BoxFit.cover,
           errorWidget: (context, url, error) => Container(
-            width: kwidth(context),
+            width: kWidth(context),
             height: height,
             child: Icon(Icons.error),
             decoration: BoxDecoration(color: Theme.of(context).highlightColor),
