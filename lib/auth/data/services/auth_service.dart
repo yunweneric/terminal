@@ -1,8 +1,8 @@
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:xoecollect/models/auth/login_req_model.dart';
-import 'package:xoecollect/models/auth/reset_pin_req_model.dart';
-import 'package:xoecollect/models/base/base_res_model.dart';
-import 'package:xoecollect/services/base_service.dart';
+import 'package:xoecollect/auth/data/model/login_req_model.dart';
+import 'package:xoecollect/auth/data/model/reset_pin_req_model.dart';
+import 'package:xoecollect/shared/models/base/base_res_model.dart';
+import 'package:xoecollect/shared/services/base_service.dart';
 
 class AuthService extends BaseService {
   Future<AppBaseResponse> phoneLogin(BuildContext context, LoginRequestModel model) async {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:xoecollect/models/others/routing_models.dart';
-import 'package:xoecollect/screens/auth/login_screen.dart';
-import 'package:xoecollect/screens/auth/pin_screen.dart';
-import 'package:xoecollect/screens/auth/verify_screen.dart';
-import 'package:xoecollect/screens/home/home_screen.dart';
-import 'package:xoecollect/screens/start/splash_screen.dart';
-import 'package:xoecollect/screens/start/start_screen.dart';
+import 'package:xoecollect/auth/screens/login_screen.dart';
+import 'package:xoecollect/auth/screens/pin_screen.dart';
+import 'package:xoecollect/auth/screens/verify_screen.dart';
+import 'package:xoecollect/shared/models/others/routing_models.dart';
+import 'package:xoecollect/home/home_screen.dart';
+import 'package:xoecollect/start/splash_screen.dart';
+import 'package:xoecollect/start/start_screen.dart';
 
 import 'index.dart';
 

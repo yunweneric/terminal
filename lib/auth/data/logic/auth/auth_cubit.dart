@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:xoecollect/models/auth/login_req_model.dart';
-import 'package:xoecollect/models/auth/reset_pin_req_model.dart';
-import 'package:xoecollect/models/auth/token_res.dart';
-import 'package:xoecollect/models/auth/verification_res_model.dart';
-import 'package:xoecollect/models/base/base_res_model.dart';
-import 'package:xoecollect/services/auth_service.dart';
+import 'package:xoecollect/auth/data/model/login_req_model.dart';
+import 'package:xoecollect/auth/data/model/reset_pin_req_model.dart';
+import 'package:xoecollect/auth/data/model/token_res.dart';
+import 'package:xoecollect/auth/data/model/verification_res_model.dart';
+import 'package:xoecollect/shared/models/base/base_res_model.dart';
+import 'package:xoecollect/auth/data/services/auth_service.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 part 'auth_state.dart';
 

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:xoecollect/models/account/user_model.dart';
+import 'package:xoecollect/shared/models/account/user_model.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 
 class LocalPreferences {

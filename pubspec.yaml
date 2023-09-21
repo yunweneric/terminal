@@ -13,9 +13,12 @@ dependencies:
   animate_do: ^3.0.2
   awesome_dialog: ^3.1.0
   cached_network_image: ^3.2.3
+  cloud_firestore: ^4.9.2
   cupertino_icons: ^1.0.2
   easy_localization: ^3.0.1
   faker: ^2.1.0
+  firebase_auth: ^4.10.0
+  firebase_core: ^2.16.0
   flutter:
     sdk: flutter
   flutter_animate: ^4.1.1+1

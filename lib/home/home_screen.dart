@@ -1,20 +1,17 @@
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
-import 'package:xoecollect/models/account/user_model.dart';
+import 'package:xoecollect/home/home_card.dart';
+import 'package:xoecollect/home/home_header.dart';
 import 'package:xoecollect/routes/route_names.dart';
-import 'package:xoecollect/screens/home/home_card.dart';
-import 'package:xoecollect/screens/home/home_header.dart';
 import 'package:xoecollect/shared/components/avatar_circle.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
 import 'package:xoecollect/shared/components/data_builder.dart';
 import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/components/states_widgets.dart';
+import 'package:xoecollect/shared/models/account/user_model.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/theme/colors.dart';
 

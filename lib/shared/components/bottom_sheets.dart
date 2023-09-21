@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:xoecollect/models/others/sheet_action_model.dart';
+import 'package:xoecollect/shared/models/others/sheet_action_model.dart';
 import 'package:xoecollect/shared/components/loaders.dart';
 import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/helpers/helpers.dart';

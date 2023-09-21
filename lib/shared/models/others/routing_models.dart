@@ -1,4 +1,4 @@
-import 'package:xoecollect/models/base/base_res_model.dart';
+import 'package:xoecollect/shared/models/base/base_res_model.dart';
 
 class VerificationRoutingModel {
   final AppBaseResponse data;

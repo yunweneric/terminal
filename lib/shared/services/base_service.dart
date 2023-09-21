@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:xoecollect/models/base/base_res_model.dart';
+import 'package:xoecollect/shared/models/base/base_res_model.dart';
 import 'package:xoecollect/shared/utils/local_storage.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 
