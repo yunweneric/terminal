@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "869980929762",
+    "project_id": "xoe-collect",
+    "storage_bucket": "xoe-collect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869980929762:android:eb975a6ea75827258b28bb",
+        "android_client_info": {
+          "package_name": "com.bickdrim.xoecollect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFG2CMxvCyEaVfYP7ORnaApZ4DsiblYwM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

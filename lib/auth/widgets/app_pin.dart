@@ -5,7 +5,8 @@ import 'package:xoecollect/shared/components/radius.dart';
 
 class AppPin extends StatefulWidget {
   final void Function(String)? onChanged;
-  const AppPin({super.key, this.onChanged});
+  final int? length;
+  const AppPin({super.key, this.onChanged, this.length});
 
   @override
   State<AppPin> createState() => _AppPinState();
@@ -25,7 +26,7 @@ class _AppPinState extends State<AppPin> {
       ),
     );
     return Pinput(
-      length: 4,
+      length: widget.length ?? 6,
       // controller: controller,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       errorText: null,

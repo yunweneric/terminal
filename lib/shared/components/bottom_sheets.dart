@@ -17,7 +17,9 @@ class AppSheet {
       backgroundColor: Theme.of(context).cardColor,
       context: context,
       builder: (context) => child,
+      // topControl: Container(),
       useRootNavigator: false,
+      barrierColor: kDark.withOpacity(0.7),
       isDismissible: isDismissible ?? true,
       enableDrag: enableDrag ?? true,
     );
@@ -71,6 +73,7 @@ class AppSheet {
     AlignmentGeometry? alignment,
     bool? isDismissible,
     bool? enableDrag,
+    VoidCallback? onClose,
   }) {
     return baseBottomSheet(
       context: context,

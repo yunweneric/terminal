@@ -8,24 +8,24 @@ import 'colors.dart';
 class AppTheme {
   // 1
   static TextTheme lightTextTheme = TextTheme(
-    bodyLarge: GoogleFonts.openSans(fontSize: 14.0.sp, fontWeight: FontWeight.w700, color: kDark),
-    bodyMedium: GoogleFonts.openSans(fontSize: 14.0.sp, fontWeight: FontWeight.normal, color: kDark),
-    displayLarge: GoogleFonts.openSans(fontSize: 28.0.sp, fontWeight: FontWeight.bold, color: kDark),
-    displayMedium: GoogleFonts.openSans(fontSize: 16.0.sp, fontWeight: FontWeight.w500, color: kDark),
-    displaySmall: GoogleFonts.openSans(fontSize: 12.0.sp, fontWeight: FontWeight.w600, color: kDark),
-    titleMedium: GoogleFonts.openSans(fontSize: 16.0.sp, fontWeight: FontWeight.w600, color: kDark),
+    bodyLarge: TextStyle(fontFamily: "EuclidCircularA", fontSize: 14.0.sp, fontWeight: FontWeight.w700, color: kDark),
+    bodyMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 14.0.sp, fontWeight: FontWeight.normal, color: kDark),
+    displayLarge: TextStyle(fontFamily: "EuclidCircularA", fontSize: 28.0.sp, fontWeight: FontWeight.bold, color: kDark),
+    displayMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 18.0.sp, fontWeight: FontWeight.w500, color: kDark),
+    displaySmall: TextStyle(fontFamily: "EuclidCircularA", fontSize: 12.0.sp, fontWeight: FontWeight.w600, color: kDark),
+    titleMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 16.0.sp, fontWeight: FontWeight.w600, color: kDark),
     labelMedium: TextStyle(fontSize: 14.0.sp, color: kGrey, fontWeight: FontWeight.w500),
   );
 
   // 2
   static TextTheme darkTextTheme = TextTheme(
-    bodyLarge: GoogleFonts.openSans(fontSize: 14.0.sp, fontWeight: FontWeight.w700, color: kWhite),
-    bodyMedium: GoogleFonts.openSans(fontSize: 14.0.sp, fontWeight: FontWeight.normal, color: kWhite),
-    displayLarge: GoogleFonts.openSans(fontSize: 28.0.sp, fontWeight: FontWeight.bold, color: kWhite),
-    displayMedium: GoogleFonts.openSans(fontSize: 20.0.sp, fontWeight: FontWeight.w500, color: kWhite),
-    displaySmall: GoogleFonts.openSans(fontSize: 14.0.sp, fontWeight: FontWeight.w600, color: kWhite),
-    titleMedium: GoogleFonts.openSans(fontSize: 16.0.sp, fontWeight: FontWeight.w600, color: kWhite),
-    labelMedium: TextStyle(fontSize: 14.0.sp, color: kGrey, fontWeight: FontWeight.w500),
+    bodyLarge: TextStyle(fontFamily: "EuclidCircularA", fontSize: 14.0.sp, fontWeight: FontWeight.w700, color: kWhite),
+    bodyMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 14.0.sp, fontWeight: FontWeight.normal, color: kWhite),
+    displayLarge: TextStyle(fontFamily: "EuclidCircularA", fontSize: 28.0.sp, fontWeight: FontWeight.bold, color: kWhite),
+    displayMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 18.0.sp, fontWeight: FontWeight.w500, color: kWhite),
+    displaySmall: TextStyle(fontFamily: "EuclidCircularA", fontSize: 14.0.sp, fontWeight: FontWeight.w600, color: kWhite),
+    titleMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 16.0.sp, fontWeight: FontWeight.w600, color: kWhite),
+    labelMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 14.0.sp, color: kGrey, fontWeight: FontWeight.w500),
   );
 
   // 3
@@ -54,7 +54,7 @@ class AppTheme {
         elevation: 0,
         actionsIconTheme: IconThemeData(color: kDark),
         iconTheme: IconThemeData(color: kDark),
-        titleTextStyle: TextStyle(color: kDark, fontSize: 14.sp, fontWeight: FontWeight.w500),
+        titleTextStyle: TextStyle(fontFamily: "EuclidCircularA", color: kDark, fontSize: 14.sp, fontWeight: FontWeight.w500),
       ),
     );
   }
@@ -78,7 +78,7 @@ class AppTheme {
         elevation: 0,
         actionsIconTheme: IconThemeData(color: kWhite),
         iconTheme: IconThemeData(color: kWhite),
-        titleTextStyle: TextStyle(color: kWhite, fontSize: 14.sp, fontWeight: FontWeight.w500),
+        titleTextStyle: TextStyle(fontFamily: "EuclidCircularA", color: kWhite, fontSize: 14.sp, fontWeight: FontWeight.w500),
       ),
     );
   }

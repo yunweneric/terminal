@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:xoecollect/auth/screens/app_pin.dart';
+import 'package:xoecollect/auth/widgets/app_pin.dart';
 import 'package:xoecollect/shared/models/others/routing_models.dart';
 import 'package:xoecollect/routes/index.dart';
 import 'package:xoecollect/shared/components/alerts.dart';
@@ -74,7 +74,7 @@ class _RegisterState extends State<VerifyScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Verify Code", style: Theme.of(context).textTheme.displayLarge),
+                  Text("Verify Code", style: Theme.of(context).textTheme.displayMedium),
                   Text("Please enter the verification code that was sent you", textAlign: TextAlign.center),
                   kh20Spacer(),
                   AppPin(
@@ -95,6 +95,41 @@ class _RegisterState extends State<VerifyScreen> {
                     },
                     text: "Verify code",
                   ),
+                  khSpacer(50.h),
+                  if (timer > 0)
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        text: "Resent code in ",
+                        style: Theme.of(context).textTheme.bodySmall,
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: timer.toString() + " seconds",
+                            style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor),
+                          ),
+                        ],
+                      ),
+                    ),
+                  if (timer == 0)
+                    GestureDetector(
+                      onTap: () {
+                        resetTimer();
+                        // BlocProvider.of<AuthCubit>(context).resetPassword(widget.verificationResponse.phone, context);
+                      },
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          text: "Didn't receive the code? ",
+                          style: Theme.of(context).textTheme.bodySmall,
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: "\nResent now",
+                              style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),

@@ -45,4 +45,10 @@ class AppIcons {
   static const stop = "assets/icons/stop.svg";
   static const watch = "assets/icons/watch.svg";
   static const whatsapp = "assets/icons/whatsapp.svg";
+  static const card = "assets/icons/card.svg";
+  static const wallet = "assets/icons/wallet.svg";
+  static const home_db = "assets/icons/home_db.svg";
+  static const withdraw = "assets/icons/withdraw.svg";
+  static const deposit = "assets/icons/deposit.svg";
+  static const transactions = "assets/icons/transactions.svg";
 }

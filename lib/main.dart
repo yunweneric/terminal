@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xoecollect/routes/index.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
@@ -11,6 +12,8 @@ import 'package:xoecollect/theme/theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
+
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('fr')],

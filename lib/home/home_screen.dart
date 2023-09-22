@@ -48,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
         name: '',
         description: '',
       ),
+      photoUrl: faker.image.image(),
     );
     super.initState();
   }
@@ -55,8 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        clipBehavior: Clip.none,
+      body: Column(
         children: [
           HeaderSection(
             user: user,
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           InkWell(
                             onTap: user == null ? () {} : () => context.push(AppRoutes.profile, extra: user),
                             // onTap: () => context.push(AppRoutes.rate_driver_trip + "/spp"),
-                            child: avatarCircle(image: user?.username, context: context, radius: 18.r),
+                            child: avatarCircle(image: user?.photoUrl, context: context, radius: 18.r),
                           ),
                         ],
                       )
@@ -110,61 +110,53 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          Positioned(
-            top: 270.h,
-            left: 10,
-            right: 10,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(15.r), topRight: Radius.circular(15.r)),
-                color: Theme.of(context).scaffoldBackgroundColor,
-              ),
-              width: kWidth(context),
-              padding: kph(10.w),
-              child: appLoaderBuilder(
-                // loading: loadKyc || loadingUser,
-                // error: errorUser || errorKyc,
-                loading: false,
-                error: false,
-                hasData: user != null,
+          khSpacer(50.h),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(15.r), topRight: Radius.circular(15.r)),
+              color: Theme.of(context).scaffoldBackgroundColor,
+            ),
+            width: kWidth(context),
+            padding: kph(20.w),
+            child: appLoaderBuilder(
+              // loading: loadKyc || loadingUser,
+              // error: errorUser || errorKyc,
+              loading: false,
+              error: false,
+              hasData: user != null,
+              child: AppHome(user: user),
+
+              loadingShimmer: AppStateWidget.loadingWidget(context: context, height: kHeight(context) / 1.5),
+              errorWidget: Container(
+                width: kWidth(context),
+                alignment: Alignment.center,
+                height: 200.h,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).highlightColor,
+                  borderRadius: radiusSm(),
+                ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    khSpacer(50.h),
-                    AppHome(user: user),
+                    Text("Could not load data"),
+                    submitButton(
+                      width: 90.w,
+                      padding: kPadding(0.w, 6.h),
+                      borderRadius: radiusVal(10.r),
+                      context: context,
+                      onPressed: () => {},
+                      icon: Icon(Icons.refresh),
+                      text: "Reload",
+                      fontSize: 11.sp,
+                    ),
                   ],
                 ),
-                loadingShimmer: AppStateWidget.loadingWidget(context: context, height: kHeight(context) / 1.5),
-                errorWidget: Container(
-                  width: kWidth(context),
-                  alignment: Alignment.center,
-                  height: 200.h,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).highlightColor,
-                    borderRadius: radiusSm(),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Could not load data"),
-                      submitButton(
-                        width: 90.w,
-                        padding: kPadding(0.w, 6.h),
-                        borderRadius: radiusVal(10.r),
-                        context: context,
-                        onPressed: () => {},
-                        icon: Icon(Icons.refresh),
-                        text: "Reload",
-                        fontSize: 11.sp,
-                      ),
-                    ],
-                  ),
-                ),
-                noDataWidget: Container(
-                  child: Text("No data"),
-                ),
+              ),
+              noDataWidget: Container(
+                child: Text("No data"),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -23,9 +23,9 @@ class HeaderSection extends StatelessWidget {
           alignment: alignment ?? Alignment.center,
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
-            // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30.r), bottomRight: Radius.circular(30.r)),
+            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30.r), bottomRight: Radius.circular(30.r)),
           ),
-          height: 300.h,
+          height: 250.h,
           width: kWidth(context),
           child: child,
         ),

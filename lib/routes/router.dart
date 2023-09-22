@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xoecollect/auth/screens/login_screen.dart';
 import 'package:xoecollect/auth/screens/pin_screen.dart';
 import 'package:xoecollect/auth/screens/verify_screen.dart';
+import 'package:xoecollect/deposits/screen/deposit_screen.dart';
+import 'package:xoecollect/profile/data/logic/profile/profile_cubit.dart';
+import 'package:xoecollect/profile/screens/profile_screen.dart';
 import 'package:xoecollect/shared/models/others/routing_models.dart';
 import 'package:xoecollect/home/home_screen.dart';
 import 'package:xoecollect/start/splash_screen.dart';
 import 'package:xoecollect/start/start_screen.dart';
+import 'package:xoecollect/transactions/screens/transaction_home.dart';
+import 'package:xoecollect/vault/screen/vault_screen.dart';
 
 import 'index.dart';
 
@@ -34,6 +40,28 @@ final routes = GoRouter(
     GoRoute(
       path: AppRoutes.home,
       pageBuilder: (context, state) => transitionEffect(state: state, child: HomeScreen()),
+    ),
+    GoRoute(
+      path: AppRoutes.transactions,
+      pageBuilder: (context, state) => transitionEffect(state: state, child: TransactionHomeScreen()),
+    ),
+    GoRoute(
+      path: AppRoutes.deposit,
+      pageBuilder: (context, state) => transitionEffect(state: state, child: DepositScreen()),
+    ),
+    GoRoute(
+      path: AppRoutes.vault,
+      pageBuilder: (context, state) => transitionEffect(state: state, child: VaultScreen()),
+    ),
+    GoRoute(
+      path: AppRoutes.profile,
+      pageBuilder: (context, state) => transitionEffect(
+        state: state,
+        child: BlocProvider(
+          create: (context) => ProfileCubit(),
+          child: ProfileScreen(),
+        ),
+      ),
     ),
 
     // ** Authentication routes

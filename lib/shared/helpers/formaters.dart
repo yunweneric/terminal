@@ -42,6 +42,12 @@ class Formaters {
     return formattedDate;
   }
 
+  static String formatDateBase(DateTime? date, String format) {
+    if (date == null) return "----";
+    String formattedDate = DateFormat(format).format(date);
+    return formattedDate;
+  }
+
   static String getFirstLetter(String str) {
     return str.substring(0, 1);
   }

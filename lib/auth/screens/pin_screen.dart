@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
-import 'package:xoecollect/auth/screens/app_pin.dart';
+import 'package:xoecollect/auth/widgets/app_pin.dart';
 import 'package:xoecollect/routes/route_names.dart';
 import 'package:xoecollect/shared/components/alerts.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
@@ -50,6 +50,7 @@ class _AddPinScreenState extends State<AddPinScreen> {
                 ),
                 kh20Spacer(),
                 AppPin(
+                  length: 4,
                   onChanged: (pin) {
                     setState(() => otpCode = pin);
                   },
@@ -146,6 +147,7 @@ class _ConfirmPinState extends State<ConfirmPin> {
                       Text("Please enter the pin you just created to confirm", textAlign: TextAlign.center),
                       kh20Spacer(),
                       AppPin(
+                        length: 4,
                         onChanged: (pin) {
                           setState(() => otpCode = pin);
                         },

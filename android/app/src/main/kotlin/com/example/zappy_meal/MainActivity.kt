@@ -1,4 +1,4 @@
-package com.example.xoecollect
+package com.bickdrim.xoecollect
 
 import io.flutter.embedding.android.FlutterActivity
 
