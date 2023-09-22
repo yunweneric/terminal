@@ -14,7 +14,7 @@ class AuthPhoneLoginError extends AuthState {
 }
 
 class AuthPhoneLoginSuccess extends AuthState {
-  final AuthResponseModel res;
+  final AppBaseResponse res;
 
   AuthPhoneLoginSuccess(this.res);
 }

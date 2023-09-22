@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     bool hasInit = await LocalPreferences.getInit();
     if (!hasInit) {
       Future.delayed(1200.ms, () {
-        context.go(AppRoutes.home);
+        context.go(AppRoutes.login);
       });
     }
   }

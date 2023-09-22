@@ -35,7 +35,7 @@ class AppSheet {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          AppLoaders.showLoader(context),
+          AppLoaders.showLoader(context: context),
           kh10Spacer(),
           Text(text, style: Theme.of(context).textTheme.displaySmall),
         ],
@@ -43,7 +43,14 @@ class AppSheet {
     );
   }
 
-  static errorSheet({required BuildContext context, required String message, List<Widget>? actions, bool? isDismissible, bool? enableDrag}) {
+  static appStateSheet({
+    required BuildContext context,
+    required bool isError,
+    required String message,
+    List<Widget>? actions,
+    bool? isDismissible,
+    bool? enableDrag,
+  }) {
     return AppSheet.simpleModal(
       context: context,
       isDismissible: isDismissible ?? false,
@@ -54,7 +61,7 @@ class AppSheet {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Lottie.asset(AnimationAsset.error, width: 150.h, height: 150.h),
+          Lottie.asset(isError ? AnimationAsset.error : AnimationAsset.success, width: 150.h, height: 150.h),
           Text(message, textAlign: TextAlign.center),
           kh20Spacer(),
           if (actions != null) ...actions,

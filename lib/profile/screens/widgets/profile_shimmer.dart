@@ -9,10 +9,11 @@ import 'package:xoecollect/shared/utils/sizing.dart';
 
 AnimateList<Widget> profileScreenShimmer(BuildContext context) {
   return AnimateList(
-    interval: 100.ms,
+    interval: 10.ms,
     effects: [ScaleEffect(), FadeEffect()],
-    delay: 400.ms,
+    delay: 40.ms,
     children: [
+      kh20Spacer(),
       Align(
         alignment: Alignment.center,
         child: Shimmer.fromColors(
@@ -38,6 +39,20 @@ AnimateList<Widget> profileScreenShimmer(BuildContext context) {
       //     ),
       //   ],
       // ),
+
+      kh20Spacer(),
+      Container(
+        padding: kPadding(10.w, 10.h),
+        margin: kAppPadding(),
+        decoration: BoxDecoration(
+          boxShadow: appShadow(context),
+          color: Theme.of(context).cardColor,
+          borderRadius: radiusSm(),
+        ),
+        child: Column(
+          children: List.generate(5, (index) => profileInfoShimmer(context: context)),
+        ),
+      ),
       kh20Spacer(),
       Container(
         padding: kPadding(10.w, 5.h),
@@ -53,19 +68,6 @@ AnimateList<Widget> profileScreenShimmer(BuildContext context) {
           showDivider: false,
         ),
       ),
-      kh20Spacer(),
-      Container(
-        padding: kPadding(10.w, 10.h),
-        margin: kAppPadding(),
-        decoration: BoxDecoration(
-          boxShadow: appShadow(context),
-          color: Theme.of(context).cardColor,
-          borderRadius: radiusSm(),
-        ),
-        child: Column(
-          children: List.generate(5, (index) => profileInfoShimmer(context: context)),
-        ),
-      )
     ],
   );
 }

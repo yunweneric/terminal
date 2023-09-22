@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
 import 'package:xoecollect/auth/screens/login_screen.dart';
 import 'package:xoecollect/auth/screens/pin_screen.dart';
 import 'package:xoecollect/auth/screens/verify_screen.dart';
@@ -67,7 +68,13 @@ final routes = GoRouter(
     // ** Authentication routes
     GoRoute(
       path: AppRoutes.login,
-      pageBuilder: (context, state) => transitionEffect(state: state, child: LoginScreen()),
+      pageBuilder: (context, state) => transitionEffect(
+        state: state,
+        child: BlocProvider(
+          create: (context) => AuthCubit(),
+          child: LoginScreen(),
+        ),
+      ),
     ),
     GoRoute(
       path: AppRoutes.add_pin_screen,

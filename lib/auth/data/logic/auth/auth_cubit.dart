@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:xoecollect/auth/data/model/login_req_model.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:xoecollect/auth/data/model/reset_pin_req_model.dart';
-import 'package:xoecollect/auth/data/model/token_res.dart';
 import 'package:xoecollect/auth/data/model/verification_res_model.dart';
+import 'package:xoecollect/auth/data/model/verification_routing.dart';
 import 'package:xoecollect/shared/models/base/base_res_model.dart';
 import 'package:xoecollect/auth/data/services/auth_service.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
@@ -13,12 +13,15 @@ class AuthCubit extends Cubit<AuthState> {
   AuthService authService = AuthService();
   AuthCubit() : super(AuthInitial());
 
-  void phoneLogin(BuildContext context, LoginRequestModel model) async {
+  void phoneLogin(BuildContext context, String phone) async {
+    emit(AuthPhoneLoginInit());
+    authService.phoneLogin(context, phone);
+  }
+
+  void listenFirebaseLogin(BuildContext context, AppBaseResponse res) async {
     try {
-      emit(AuthPhoneLoginInit());
-      AppBaseResponse res = await authService.phoneLogin(context, model);
       if (res.statusCode == 200) {
-        emit(AuthPhoneLoginSuccess(AuthResponseModel.fromJson(res.data)));
+        emit(AuthPhoneLoginSuccess(res));
       } else {
         emit(AuthPhoneLoginError(res));
       }

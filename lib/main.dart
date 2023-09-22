@@ -1,9 +1,12 @@
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:xoecollect/config/firebase_options.dart';
 import 'package:xoecollect/routes/index.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/theme/colors.dart';
@@ -14,6 +17,12 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
 
+  // await dotenv.load(fileName: ".env");
+
+  // * Initialize firebase
+  await Firebase.initializeApp(
+    options: await DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('fr')],
@@ -25,6 +34,24 @@ void main() async {
       },
     ),
   );
+  configLoading();
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.squareCircle
+    ..loadingStyle = EasyLoadingStyle.custom
+    ..indicatorSize = 50.0
+    ..radius = 8.0
+    ..maskType = EasyLoadingMaskType.custom
+    ..progressColor = kWhite
+    ..backgroundColor = Colors.white
+    ..indicatorColor = primaryColor
+    ..textColor = primaryColor
+    ..maskColor = Colors.black.withOpacity(0.3)
+    ..userInteractions = false
+    ..dismissOnTap = false;
 }
 
 class MyApp extends StatefulWidget {
@@ -54,11 +81,9 @@ class _MyAppState extends State<MyApp> {
       logI(constrains);
       return ScreenUtilInit(
         useInheritedMediaQuery: true,
-        // designSize: isMobile(constrains.maxWidth) ? Size(360, 690) : Size(1920, 1080),
-        // designSize: Size(1920, 1080),
-        // scaleByHeight: true,
         builder: (context, child) {
           ThemeData theme = AppTheme.light();
+
           return MaterialApp.router(
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
@@ -67,6 +92,7 @@ class _MyAppState extends State<MyApp> {
             routerConfig: routes,
             debugShowCheckedModeBanner: false,
             theme: theme,
+            builder: EasyLoading.init(),
           );
         },
       );

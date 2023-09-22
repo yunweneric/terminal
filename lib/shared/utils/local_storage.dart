@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:xoecollect/auth/data/model/verification_routing.dart';
 import 'package:xoecollect/shared/models/account/user_model.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 
@@ -12,6 +13,14 @@ class LocalPreferences {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     logI(["save init", init]);
     return sharedPreferences.setBool('init', init);
+  }
+
+  static saveVerificationData(VerificationParams? data) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    if (data == null)
+      sharedPreferences.setString('verification_data', "");
+    else
+      sharedPreferences.setString('verification_data', jsonEncode(data.toJson()));
   }
 
   static saveNotificationToken(String n_token) async {
@@ -65,6 +74,13 @@ class LocalPreferences {
     String? token = sharedPreferences.getString('token');
     if (token == null || token == "") return null;
     return token;
+  }
+
+  Future<VerificationParams?> getVerificationData() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? res = sharedPreferences.getString('verification_data');
+    if (res == null || res == "") return null;
+    return VerificationParams.fromJson(json.decode(res));
   }
 
   static Future<List<String>> getNotificationTokens() async {

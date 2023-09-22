@@ -103,24 +103,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           //   ],
                           // ),
                           // kh20Spacer(),
-                          Container(
-                            padding: kPadding(10.w, 5.h),
-                            margin: kAppPadding(),
-                            decoration: BoxDecoration(
-                              boxShadow: appShadow(context),
-                              color: Theme.of(context).cardColor,
-                              borderRadius: radiusSm(),
-                            ),
-                            child: profileInfo(
-                              context: context,
-                              title: "Change Profile Photo",
-                              value: user?.username ?? "",
-                              icon: AppIcons.camera,
-                              scale: 0.7,
-                              showDivider: false,
-                              onTap: () => pickImage(),
-                            ),
-                          ),
+                          // Container(
+                          //   padding: kPadding(10.w, 5.h),
+                          //   margin: kAppPadding(),
+                          //   decoration: BoxDecoration(
+                          //     boxShadow: appShadow(context),
+                          //     color: Theme.of(context).cardColor,
+                          //     borderRadius: radiusSm(),
+                          //   ),
+                          //   child: profileInfo(
+                          //     context: context,
+                          //     title: "Change Profile Photo",
+                          //     value: user?.username ?? "",
+                          //     icon: AppIcons.camera,
+                          //     scale: 0.7,
+                          //     showDivider: false,
+                          //     onTap: () => pickImage(),
+                          //   ),
+                          // ),
                           kh20Spacer(),
                           Container(
                             padding: kPadding(10.w, 10.h),
