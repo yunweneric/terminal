@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xoecollect/routes/index.dart';
 import 'package:xoecollect/shared/utils/image_assets.dart';
 import 'package:xoecollect/shared/utils/local_storage.dart';
+import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/theme/colors.dart';
 
@@ -25,11 +25,23 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   reRouteUser() async {
-    bool hasInit = await LocalPreferences.getInit();
-    if (!hasInit) {
-      Future.delayed(1200.ms, () {
-        context.go(AppRoutes.login);
-      });
+    // bool hasInit = await LocalPreferences.getInit();
+    String? token = await LocalPreferences.getToken();
+    String? pin = await LocalPreferences.getPin();
+    logI([token, pin]);
+    // if (!hasInit) {
+    //   Future.delayed(1200.ms, () {
+    //     context.go(AppRoutes.login);
+    //   });
+    // }
+    // token = null;
+    if (token != null) {
+      if (pin != null)
+        context.go(AppRoutes.home);
+      else
+        context.go(AppRoutes.auth_pin_screen);
+    } else {
+      context.go(AppRoutes.login);
     }
   }
 

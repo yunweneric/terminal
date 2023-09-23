@@ -1,17 +1,16 @@
-import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:uuid/uuid.dart';
 import 'package:xoecollect/home/home_card.dart';
 import 'package:xoecollect/home/home_header.dart';
 import 'package:xoecollect/routes/route_names.dart';
 import 'package:xoecollect/shared/components/avatar_circle.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
 import 'package:xoecollect/shared/components/data_builder.dart';
+import 'package:xoecollect/shared/components/loaders.dart';
 import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/components/states_widgets.dart';
-import 'package:xoecollect/shared/models/account/user_model.dart';
+import 'package:xoecollect/shared/models/users/user_model.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/theme/colors.dart';
 
@@ -35,21 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    Faker faker = Faker();
-    user = AppUser(
-      uuid: Uuid().v1(),
-      createdAt: DateTime.now(),
-      email: faker.internet.email(),
-      username: faker.person.firstName(),
-      phone: faker.phoneNumber.us(),
-      role: Role(
-        createdAt: DateTime.now(),
-        uuid: '',
-        name: '',
-        description: '',
-      ),
-      photoUrl: faker.image.image(),
-    );
+    user = AppUser.fake();
+    // AppLoaders.dismissEasyLoader();
     super.initState();
   }
 
@@ -69,16 +55,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      RichText(
-                        text: TextSpan(
-                          text: user?.username == null ? 'Hi --\n' : "Hi ${user?.username}\n",
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 22.sp, color: kWhite),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: "Welcome",
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.sp, color: Theme.of(context).primaryColor),
-                            ),
-                          ],
+                      Expanded(
+                        child: RichText(
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          text: TextSpan(
+                            text: user?.username == null ? 'Hi --\n' : "Hi ${user?.username}\n",
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 22.sp, color: kWhite),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: "Welcome",
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.sp, color: Theme.of(context).primaryColor),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Row(

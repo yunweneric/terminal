@@ -28,7 +28,7 @@ class AuthVerifyOTPError extends AuthState {
 }
 
 class AuthVerifyOTPSuccess extends AuthState {
-  final VerificationResponseModel res;
+  final AppUser res;
 
   AuthVerifyOTPSuccess(this.res);
 }
@@ -42,8 +42,8 @@ class AuthAddPinError extends AuthState {
 }
 
 class AuthAddPinSuccess extends AuthState {
-  final AppBaseResponse res;
-  AuthAddPinSuccess(this.res);
+  final String pin;
+  AuthAddPinSuccess(this.pin);
 }
 
 class AuthResetPasswordInit extends AuthState {}

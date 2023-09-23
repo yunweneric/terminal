@@ -6,7 +6,7 @@ import 'package:xoecollect/routes/index.dart';
 import 'package:xoecollect/shared/components/auth_input.dart';
 import 'package:xoecollect/shared/components/bottom_sheets.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
-import 'package:xoecollect/shared/models/account/user_model.dart';
+import 'package:xoecollect/shared/models/users/user_model.dart';
 import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';

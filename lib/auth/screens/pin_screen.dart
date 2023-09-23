@@ -7,7 +7,9 @@ import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
 import 'package:xoecollect/auth/widgets/app_pin.dart';
 import 'package:xoecollect/routes/route_names.dart';
 import 'package:xoecollect/shared/components/alerts.dart';
+import 'package:xoecollect/shared/components/bottom_sheets.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
+import 'package:xoecollect/shared/components/loaders.dart';
 import 'package:xoecollect/shared/components/modals.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/local_storage.dart';
@@ -102,9 +104,22 @@ class _ConfirmPinState extends State<ConfirmPin> {
         // appBar: appBar(context: context, title: "Confirm Pin", canPop: true),
         body: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) async {
-            if (state is AuthAddPinError) AppModal.showErrorAlert(context: context, title: "Reset Pin", desc: state.res.message);
+            if (state is AuthAddPinInit) {
+              AppLoaders.showLoader(context: context);
+            }
+            if (state is AuthAddPinError) {
+              AppLoaders.dismissEasyLoader();
+              AppSheet.appErrorSheet(
+                context: context,
+                message: state.res.message,
+                okAction: () {},
+                onCancel: () {},
+              );
+            }
+
             if (state is AuthAddPinSuccess) {
-              await LocalPreferences.savePin(otpCode);
+              AppLoaders.dismissEasyLoader();
+              await LocalPreferences.savePin(state.pin);
               AppModal.showSuccessAlert(
                 dismissOnBackKeyPress: false,
                 dismissOnTouchOutside: false,
@@ -159,12 +174,10 @@ class _ConfirmPinState extends State<ConfirmPin> {
                         color: otpCode.length > 3 ? Theme.of(context).primaryColor : Theme.of(context).highlightColor,
                         textColor: otpCode.length > 3 ? Theme.of(context).primaryColorLight : Theme.of(context).primaryColorDark,
                         onPressed: otpCode.length > 3 && otpCode == widget.code
-                            // ? () => BlocProvider.of<AuthCubit>(context).createPin(
-                            //       context,
-                            //       ResetPinReqModel(oldPin: "1234", newPin: otpCode),
-                            //     )
-
-                            ? () => context.go(AppRoutes.home)
+                            ? () => BlocProvider.of<AuthCubit>(context).createPin(
+                                  context,
+                                  otpCode,
+                                )
                             : () => showToastError("Pin must be the same"),
                         text: "Confirm",
                       ),

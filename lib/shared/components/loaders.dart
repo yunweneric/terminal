@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:xoecollect/shared/utils/index.dart';
+import 'package:xoecollect/shared/utils/logger_util.dart';
 
 class AppLoaders {
   static Widget loadingWidget(context) {
@@ -25,6 +26,7 @@ class AppLoaders {
   }
 
   static void dismissEasyLoader() {
+    logI("dismiss loader");
     EasyLoading.dismiss();
   }
 
@@ -49,6 +51,7 @@ class AppLoaders {
   }
 
   static showLoader({bool? dismissOnTap, required BuildContext context}) {
+    logI("show loader");
     EasyLoading.show(
       dismissOnTap: dismissOnTap,
       maskType: EasyLoadingMaskType.custom,

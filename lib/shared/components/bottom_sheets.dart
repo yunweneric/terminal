@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:xoecollect/shared/components/buttons.dart';
 import 'package:xoecollect/shared/models/others/sheet_action_model.dart';
 import 'package:xoecollect/shared/components/loaders.dart';
 import 'package:xoecollect/shared/components/radius.dart';
-import 'package:xoecollect/shared/helpers/helpers.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/theme/colors.dart';
@@ -43,30 +44,81 @@ class AppSheet {
     );
   }
 
-  static appStateSheet({
+  static _appStateBaseSheet({
     required BuildContext context,
     required bool isError,
     required String message,
     List<Widget>? actions,
     bool? isDismissible,
     bool? enableDrag,
+    VoidCallback? onClose,
   }) {
     return AppSheet.simpleModal(
       context: context,
       isDismissible: isDismissible ?? false,
       enableDrag: enableDrag ?? false,
-      height: 400.h,
+      onClose: onClose,
+      height: 500.h,
       padding: kAppPadding(),
       alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Lottie.asset(isError ? AnimationAsset.error : AnimationAsset.success, width: 150.h, height: 150.h),
-          Text(message, textAlign: TextAlign.center),
+          Transform.scale(scale: 4, child: Lottie.asset(isError ? AnimationAsset.error : AnimationAsset.success, width: 150.h)),
+          // kh20Spacer(),
+          Text(
+            message,
+            textAlign: TextAlign.center,
+          ),
           kh20Spacer(),
           if (actions != null) ...actions,
         ],
       ),
+    );
+  }
+
+  static appErrorSheet({
+    required BuildContext context,
+    VoidCallback? okAction,
+    VoidCallback? onCancel,
+    VoidCallback? onClose,
+    required String message,
+    String? okText,
+    String? cancelText,
+    bool? isDismissible,
+    bool? enableDrag,
+  }) {
+    AppSheet._appStateBaseSheet(
+      context: context,
+      message: message,
+      isDismissible: isDismissible,
+      enableDrag: enableDrag,
+      isError: true,
+      actions: [
+        kh20Spacer(),
+        if (okAction != null)
+          submitButton(
+            context: context,
+            onPressed: () {
+              context.pop();
+              okAction();
+            },
+            text: okText ?? "Try Again",
+          ),
+        if (onCancel != null) kh10Spacer(),
+        if (onCancel != null)
+          submitButton(
+            color: Theme.of(context).cardColor,
+            textColor: Theme.of(context).primaryColor,
+            borderSide: BorderSide(color: Theme.of(context).primaryColor),
+            context: context,
+            onPressed: () async {
+              context.pop();
+              onCancel();
+            },
+            text: cancelText ?? "Cancel!",
+          ),
+      ],
     );
   }
 
@@ -94,83 +146,6 @@ class AppSheet {
         margin: margin,
         // margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         decoration: decoration,
-      ),
-    );
-  }
-
-  static void contactDriverSheet({
-    required BuildContext context,
-    String? phone,
-    required String message,
-    required String title,
-    required String description,
-  }) {
-    List<SheetAction> actions = [
-      SheetAction(
-        title: "WhatsApp",
-        icon: AppIcons.whatsapp,
-        onTap: () => Helpers.contactWhatsApp(context: context, message: message, phone: phone),
-      ),
-      SheetAction(
-        title: "Phone",
-        icon: AppIcons.phone,
-        onTap: () => Helpers.contactPhone(
-          context: context,
-          phone: phone,
-        ),
-      ),
-    ];
-
-    return AppSheet.simpleModal(
-      context: context,
-      height: 400.h,
-      padding: kPadding(20.w, 30.h),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.displayMedium,
-              textAlign: TextAlign.center,
-            ),
-            kh20Spacer(),
-            Text(
-              description,
-              textAlign: TextAlign.center,
-            ),
-            kh20Spacer(),
-            GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: actions.length,
-              padding: kPadding(20.w, 30.h),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 20.h,
-                crossAxisSpacing: 20.h,
-              ),
-              itemBuilder: ((context, index) {
-                return GestureDetector(
-                  onTap: () => actions[index].onTap(),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: radiusM(),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(actions[index].icon, color: kWhite),
-                        khSpacer(5.h),
-                        Text(actions[index].title, style: TextStyle(color: kWhite)),
-                      ],
-                    ),
-                  ),
-                );
-              }),
-            ),
-          ],
-        ),
       ),
     );
   }

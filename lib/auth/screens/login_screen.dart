@@ -6,18 +6,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
-import 'package:xoecollect/auth/data/model/verification_routing.dart';
 import 'package:xoecollect/shared/components/bottom_sheets.dart';
 import 'package:xoecollect/shared/components/loaders.dart';
-import 'package:xoecollect/shared/components/radius.dart';
-import 'package:xoecollect/shared/models/base/base_res_model.dart';
 import 'package:xoecollect/shared/models/others/routing_models.dart';
 import 'package:xoecollect/routes/route_names.dart';
 import 'package:xoecollect/shared/components/alerts.dart';
 import 'package:xoecollect/shared/components/auth_input.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
 import 'package:xoecollect/shared/utils/index.dart';
-import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -33,11 +29,20 @@ class _LoginScreenState extends State<LoginScreen> {
   bool error = false;
   bool has_accepted_terms = false;
   bool is_password_visible = false;
-  String country_code = "+237";
   TextEditingController name_controller = TextEditingController();
   TextEditingController phone_controller = TextEditingController();
 
   CountryCode? country;
+
+  @override
+  void initState() {
+    setState(() {
+      phone_controller.text = "+237";
+      name_controller.text = "Cameroon";
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             contentPadding: kPadding(0, 0),
                             onChanged: loading ? (d) {} : (onChanged) => setState(() => has_accepted_terms = onChanged!),
                             title: GestureDetector(
-                              onTap: () => context.push(AppRoutes.terms),
+                              // onTap: () => context.push(AppRoutes.terms),
                               child: RichText(
                                 text: TextSpan(
                                   text: "By login, you agree with all the",
@@ -142,7 +147,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               }
                               if (state is AuthPhoneLoginError) {
                                 AppLoaders.dismissEasyLoader();
-                                AppSheet.appStateSheet(context: context, message: state.res.message, isError: true);
+                                AppSheet.appErrorSheet(
+                                  context: context,
+                                  message: state.res.message,
+                                );
                               }
                               if (state is AuthPhoneLoginSuccess) {
                                 AppLoaders.dismissEasyLoader();
@@ -158,6 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   if (phone == null) return showToastError("Phone number cannot be empty!");
                                   if (phone!.length < 13) return showToastError("Please enter a valid phone number!");
                                   if (!has_accepted_terms) return showToastError("Please accept terms and policies to continue!");
+                                  FocusManager.instance.primaryFocus?.unfocus();
                                   AppSheet.simpleModal(
                                     context: context,
                                     height: 300.h,

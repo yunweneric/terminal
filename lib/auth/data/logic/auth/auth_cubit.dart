@@ -1,11 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:xoecollect/auth/data/model/reset_pin_req_model.dart';
-import 'package:xoecollect/auth/data/model/verification_res_model.dart';
-import 'package:xoecollect/auth/data/model/verification_routing.dart';
+import 'package:xoecollect/shared/helpers/encryptor.dart';
 import 'package:xoecollect/shared/models/base/base_res_model.dart';
 import 'package:xoecollect/auth/data/services/auth_service.dart';
+import 'package:xoecollect/shared/models/users/user_model.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 part 'auth_state.dart';
 
@@ -31,28 +30,13 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  verifyCode(BuildContext context, String otpCode, bool isNew) async {
-    logI(isNew);
-    try {
-      emit(AuthVerifyOTPInit());
-      AppBaseResponse res = await authService.verifyCode(context, otpCode, isNew);
-      if (res.statusCode == 200) {
-        emit(AuthVerifyOTPSuccess(VerificationResponseModel.fromJson(res.data)));
-      } else {
-        emit(AuthVerifyOTPError(res));
-      }
-    } catch (e) {
-      logError(["Error verifyCode", e]);
-      emit(AuthVerifyOTPError(authService.apiServerError()));
-    }
-  }
-
-  Future createPin(BuildContext context, ResetPinReqModel data) async {
+  Future createPin(BuildContext context, String code) async {
     try {
       emit(AuthAddPinInit());
-      AppBaseResponse res = await authService.createPin(context, data);
+      String encryptedPin = EnCryptor.encryptPin(code);
+      AppBaseResponse res = await authService.createPin(context, encryptedPin);
       if (res.statusCode == 200) {
-        emit(AuthAddPinSuccess(res));
+        emit(AuthAddPinSuccess(encryptedPin));
       } else {
         emit(AuthAddPinError(res));
       }
@@ -62,18 +46,16 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> resetPassword(String phone, BuildContext context) async {
+  void phoneVerification({required BuildContext context, required String phone, required String smsCode, required String verificationId}) async {
+    emit(AuthVerifyOTPInit());
     try {
-      emit(AuthResetPasswordInit());
-      AppBaseResponse res = await authService.resetPassword(context, phone);
-      if (res.statusCode == 200) {
-        emit(AuthResetPasswordSuccess(res));
-      } else {
-        emit(AuthResetPasswordError(res));
-      }
-    } catch (e) {
-      logError(["Error createPin", e]);
-      emit(AuthResetPasswordError(authService.apiServerError()));
+      AppBaseResponse response = await authService.phoneVerification(context, smsCode, phone, verificationId);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(AuthVerifyOTPSuccess(AppUser.fromJson(response.data)));
+      } else
+        emit(AuthVerifyOTPError(response));
+    } catch (error) {
+      emit(AuthVerifyOTPError(authService.apiServerError()));
     }
   }
 }

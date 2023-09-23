@@ -45,6 +45,9 @@ dependencies:
   uuid: ^3.0.7
   intl_phone_number_input: ^0.7.0+2
   country_code_picker: ^3.0.0
+  firebase_storage: ^11.2.7
+  flutter_dotenv: ^5.1.0
+  crypto: ^3.0.3
 
 
 dev_dependencies:
@@ -74,6 +77,7 @@ flutter:
     - assets/images/
     - assets/translations/
     - assets/fonts/
+    - .env
   fonts:
     - family: EuclidCircularA
       fonts:

@@ -6,7 +6,9 @@ import 'package:xoecollect/shared/components/radius.dart';
 class AppPin extends StatefulWidget {
   final void Function(String)? onChanged;
   final int? length;
-  const AppPin({super.key, this.onChanged, this.length});
+  final TextEditingController? controller;
+
+  const AppPin({super.key, this.onChanged, this.length, this.controller});
 
   @override
   State<AppPin> createState() => _AppPinState();
@@ -17,7 +19,7 @@ class _AppPinState extends State<AppPin> {
   Widget build(BuildContext context) {
     final defaultPinTheme = PinTheme(
       width: 60.w,
-      height: 60.w,
+      height: 55.w,
       textStyle: TextStyle(fontSize: 20.sp, color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),
       decoration: BoxDecoration(
         border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
@@ -27,7 +29,7 @@ class _AppPinState extends State<AppPin> {
     );
     return Pinput(
       length: widget.length ?? 6,
-      // controller: controller,
+      controller: widget.controller,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       errorText: null,
       androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsRetrieverApi,

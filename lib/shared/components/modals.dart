@@ -196,7 +196,7 @@ class AppModal {
             Container(
               child: Column(
                 children: [
-                  SvgPicture.asset(SvgAsset.success_confetti),
+                  SvgPicture.asset(AnimationAsset.success),
                   kh10Spacer(),
                   Text(title, style: Theme.of(context).textTheme.displayMedium, textAlign: TextAlign.center),
                   kh10Spacer(),

@@ -14,9 +14,8 @@ import 'package:xoecollect/shared/components/bottom_sheets.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
 import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/components/shadows.dart';
-import 'package:xoecollect/shared/helpers/formaters.dart';
 import 'package:xoecollect/shared/helpers/image_helpers.dart';
-import 'package:xoecollect/shared/models/account/user_model.dart';
+import 'package:xoecollect/shared/models/users/user_model.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 
@@ -137,7 +136,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 profileInfo(
                                   context: context,
                                   title: "Phone",
-                                  value: user?.phone ?? "----",
+                                  value: user?.phoneNumber ?? "----",
                                   icon: AppIcons.phone,
                                   scale: 0.8,
                                   showDivider: false,

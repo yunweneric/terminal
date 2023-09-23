@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xoecollect/auth/data/model/verification_routing.dart';
-import 'package:xoecollect/shared/models/account/user_model.dart';
+import 'package:xoecollect/shared/helpers/encryptor.dart';
+import 'package:xoecollect/shared/models/users/user_model.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 
 class LocalPreferences {
@@ -121,6 +122,6 @@ class LocalPreferences {
     String? res = await sharedPreferences.getString('user_info');
     if (res == null || res == "") return null;
     AppUser user = AppUser.fromJson(json.decode(res));
-    return user.uuid;
+    return user.uid;
   }
 }

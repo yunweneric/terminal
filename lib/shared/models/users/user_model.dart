@@ -4,6 +4,10 @@
 
 import 'dart:convert';
 
+import 'package:faker/faker.dart';
+import 'package:uuid/uuid.dart';
+import 'package:xoecollect/shared/models/auth/providers.dart';
+
 AppUser appUserFromJson(String str) => AppUser.fromJson(json.decode(str));
 
 String appUserToJson(AppUser data) => json.encode(data.toJson());
@@ -11,77 +15,92 @@ String appUserToJson(AppUser data) => json.encode(data.toJson());
 class AppUser {
   AppUser({
     this.username,
+    this.password,
     required this.uid,
-    required this.email,
+    this.email,
     this.emailVerified,
-    this.phoneNumber,
+    required this.phoneNumber,
     this.photoUrl,
-    this.ref_id,
     required this.providerId,
     required this.created_at,
-    required this.updated_at,
-    this.token,
+    required this.token,
     required this.nToken,
     required this.role,
-    required this.souls,
-    required this.points,
-    this.date_of_birth,
   });
 
   final String? username;
-  final String? ref_id;
+  final String created_at;
   final String uid;
-  final String email;
+  final String? email;
   final String? emailVerified;
-  final String? phoneNumber;
+  final String phoneNumber;
   final String? photoUrl;
+  String? password;
   final String providerId;
-  final String? token;
+  final String token;
   final AppRole role;
-  final List<String> souls;
-  final int points;
   final List<String> nToken;
-  final DateTime created_at;
-  final DateTime updated_at;
-  final DateTime? date_of_birth;
 
   factory AppUser.fromJson(Map<String, dynamic> json) => AppUser(
         username: json["username"],
         uid: json["uid"],
+        password: json["password"],
         email: json["email"],
-        ref_id: json["ref_id"],
         emailVerified: json["emailVerified"],
         phoneNumber: json["phoneNumber"],
         photoUrl: json["photoURL"],
         providerId: json["providerId"],
-        created_at: DateTime.parse(json["created_at"]),
-        updated_at: DateTime.parse(json["updated_at"]),
-        date_of_birth: json["date_of_birth"],
+        created_at: json["created_at"],
         role: AppRole.fromJson(json["role"]),
         token: json["token"],
         nToken: List<String>.from(json["nToken"]!.map((x) => x)),
-        souls: List<String>.from(json["souls"]!.map((x) => x)),
-        points: json["points"],
       );
 
   Map<String, dynamic> toJson() => {
         "username": username,
         "uid": uid,
-        "ref_id": ref_id,
         "email": email,
+        "password": password,
         "emailVerified": emailVerified,
         "phoneNumber": phoneNumber,
         "photoURL": photoUrl,
         "providerId": providerId,
-        "created_at": created_at.toIso8601String(),
-        "updated_at": updated_at.toIso8601String(),
-        "date_of_birth": date_of_birth?.toIso8601String(),
+        "created_at": created_at,
         "token": token,
         "role": role.toJson(),
         "nToken": List<String>.from(nToken.map((x) => x)),
-        "souls": List<String>.from(souls.map((x) => x)),
-        "points": points,
       };
+
+  static AppUser empty() {
+    return AppUser(
+      uid: "",
+      created_at: "",
+      email: "",
+      username: "",
+      phoneNumber: "",
+      photoUrl: "",
+      role: AppRole(role: "", value: ""),
+      providerId: '',
+      token: '',
+      nToken: [],
+    );
+  }
+
+  static AppUser fake() {
+    Faker faker = Faker();
+    return AppUser(
+      uid: Uuid().v1(),
+      created_at: DateTime.now().toIso8601String(),
+      email: faker.internet.email(),
+      username: faker.person.name(),
+      phoneNumber: faker.phoneNumber.us(),
+      photoUrl: faker.image.image(),
+      role: AppRole(role: "agent", value: Uuid().v1()),
+      providerId: AuthProviders.PHONE,
+      token: '',
+      nToken: [],
+    );
+  }
 }
 
 class AppRole {

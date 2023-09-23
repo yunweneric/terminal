@@ -16,6 +16,7 @@ class AppRoutes {
   static const register = "/register";
   static const verify_screen = "/verify_screen";
   static const add_pin_screen = "/add_pin_screen";
+  static const auth_pin_screen = "/auth_pin_screen";
 
   // ** Other routes
   static const terms = "/terms";

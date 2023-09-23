@@ -1,7 +1,7 @@
 class SvgAsset {
   static const user_account = "assets/svgs/user_account.svg";
   static const business_account = "assets/svgs/business_account.svg";
-  static const success_confetti = "assets/svgs/success_confetti.svg";
+  static const success = "assets/svgs/success.svg";
   static const welcome = "assets/svgs/welcome.svg";
   static const home_welcome = "assets/svgs/home_welcome.svg";
   static const front_id = "assets/svgs/front_id.svg";

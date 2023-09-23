@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
 import 'package:xoecollect/auth/screens/login_screen.dart';
+import 'package:xoecollect/auth/screens/pin_auth.dart';
 import 'package:xoecollect/auth/screens/pin_screen.dart';
 import 'package:xoecollect/auth/screens/verify_screen.dart';
 import 'package:xoecollect/deposits/screen/deposit_screen.dart';
@@ -32,28 +33,38 @@ CustomTransitionPage transitionEffect({required state, required Widget child}) {
 final routes = GoRouter(
   routes: [
     // ** Splash screen routes
-    GoRoute(path: AppRoutes.splash, pageBuilder: (context, state) => transitionEffect(state: state, child: SplashScreen())),
+    GoRoute(
+      path: AppRoutes.splash,
+      pageBuilder: (context, state) => transitionEffect(state: state, child: SplashScreen()),
+    ),
 
     // ** Onboarding routes
-    GoRoute(path: AppRoutes.start, pageBuilder: (context, state) => transitionEffect(state: state, child: StartScreen())),
+    GoRoute(
+      path: AppRoutes.start,
+      pageBuilder: (context, state) => transitionEffect(state: state, child: StartScreen()),
+    ),
 
     // ** Home routes
     GoRoute(
       path: AppRoutes.home,
       pageBuilder: (context, state) => transitionEffect(state: state, child: HomeScreen()),
     ),
+
     GoRoute(
       path: AppRoutes.transactions,
       pageBuilder: (context, state) => transitionEffect(state: state, child: TransactionHomeScreen()),
     ),
+
     GoRoute(
       path: AppRoutes.deposit,
       pageBuilder: (context, state) => transitionEffect(state: state, child: DepositScreen()),
     ),
+
     GoRoute(
       path: AppRoutes.vault,
       pageBuilder: (context, state) => transitionEffect(state: state, child: VaultScreen()),
     ),
+
     GoRoute(
       path: AppRoutes.profile,
       pageBuilder: (context, state) => transitionEffect(
@@ -76,15 +87,24 @@ final routes = GoRouter(
         ),
       ),
     ),
+
     GoRoute(
       path: AppRoutes.add_pin_screen,
       pageBuilder: (context, state) => transitionEffect(state: state, child: AddPinScreen(fromSplashScreen: false)),
     ),
     GoRoute(
+      path: AppRoutes.auth_pin_screen,
+      pageBuilder: (context, state) => transitionEffect(state: state, child: PinAuthScreen()),
+    ),
+
+    GoRoute(
       path: AppRoutes.verify_screen,
       pageBuilder: (context, state) => transitionEffect(
         state: state,
-        child: VerifyScreen(verify_data: state.extra as VerificationRoutingModel),
+        child: BlocProvider(
+          create: (context) => AuthCubit(),
+          child: VerifyScreen(verify_data: state.extra as VerificationRoutingModel),
+        ),
       ),
     ),
   ],
