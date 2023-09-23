@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:xoecollect/auth/data/model/reset_pin_req_model.dart';
 import 'package:xoecollect/shared/helpers/encryptor.dart';
 import 'package:xoecollect/shared/models/base/base_res_model.dart';
 import 'package:xoecollect/auth/data/services/auth_service.dart';

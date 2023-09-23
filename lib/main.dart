@@ -9,7 +9,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xoecollect/config/firebase_options.dart';
 import 'package:xoecollect/routes/index.dart';
-import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/theme/colors.dart';
 import 'package:xoecollect/theme/theme.dart';
 

@@ -5,10 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:xoecollect/home/home_card.dart';
 import 'package:xoecollect/home/home_header.dart';
 import 'package:xoecollect/routes/route_names.dart';
-import 'package:xoecollect/shared/components/avatar_circle.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
 import 'package:xoecollect/shared/components/data_builder.dart';
-import 'package:xoecollect/shared/components/loaders.dart';
 import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/components/states_widgets.dart';
 import 'package:xoecollect/shared/models/users/user_model.dart';
@@ -83,6 +81,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
+                Row(
+                  children: [],
+                )
               ],
             ),
           ),

@@ -11,7 +11,6 @@ import 'package:xoecollect/shared/components/bottom_sheets.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
 import 'package:xoecollect/shared/components/loaders.dart';
 import 'package:xoecollect/shared/components/modals.dart';
-import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/local_storage.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 

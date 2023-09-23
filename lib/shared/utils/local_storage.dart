@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xoecollect/auth/data/model/verification_routing.dart';
-import 'package:xoecollect/shared/helpers/encryptor.dart';
 import 'package:xoecollect/shared/models/users/user_model.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 

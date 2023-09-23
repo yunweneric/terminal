@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
-import 'package:xoecollect/auth/data/model/reset_pin_req_model.dart';
 import 'package:xoecollect/auth/data/model/verification_routing.dart';
 import 'package:xoecollect/config/app_config.dart';
 import 'package:xoecollect/shared/models/auth/providers.dart';
