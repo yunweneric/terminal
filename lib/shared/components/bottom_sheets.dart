@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:xoecollect/auth/widgets/app_pin.dart';
+import 'package:xoecollect/shared/components/alerts.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
 import 'package:xoecollect/shared/models/others/sheet_action_model.dart';
 import 'package:xoecollect/shared/components/loaders.dart';
@@ -41,6 +43,48 @@ class AppSheet {
           Text(text, style: Theme.of(context).textTheme.displaySmall),
         ],
       ),
+    );
+  }
+
+  static showPinSheet({required context, required onValidate}) {
+    String entered_pin = "";
+    return AppSheet.simpleModal(
+      context: context,
+      isDismissible: true,
+      enableDrag: false,
+      height: 500.h,
+      padding: kPadding(30.w, 50.w),
+      alignment: Alignment.topCenter,
+      child: StatefulBuilder(builder: (context, setNewState) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text("Enter your Pin", style: Theme.of(context).textTheme.displayLarge),
+            kh20Spacer(),
+            AppPin(
+              length: 4,
+              onChanged: (pin) {
+                setNewState(() {
+                  entered_pin = pin;
+                });
+              },
+            ),
+            kh20Spacer(),
+            submitButton(
+              width: 180.w,
+              context: context,
+              onPressed: () {
+                if (entered_pin.length < 4) {
+                  showToastError("Enter valid Pin");
+                  return;
+                }
+                onValidate(entered_pin);
+              },
+              text: "Validate",
+            )
+          ],
+        );
+      }),
     );
   }
 

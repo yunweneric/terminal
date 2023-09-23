@@ -5,6 +5,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/components/shadows.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
+import 'package:xoecollect/theme/colors.dart';
 
 Widget profileInfo({
   required String title,
@@ -13,6 +14,7 @@ Widget profileInfo({
   required BuildContext context,
   double scale = 1,
   bool showDivider = true,
+  bool danger = false,
   VoidCallback? onTap,
 }) =>
     InkWell(
@@ -30,14 +32,17 @@ Widget profileInfo({
                     Container(
                       height: 25.h,
                       width: 25.h,
-                      decoration: BoxDecoration(color: Theme.of(context).primaryColor, borderRadius: BorderRadius.circular(5.r)),
+                      decoration: BoxDecoration(
+                        color: danger ? kDanger : Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(5.r),
+                      ),
                       child: Transform.scale(
                         scale: scale,
                         child: SvgPicture.asset(icon, color: Theme.of(context).primaryColorLight),
                       ),
                     ),
                     kwSpacer(10.w),
-                    Text(title),
+                    Text(title, style: danger ? Theme.of(context).textTheme.displayMedium!.copyWith(color: kDanger, fontSize: 15.sp) : null),
                   ],
                 ),
                 Spacer(),

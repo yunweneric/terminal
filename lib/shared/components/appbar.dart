@@ -10,11 +10,12 @@ AppBar appBar({
   bool? canPop,
   bool? centerTitle,
   PreferredSizeWidget? bottom,
+  TextStyle? style,
 }) {
   return AppBar(
     backgroundColor: bgColor ?? Theme.of(context).primaryColor,
     centerTitle: centerTitle,
-    title: Text(title, style: TextStyle(color: color ?? kWhite)),
+    title: Text(title, style: style ?? TextStyle(color: color ?? kWhite)),
     automaticallyImplyLeading: canPop == true ? true : false,
     leading: canPop == true
         ? GestureDetector(

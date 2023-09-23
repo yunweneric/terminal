@@ -1,4 +1,3 @@
-import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,16 +21,7 @@ class DepositScreen extends StatefulWidget {
 class _DepositScreenState extends State<DepositScreen> {
   @override
   Widget build(BuildContext context) {
-    Faker faker = Faker();
-    List<AppTransaction> transactions = List.generate(
-      20,
-      (index) => AppTransaction(
-        amount: faker.randomGenerator.integer(100000, min: 2000),
-        createdAt: DateTime.now(),
-        name: faker.person.firstName(),
-        id: faker.jwt.secret,
-      ),
-    );
+    List<AppTransaction> transactions = List.generate(20, (index) => AppTransaction.fake());
     return Scaffold(
       appBar: appBar(context: context, title: "Deposits", canPop: true),
       body: SafeArea(

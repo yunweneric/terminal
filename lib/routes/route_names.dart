@@ -4,6 +4,7 @@ class AppRoutes {
   static const splash = "/";
 
   // ** home actions routes
+  static const transaction_details = "/transaction_details";
   static const transactions = "/transactions";
   static const profile = "/profile";
   static const accounts = "/accounts";

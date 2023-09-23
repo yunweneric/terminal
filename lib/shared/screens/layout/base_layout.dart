@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:xoecollect/home/home_screen.dart';
+import 'package:xoecollect/home/screens/home_screen.dart';
+import 'package:xoecollect/profile/screens/profile_screen.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 
 class BaseHomeScreen extends StatefulWidget {
@@ -37,7 +38,7 @@ class _BaseHomeScreenState extends State<BaseHomeScreen> {
     HomeScreen(),
     HomeScreen(),
     HomeScreen(),
-    HomeScreen(),
+    ProfileScreen(),
   ];
 
   @override

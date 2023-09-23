@@ -52,9 +52,9 @@ class Formaters {
     return str.substring(0, 1);
   }
 
-  static String formatCurrency(String amount) {
+  static String formatCurrency(int amount) {
     final formatter = new NumberFormat("#,##0", "en_US");
-    return formatter.format(int.parse(amount));
+    return formatter.format(amount);
   }
 
   static String formatCoordinates(double val) {
