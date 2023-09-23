@@ -47,12 +47,12 @@ Widget submitButton(
                             text,
                             style: TextStyle(fontSize: fontSize ?? 12.w, color: textColor, fontWeight: FontWeight.w700),
                           ),
-                          if (text != "") kwSpacer(5.w),
+                          if (text != "") kwSpacer(10.w),
                           icon,
                         ]
                       : [
                           icon,
-                          if (text != "") SizedBox(width: 5.w),
+                          if (text != "") SizedBox(width: 10.w),
                           Text(
                             text,
                             style: TextStyle(fontSize: fontSize ?? 12.w, color: textColor, fontWeight: FontWeight.w700),

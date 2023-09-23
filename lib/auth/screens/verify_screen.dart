@@ -143,9 +143,11 @@ class _RegisterState extends State<VerifyScreen> {
                   padding: kAppPadding(),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Verify OTP Code", style: Theme.of(context).textTheme.displayLarge!.copyWith(color: Theme.of(context).primaryColor)),
-                      Text("Please enter the verification code that was sent you", textAlign: TextAlign.center),
+                      Text("Verify OTP Code", style: Theme.of(context).textTheme.displayLarge),
+                      Text("Please enter the verification code that was sent you"),
+                      kh20Spacer(),
                       kh20Spacer(),
                       AppPin(
                         controller: controller,
@@ -153,6 +155,7 @@ class _RegisterState extends State<VerifyScreen> {
                           setState(() => otpCode = pin);
                         },
                       ),
+                      kh20Spacer(),
                       kh20Spacer(),
                       submitButton(
                         context: context,
@@ -173,35 +176,39 @@ class _RegisterState extends State<VerifyScreen> {
                       ),
                       khSpacer(50.h),
                       if (timer > 0)
-                        RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            text: "Resent code in ",
-                            style: Theme.of(context).textTheme.bodySmall,
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: timer.toString() + " seconds",
-                                style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor),
-                              ),
-                            ],
-                          ),
-                        ),
-                      if (timer == 0)
-                        GestureDetector(
-                          onTap: () {
-                            resentCode();
-                          },
+                        Center(
                           child: RichText(
                             textAlign: TextAlign.center,
                             text: TextSpan(
-                              text: "Didn't receive the code? ",
+                              text: "Resent code in ",
                               style: Theme.of(context).textTheme.bodySmall,
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: "\nResent now",
+                                  text: timer.toString() + " seconds",
                                   style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor),
                                 ),
                               ],
+                            ),
+                          ),
+                        ),
+                      if (timer == 0)
+                        Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              resentCode();
+                            },
+                            child: RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                text: "Didn't receive the code? ",
+                                style: Theme.of(context).textTheme.bodySmall,
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: "\nResent now",
+                                    style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

@@ -7,8 +7,8 @@ import 'package:xoecollect/shared/components/auth_input.dart';
 import 'package:xoecollect/shared/components/bottom_sheets.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
 import 'package:xoecollect/shared/helpers/formaters.dart';
+import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
-import 'package:xoecollect/transactions/screens/data/model/transation.dart';
 import 'package:xoecollect/transactions/screens/widgets/table_header.dart';
 import 'package:xoecollect/transactions/screens/widgets/table_item.dart';
 
@@ -23,12 +23,13 @@ class _DepositScreenState extends State<DepositScreen> {
   @override
   Widget build(BuildContext context) {
     Faker faker = Faker();
-    List<Transaction> transactions = List.generate(
+    List<AppTransaction> transactions = List.generate(
       20,
-      (index) => Transaction(
+      (index) => AppTransaction(
         amount: faker.randomGenerator.integer(100000, min: 2000),
         createdAt: DateTime.now(),
         name: faker.person.firstName(),
+        id: faker.jwt.secret,
       ),
     );
     return Scaffold(

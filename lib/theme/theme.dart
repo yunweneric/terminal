@@ -30,7 +30,7 @@ class AppTheme {
   // 3
   static ThemeData light() {
     return ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: primaryColor, primary: primaryColor, brightness: Brightness.light),
+      colorScheme: ColorScheme.fromSeed(seedColor: primaryColor, primary: primaryColor, brightness: Brightness.light, secondary: kSuccess),
       brightness: Brightness.light,
       primaryColor: primaryColor,
       textTheme: lightTextTheme,
@@ -40,6 +40,7 @@ class AppTheme {
       shadowColor: Colors.grey,
       bottomAppBarTheme: BottomAppBarTheme(color: kWhite),
       hoverColor: kSecondaryColor,
+      hintColor: kSuccess,
       floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: primaryColor, foregroundColor: kWhite),
       inputDecorationTheme: InputDecorationTheme(
         border: mainBorder(),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:xoecollect/shared/models/users/user_model.dart';
+import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 
 class HeaderSection extends StatelessWidget {
@@ -16,8 +18,7 @@ class HeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.bottomCenter,
+    return Column(
       children: [
         Container(
           alignment: alignment ?? Alignment.center,
@@ -25,15 +26,28 @@ class HeaderSection extends StatelessWidget {
             color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30.r), bottomRight: Radius.circular(30.r)),
           ),
-          height: 250.h,
+          // height: 300.h,
+          padding: kPadding(0, 30.h),
           width: kWidth(context),
           child: child,
         ),
-        // Positioned(
-        //   bottom: 0,
-        //   left: 20,
-        //   child: Image.asset(ImageAssets.splash_curve, scale: 1.8, fit: BoxFit.cover),
-        // )
+        Container(
+          padding: kph(20.w),
+          margin: kpv(20.w),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Transaction History", style: Theme.of(context).textTheme.displayMedium),
+              Row(
+                children: [
+                  Text("View All"),
+                  kwSpacer(5.w),
+                  SvgPicture.asset(AppIcons.chevron_right),
+                ],
+              )
+            ],
+          ),
+        ),
       ],
     );
   }

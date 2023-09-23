@@ -9,6 +9,15 @@ import 'package:xoecollect/transactions/screens/data/model/transation.dart';
 import 'package:xoecollect/transactions/screens/widgets/table_header.dart';
 import 'package:xoecollect/transactions/screens/widgets/table_item.dart';
 
+class Transaction {
+  final String name;
+  final String? photoUrl;
+  final int amount;
+  final DateTime createdAt;
+
+  Transaction({required this.amount, required this.createdAt, required this.name, this.photoUrl});
+}
+
 class TransactionHomeScreen extends StatefulWidget {
   const TransactionHomeScreen({super.key});
 

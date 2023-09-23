@@ -58,4 +58,5 @@ class AppIcons {
   static const contact_filled = "assets/icons/contact_filled.svg";
   static const insight = "assets/icons/insight.svg";
   static const insight_filled = "assets/icons/insight_filled.svg";
+  static const chevron_right = "assets/icons/chevron_right.svg";
 }

@@ -7,4 +7,5 @@ class SvgAsset {
   static const front_id = "assets/svgs/front_id.svg";
   static const back_id = "assets/svgs/back_id.svg";
   static const user_w_id = "assets/svgs/user_w_id.svg";
+  static const no_transaction = "assets/svgs/no_transaction.svg";
 }
