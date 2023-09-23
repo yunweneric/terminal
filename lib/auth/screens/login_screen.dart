@@ -56,9 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Center(child: Image.asset(ImageAssets.color_logo_and_name, scale: 2)),
-                  // kh20Spacer(),
-                  Text("Login", style: Theme.of(context).textTheme.displayMedium),
+                  Text("Login", style: Theme.of(context).textTheme.displayLarge!.copyWith(color: Theme.of(context).primaryColor)),
                   kh20Spacer(),
                   Form(
                     child: Column(

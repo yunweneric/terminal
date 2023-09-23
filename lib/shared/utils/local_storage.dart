@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xoecollect/auth/data/model/verification_routing.dart';
 import 'package:xoecollect/shared/helpers/encryptor.dart';
@@ -96,18 +98,17 @@ class LocalPreferences {
     return pin;
   }
 
-  // static Future<bool> logOutUser() async {
-  //   try {
-  //     await FirebaseMessaging.instance.deleteToken();
-  //     await saveAllUserInfo("");
-  //     await saveToken('');
-  //     await resetNotificationToken();
-  //     return true;
-  //   } catch (e) {
-  //     logError(["logOutUser", e]);
-  //     return false;
-  //   }
-  // }
+  static Future<bool> logOutUser() async {
+    try {
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      await FirebaseAuth.instance.signOut();
+      await sharedPreferences.clear();
+      return true;
+    } catch (e) {
+      logError(["logOutUser", e]);
+      return false;
+    }
+  }
 
   static Future<AppUser?> getAllUserInfo() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();

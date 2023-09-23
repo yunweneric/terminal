@@ -144,7 +144,7 @@ class _RegisterState extends State<VerifyScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Verify Code", style: Theme.of(context).textTheme.displayMedium),
+                      Text("Verify OTP Code", style: Theme.of(context).textTheme.displayLarge!.copyWith(color: Theme.of(context).primaryColor)),
                       Text("Please enter the verification code that was sent you", textAlign: TextAlign.center),
                       kh20Spacer(),
                       AppPin(

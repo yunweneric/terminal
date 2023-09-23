@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xoecollect/home/home_card.dart';
 import 'package:xoecollect/home/home_header.dart';
@@ -11,6 +12,7 @@ import 'package:xoecollect/shared/components/loaders.dart';
 import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/components/states_widgets.dart';
 import 'package:xoecollect/shared/models/users/user_model.dart';
+import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/theme/colors.dart';
 
@@ -56,29 +58,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: RichText(
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          text: TextSpan(
-                            text: user?.username == null ? 'Hi --\n' : "Hi ${user?.username}\n",
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 22.sp, color: kWhite),
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: "Welcome",
-                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.sp, color: Theme.of(context).primaryColor),
-                              ),
-                            ],
-                          ),
-                        ),
+                        child: Text("Cash Collect"),
                       ),
                       Row(
                         children: [
-                          // SvgPicture.asset(AppIcons.bell),
-                          // kwSpacer(5.w),
                           InkWell(
                             onTap: user == null ? () {} : () => context.push(AppRoutes.profile, extra: user),
-                            // onTap: () => context.push(AppRoutes.rate_driver_trip + "/spp"),
-                            child: avatarCircle(image: user?.photoUrl, context: context, radius: 18.r),
+                            child: SvgPicture.asset(AppIcons.bell),
                           ),
                         ],
                       )
@@ -115,7 +101,6 @@ class _HomeScreenState extends State<HomeScreen> {
               error: false,
               hasData: user != null,
               child: AppHome(user: user),
-
               loadingShimmer: AppStateWidget.loadingWidget(context: context, height: kHeight(context) / 1.5),
               errorWidget: Container(
                 width: kWidth(context),

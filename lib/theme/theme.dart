@@ -39,7 +39,7 @@ class AppTheme {
       primaryColorLight: kWhite,
       shadowColor: Colors.grey,
       bottomAppBarTheme: BottomAppBarTheme(color: kWhite),
-      hoverColor: kSuccess,
+      hoverColor: kSecondaryColor,
       floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: primaryColor, foregroundColor: kWhite),
       inputDecorationTheme: InputDecorationTheme(
         border: mainBorder(),
@@ -69,7 +69,7 @@ class AppTheme {
       primaryColorDark: kWhite,
       primaryColorLight: kDark,
       shadowColor: kDarkCard,
-      hoverColor: kSuccess,
+      hoverColor: kSecondaryColor,
       colorScheme: ColorScheme.fromSeed(seedColor: primaryColor, primary: primaryColor, brightness: Brightness.dark),
       floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: primaryColor, foregroundColor: kWhite),
       appBarTheme: AppBarTheme(

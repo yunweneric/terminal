@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:xoecollect/profile/data/logic/profile/profile_cubit.dart';
 import 'package:xoecollect/profile/screens/widgets/profile_shimmer.dart';
 import 'package:xoecollect/profile/screens/widgets/profile_tile.dart';
+import 'package:xoecollect/routes/index.dart';
 import 'package:xoecollect/shared/components/appbar.dart';
 import 'package:xoecollect/shared/components/avatar_circle.dart';
 import 'package:xoecollect/shared/components/bottom_sheets.dart';
@@ -17,6 +18,7 @@ import 'package:xoecollect/shared/components/shadows.dart';
 import 'package:xoecollect/shared/helpers/image_helpers.dart';
 import 'package:xoecollect/shared/models/users/user_model.dart';
 import 'package:xoecollect/shared/utils/index.dart';
+import 'package:xoecollect/shared/utils/local_storage.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -181,8 +183,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             kh20Spacer(),
                                             submitButton(
                                               context: context,
-                                              onPressed: () {
-                                                context.pop();
+                                              onPressed: () async {
+                                                bool loggedOut = await LocalPreferences.logOutUser();
+                                                if (loggedOut) context.go(AppRoutes.login);
                                               },
                                               text: "Yes Proceed",
                                             ),

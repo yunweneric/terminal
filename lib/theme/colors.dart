@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-const Color primaryColor = Color.fromRGBO(16, 30, 68, 1);
+const Color primaryColor = Color(0xFF25388D);
 // const Color primaryColor = Color.fromARGB(255, 12, 149, 234);
-const Color kSuccess = Color.fromRGBO(6, 70, 28, 1);
-const Color kDanger = Color(0xFFFB2C55);
-const Color kDangerLight = Color.fromARGB(255, 245, 117, 108);
+const Color kSecondaryColor = Color(0xFF028731);
+const Color kSuccess = Color(0xFFA0E86F);
+const Color kDanger = Color(0xFFF75555);
+const Color kDangerLight = Color(0xFFEEA9B4);
 const Color kWhite = Color(0xFFFFFFFF);
 const Color kBackground = Colors.white;
 const Color kDarkBackground = Color(0xFF070811);

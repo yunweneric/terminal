@@ -40,16 +40,17 @@ class _AddPinScreenState extends State<AddPinScreen> {
           padding: kAppPadding(),
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(child: Image.asset(ImageAssets.logo_and_name, scale: 2)),
+                // Center(child: Image.asset(ImageAssets.logo_and_name, scale: 2)),
                 kh20Spacer(),
-                Text("Add your account pin", style: Theme.of(context).textTheme.displayMedium),
+                Text("Set your PIN code ", style: Theme.of(context).textTheme.displayLarge),
                 kh20Spacer(),
                 Text(
-                  "You will use this pin to login once your account is created!",
-                  textAlign: TextAlign.center,
+                  "Add a PIN to make your account more secure. You may be asked for a PIN when making a transaction.",
+                  // textAlign: TextAlign.center,
                 ),
+                kh20Spacer(),
                 kh20Spacer(),
                 AppPin(
                   length: 4,
@@ -57,6 +58,7 @@ class _AddPinScreenState extends State<AddPinScreen> {
                     setState(() => otpCode = pin);
                   },
                 ),
+                kh20Spacer(),
                 kh20Spacer(),
                 submitButton(
                   loading: loading,
@@ -72,7 +74,7 @@ class _AddPinScreenState extends State<AddPinScreen> {
                               return BlocProvider(create: (context) => AuthCubit(), child: ConfirmPin(code: otpCode));
                             },
                           ),
-                  text: "Continue",
+                  text: "Add Pin",
                 ),
                 kh20Spacer(),
               ],
@@ -153,13 +155,15 @@ class _ConfirmPinState extends State<ConfirmPin> {
                   padding: kAppPadding(),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Center(child: Image.asset(ImageAssets.logo_and_name, scale: 2)),
                       kh20Spacer(),
-                      Text("Confirm Account pin", style: Theme.of(context).textTheme.displayMedium),
+                      Text("Confirm PIN code 🔐 ", style: Theme.of(context).textTheme.displayLarge),
                       kh20Spacer(),
-                      Text("Please enter the pin you just created to confirm", textAlign: TextAlign.center),
+                      Text(
+                        "Confirm the PIN to make your account more secure. You may be asked for a PIN when making a transaction.",
+                      ),
+                      kh20Spacer(),
                       kh20Spacer(),
                       AppPin(
                         length: 4,
@@ -179,7 +183,7 @@ class _ConfirmPinState extends State<ConfirmPin> {
                                   otpCode,
                                 )
                             : () => showToastError("Pin must be the same"),
-                        text: "Confirm",
+                        text: "Confirm Pin",
                       ),
                       kh20Spacer(),
                     ],

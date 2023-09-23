@@ -26,7 +26,7 @@ Widget submitButton(
     width: width == null ? kWidth(context) : width,
     child: ElevatedButton(
       style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(borderRadius: borderRadius ?? radiusSm(), side: borderSide == null ? BorderSide.none : borderSide),
+        shape: RoundedRectangleBorder(borderRadius: borderRadius ?? radiusXxl(), side: borderSide == null ? BorderSide.none : borderSide),
         padding: padding ?? EdgeInsets.symmetric(vertical: 15.h),
         backgroundColor: color ?? Theme.of(context).primaryColor,
         elevation: elevation == null ? 0 : elevation,

@@ -11,6 +11,7 @@ import 'package:xoecollect/profile/data/logic/profile/profile_cubit.dart';
 import 'package:xoecollect/profile/screens/profile_screen.dart';
 import 'package:xoecollect/shared/models/others/routing_models.dart';
 import 'package:xoecollect/home/home_screen.dart';
+import 'package:xoecollect/shared/screens/layout/base_layout.dart';
 import 'package:xoecollect/start/splash_screen.dart';
 import 'package:xoecollect/start/start_screen.dart';
 import 'package:xoecollect/transactions/screens/transaction_home.dart';
@@ -48,6 +49,12 @@ final routes = GoRouter(
     GoRoute(
       path: AppRoutes.home,
       pageBuilder: (context, state) => transitionEffect(state: state, child: HomeScreen()),
+    ),
+
+    // ** Home routes
+    GoRoute(
+      path: AppRoutes.base,
+      pageBuilder: (context, state) => transitionEffect(state: state, child: BaseHomeScreen()),
     ),
 
     GoRoute(

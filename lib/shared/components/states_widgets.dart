@@ -8,7 +8,7 @@ class AppStateWidget {
   static loadingWidget({required BuildContext context, double? height}) {
     return Container(
       height: height,
-      child: Center(child: AppLoaders.showLoader(context:context)),
+      child: Center(child: AppLoaders.loadingWidget(context)),
     );
   }
 

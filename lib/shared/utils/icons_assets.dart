@@ -6,6 +6,7 @@ class AppIcons {
   static const user = "assets/icons/user.svg";
   static const login = "assets/icons/login.svg";
   static const home = "assets/icons/home.svg";
+  static const home_filled = "assets/icons/home_filled.svg";
   static const report = "assets/icons/report.svg";
   static const cart = "assets/icons/cart.svg";
   static const profile = "assets/icons/profile.svg";
@@ -51,4 +52,10 @@ class AppIcons {
   static const withdraw = "assets/icons/withdraw.svg";
   static const deposit = "assets/icons/deposit.svg";
   static const transactions = "assets/icons/transactions.svg";
+  static const account_filled = "assets/icons/account_filled.svg";
+  static const account = "assets/icons/account.svg";
+  static const contact = "assets/icons/contact.svg";
+  static const contact_filled = "assets/icons/contact_filled.svg";
+  static const insight = "assets/icons/insight.svg";
+  static const insight_filled = "assets/icons/insight_filled.svg";
 }
