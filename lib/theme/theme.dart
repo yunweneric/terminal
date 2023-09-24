@@ -9,9 +9,10 @@ class AppTheme {
   static TextTheme lightTextTheme = TextTheme(
     bodyLarge: TextStyle(fontFamily: "EuclidCircularA", fontSize: 14.0.sp, fontWeight: FontWeight.w700, color: kDark),
     bodyMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 14.0.sp, fontWeight: FontWeight.normal, color: kDark),
+    bodySmall: TextStyle(fontFamily: "EuclidCircularA", fontSize: 10.0.sp, fontWeight: FontWeight.normal, color: kDark),
     displayLarge: TextStyle(fontFamily: "EuclidCircularA", fontSize: 28.0.sp, fontWeight: FontWeight.bold, color: kDark),
-    displayMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 18.0.sp, fontWeight: FontWeight.w500, color: kDark),
-    displaySmall: TextStyle(fontFamily: "EuclidCircularA", fontSize: 12.0.sp, fontWeight: FontWeight.w600, color: kDark),
+    displayMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 16.0.sp, fontWeight: FontWeight.w500, color: kDark),
+    displaySmall: TextStyle(fontFamily: "EuclidCircularA", fontSize: 14.0.sp, fontWeight: FontWeight.w500, color: kDark),
     titleMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 16.0.sp, fontWeight: FontWeight.w600, color: kDark),
     labelMedium: TextStyle(fontSize: 14.0.sp, color: kGrey, fontWeight: FontWeight.w500),
   );
@@ -20,8 +21,9 @@ class AppTheme {
   static TextTheme darkTextTheme = TextTheme(
     bodyLarge: TextStyle(fontFamily: "EuclidCircularA", fontSize: 14.0.sp, fontWeight: FontWeight.w700, color: kWhite),
     bodyMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 14.0.sp, fontWeight: FontWeight.normal, color: kWhite),
+    bodySmall: TextStyle(fontFamily: "EuclidCircularA", fontSize: 10.0.sp, fontWeight: FontWeight.normal, color: kWhite),
     displayLarge: TextStyle(fontFamily: "EuclidCircularA", fontSize: 28.0.sp, fontWeight: FontWeight.bold, color: kWhite),
-    displayMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 18.0.sp, fontWeight: FontWeight.w500, color: kWhite),
+    displayMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 16.0.sp, fontWeight: FontWeight.w500, color: kWhite),
     displaySmall: TextStyle(fontFamily: "EuclidCircularA", fontSize: 14.0.sp, fontWeight: FontWeight.w600, color: kWhite),
     titleMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 16.0.sp, fontWeight: FontWeight.w600, color: kWhite),
     labelMedium: TextStyle(fontFamily: "EuclidCircularA", fontSize: 14.0.sp, color: kGrey, fontWeight: FontWeight.w500),
@@ -55,6 +57,10 @@ class AppTheme {
         actionsIconTheme: IconThemeData(color: kDark),
         iconTheme: IconThemeData(color: kDark),
         titleTextStyle: TextStyle(fontFamily: "EuclidCircularA", color: kDark, fontSize: 14.sp, fontWeight: FontWeight.w500),
+      ),
+      listTileTheme: ListTileThemeData(
+        titleTextStyle: lightTextTheme.displaySmall,
+        subtitleTextStyle: lightTextTheme.bodySmall,
       ),
     );
   }

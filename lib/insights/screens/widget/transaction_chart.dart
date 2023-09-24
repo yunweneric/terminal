@@ -50,7 +50,7 @@ class TransactionChartState extends State<TransactionChart> {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 1.1,
+      aspectRatio: 1.5,
       child: Padding(
         padding: kPadding(10.w, 10.h),
         child: Column(
