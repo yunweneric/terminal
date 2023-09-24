@@ -12,7 +12,7 @@ headerAmount({required String title, required int amount, required BuildContext 
           Container(
             child: Text(
               Formaters.formatCurrency(amount),
-              style: Theme.of(context).textTheme.displayLarge!.copyWith(color: amountColor ?? kWhite, fontSize: 45.sp),
+              style: Theme.of(context).textTheme.displayLarge!.copyWith(color: amountColor ?? kWhite, fontSize: 35.sp),
             ),
           ),
           Text(

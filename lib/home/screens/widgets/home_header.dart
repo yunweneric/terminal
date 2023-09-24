@@ -44,12 +44,12 @@ class _HeaderSectionState extends State<HeaderSection> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                margin: EdgeInsets.only(bottom: 20.h),
+                margin: EdgeInsets.only(bottom: 10.h),
                 padding: kPadding(30.w, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    khSpacer(kToolbarHeight + 20.h),
+                    khSpacer(kToolbarHeight),
                     Expanded(
                       child: Text(
                         "Cash Collect",
@@ -81,7 +81,7 @@ class _HeaderSectionState extends State<HeaderSection> {
                               Container(
                                 child: Text(
                                   view_amount ? Formaters.formatCurrency(22000) : "****",
-                                  style: Theme.of(context).textTheme.displayLarge!.copyWith(color: kWhite, fontSize: 45.sp),
+                                  style: Theme.of(context).textTheme.displayLarge!.copyWith(color: kWhite, fontSize: 35.sp),
                                 ),
                               ),
                               Text(
@@ -100,7 +100,7 @@ class _HeaderSectionState extends State<HeaderSection> {
                           ),
                         ],
                       ),
-                      kwSpacer(30.w),
+                      kwSpacer(20.w),
                       Transform.scale(
                         scale: 1,
                         child: GestureDetector(
@@ -123,7 +123,6 @@ class _HeaderSectionState extends State<HeaderSection> {
                   ),
                 ],
               ),
-              kh20Spacer(),
               kh20Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -178,7 +177,7 @@ class _HeaderSectionState extends State<HeaderSection> {
       icon: CircleAvatar(
         backgroundColor: kWhite,
         radius: 12.r,
-        child: Icon(Icons.add),
+        child: Icon(Icons.add, size: 20.r),
       ),
       width: 150.w,
       context: context,

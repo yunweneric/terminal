@@ -17,7 +17,7 @@ class HeaderSection extends StatelessWidget {
       color: Theme.of(context).primaryColor,
       child: Column(
         children: [
-          khSpacer(kToolbarHeight + 20.h),
+          khSpacer(kToolbarHeight),
           Padding(
             padding: kph(10.w),
             child: Row(
@@ -32,7 +32,7 @@ class HeaderSection extends StatelessWidget {
               ],
             ),
           ),
-          kh20Spacer(),
+          kh10Spacer(),
           CircleAvatar(
             radius: 35.r,
             backgroundColor: kWhite,

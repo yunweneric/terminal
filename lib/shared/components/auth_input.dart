@@ -17,6 +17,7 @@ Widget authInput({
   EdgeInsetsGeometry? contentPadding,
   bool readOnly = false,
   double? width,
+  TextStyle? hintStyle,
 }) {
   return Container(
     margin: kPadding(0, 10.h),
@@ -40,7 +41,7 @@ Widget authInput({
             hintText: hint,
             prefixIcon: prefixIcon,
             suffixIcon: sufficIcon,
-            hintStyle: Theme.of(context).textTheme.labelMedium!.copyWith(color: Theme.of(context).highlightColor.withOpacity(0.9)),
+            hintStyle: hintStyle ?? Theme.of(context).textTheme.labelMedium!.copyWith(color: Theme.of(context).highlightColor.withOpacity(0.9)),
             contentPadding: contentPadding,
           ),
         ),

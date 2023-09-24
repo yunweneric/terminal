@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:xoecollect/contacts/contact_screen.dart';
+import 'package:xoecollect/contacts/logic/contact/contact_cubit.dart';
 import 'package:xoecollect/home/screens/home_screen.dart';
+import 'package:xoecollect/insights/screens/insights.dart';
 import 'package:xoecollect/profile/screens/profile_screen.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 
@@ -36,8 +40,11 @@ class _BaseHomeScreenState extends State<BaseHomeScreen> {
 
   List<Widget> pages = [
     HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
+    BlocProvider(
+      create: (context) => ContactCubit(),
+      child: ContactScreen(),
+    ),
+    InsightScreen(),
     ProfileScreen(),
   ];
 
