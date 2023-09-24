@@ -4,11 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xoecollect/home/screens/widgets/deposit_modal.dart';
 import 'package:xoecollect/routes/route_names.dart';
-import 'package:xoecollect/shared/components/auth_input.dart';
 import 'package:xoecollect/shared/components/bottom_sheets.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
-import 'package:xoecollect/shared/components/loaders.dart';
-import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/helpers/formaters.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
@@ -137,13 +134,7 @@ class _HeaderSectionState extends State<HeaderSection> {
                     context: context,
                     title: "Deposit",
                     onTap: () {
-                      logI("Deposit");
-
-                      depositMoney(
-                        context: context,
-                        amounts: [50, 100, 200, 500, 1000, 2000, 2500, 5000, 10000],
-                        loading: loading,
-                      );
+                      depositMoney(context: context, loading: loading);
                       Future.delayed(Duration(seconds: 2), () {
                         setState(() {
                           loading = false;

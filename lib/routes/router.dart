@@ -7,7 +7,6 @@ import 'package:xoecollect/auth/screens/pin_auth.dart';
 import 'package:xoecollect/auth/screens/pin_screen.dart';
 import 'package:xoecollect/auth/screens/verify_screen.dart';
 import 'package:xoecollect/deposits/screen/deposit_screen.dart';
-import 'package:xoecollect/profile/data/logic/profile/profile_cubit.dart';
 import 'package:xoecollect/profile/screens/profile_screen.dart';
 import 'package:xoecollect/shared/models/others/routing_models.dart';
 import 'package:xoecollect/home/screens/home_screen.dart';

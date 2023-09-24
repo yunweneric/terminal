@@ -3,7 +3,11 @@ part of 'home_deposit_cubit.dart';
 @immutable
 abstract class HomeDepositState {}
 
-class HomeDepositInitial extends HomeDepositState {}
+class HomeDepositInitial extends HomeDepositState {
+  final int amount;
+
+  HomeDepositInitial({required this.amount});
+}
 
 class HomeDepositAdded extends HomeDepositState {
   final int amount;

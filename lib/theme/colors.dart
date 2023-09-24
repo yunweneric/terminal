@@ -12,4 +12,4 @@ const Color kDarkBackground = Color(0xFF070811);
 const Color kDark = Color(0xFF0A0806);
 const Color kDarkCard = Color.fromARGB(255, 24, 28, 31);
 const Color kGrey = Color(0XFFA6A7A9);
-const Color kTextGrey = Colors.grey;
+const Color kTextGrey = Color.fromRGBO(158, 158, 158, 1);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xoecollect/shared/components/header_amount.dart';
 import 'package:xoecollect/shared/helpers/formaters.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
@@ -40,33 +41,8 @@ class HeaderSection extends StatelessWidget {
               style: Theme.of(context).textTheme.displayMedium!.copyWith(color: Theme.of(context).primaryColor, fontSize: 18.sp),
             ),
           ),
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Column(
-                children: [
-                  Container(
-                    child: Text(
-                      Formaters.formatCurrency(transaction.amount),
-                      style: Theme.of(context).textTheme.displayLarge!.copyWith(color: kWhite, fontSize: 45.sp),
-                    ),
-                  ),
-                  Text(
-                    "Available Balance",
-                    style: Theme.of(context).textTheme.displaySmall!.copyWith(color: kWhite, fontWeight: FontWeight.w400),
-                  ),
-                ],
-              ),
-              Positioned(
-                top: 0,
-                right: -30,
-                child: Text(
-                  "FCFA",
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kWhite),
-                ),
-              ),
-            ],
-          ),
+
+          headerAmount(title: "Available Balance", amount: transaction.amount, context: context),
           kh10Spacer(),
           // Divider(color: kWhite, endIndent: 50.w, indent: 50.w, thickness: 1.5.h),
           Divider(color: kWhite.withOpacity(0.5)),
