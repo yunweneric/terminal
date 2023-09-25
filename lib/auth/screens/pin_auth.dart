@@ -1,11 +1,8 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
-import 'package:xoecollect/auth/widgets/app_pin.dart';
-import 'package:xoecollect/shared/components/alerts.dart';
-import 'package:xoecollect/shared/components/buttons.dart';
-import 'package:xoecollect/shared/utils/index.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pin_plus_keyboard/package/controllers/pin_input_controller.dart';
+import 'package:pin_plus_keyboard/package/pin_plus_keyboard_package.dart';
+import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 
 class PinAuthScreen extends StatefulWidget {
@@ -19,6 +16,10 @@ class _PinAuthScreenState extends State<PinAuthScreen> {
   bool loading = false;
   bool error = false;
   String otpCode = "";
+  List values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+  PinInputController pinInputController = PinInputController(length: 4);
+
+  /// very important
 
   @override
   Widget build(BuildContext context) {
@@ -29,37 +30,33 @@ class _PinAuthScreenState extends State<PinAuthScreen> {
           height: kHeight(context),
           width: kWidth(context),
           padding: kAppPadding(),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Center(child: Image.asset(ImageAssets.logo_and_name, scale: 2)),
-                kh20Spacer(),
-                Text("Enter your account pin", style: Theme.of(context).textTheme.displayMedium),
-                kh20Spacer(),
-                AppPin(
-                  length: 4,
-                  onChanged: (pin) {
-                    setState(() => otpCode = pin);
-                  },
-                ),
-                kh20Spacer(),
-                submitButton(
-                  loading: loading,
-                  context: context,
-                  color: otpCode.length > 3 ? Theme.of(context).primaryColor : Theme.of(context).highlightColor,
-                  textColor: otpCode.length > 3 ? Theme.of(context).primaryColorLight : Theme.of(context).primaryColorDark,
-                  onPressed: otpCode.length > 3
-                      ? () => BlocProvider.of<AuthCubit>(context).createPin(
-                            context,
-                            otpCode,
-                          )
-                      : () => showToastError("Pin must be the same"),
-                  text: "Confirm",
-                ),
-                kh20Spacer(),
-              ],
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: kHeight(context) * 0.05,
+              ),
+              PinPlusKeyBoardPackage(
+                keyboardFontFamily: "Helvetica",
+                spacing: kWidth(context) * 0.06,
+                // inputShape: InputShape.circular,
+                pinInputController: pinInputController,
+                btnHasBorder: false,
+                inputsMaxWidth: 100.w,
+                inputWidth: 60.w,
+                inputHasBorder: false,
+                inputFillColor: Theme.of(context).highlightColor.withOpacity(0.3),
+                // inputBorderRadius: radiusVal(2.r),
+                focusColor: Theme.of(context).primaryColor,
+                isInputHidden: true,
+                inputHiddenColor: Theme.of(context).primaryColor.withOpacity(0.2),
+                inputTextStyle: TextStyle(),
+                onSubmit: () {
+                  /// ignore: avoid_print
+                  print("Text is : " + pinInputController.text);
+                },
+              ),
+            ],
           ),
         ),
       ),

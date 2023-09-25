@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // token = null;
     if (token != null) {
       if (pin != null)
-        context.go(AppRoutes.base);
+        context.go(AppRoutes.auth_pin_screen);
       else
         context.go(AppRoutes.auth_pin_screen);
     } else {

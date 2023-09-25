@@ -17,6 +17,7 @@ dependencies:
   country_code_picker: ^3.0.0
   crypto: ^3.0.3
   cupertino_icons: ^1.0.2
+  custom_pin_screen: ^0.5.0
   easy_localization: ^3.0.1
   faker: ^2.1.0
   firebase_auth: ^4.10.0
@@ -46,6 +47,7 @@ dependencies:
   modal_bottom_sheet: ^3.0.0-pre
   open_file: ^3.3.2
   pdf: ^3.5.0
+  pin_plus_keyboard: ^2.0.6
   pinput: ^3.0.1
   share_plus: ^7.1.0
   shared_preferences: ^2.0.18
