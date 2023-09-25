@@ -109,11 +109,31 @@ class AuthService extends BaseService {
   Future<AppBaseResponse> verifyPin(BuildContext context, String code) async {
     UserService userService = UserService();
     try {
+      String enteredPin = EnCryptor.encryptPin(code);
+      String? local_pin = await LocalPreferences.getPin();
+      if (local_pin == null) {
+        AppUser? user = await userService.getCurrentUser();
+        if (user == null) return apiError(message: "Could not find user!");
+        await LocalPreferences.savePin(user.password!);
+        bool is_correct_pin = EnCryptor.comparePin(user.password!, enteredPin);
+        return apiSuccess(message: "User found!", data: {'data': is_correct_pin});
+      } else {
+        bool is_correct_pin = EnCryptor.comparePin(local_pin, enteredPin);
+        return apiSuccess(message: "User found!", data: {'data': is_correct_pin});
+      }
+    } catch (e) {
+      return apiServerError();
+    }
+  }
+
+  Future<AppBaseResponse> createNewPin(BuildContext context, String pin, id) async {
+    UserService userService = UserService();
+    try {
+      String password = EnCryptor.encryptPin(pin);
       AppUser? user = await userService.getCurrentUser();
       if (user == null) return apiError(message: "Could not find user!");
-      String enteredPin = EnCryptor.encryptPin(code);
-      bool is_correct_pin = EnCryptor.comparePin(user.password!, enteredPin);
-      return apiSuccess(message: "User found!", data: {'data': is_correct_pin});
+      user.password = password;
+      return userService.updateUser(user);
     } catch (e) {
       return apiServerError();
     }

@@ -18,6 +18,17 @@ class UserService extends BaseService {
     }
   }
 
+  Future<AppBaseResponse> updateUser(AppUser user) async {
+    try {
+      var user_collection = await AppConfig.getCollection(AppCollections.USERS);
+      await user_collection.doc(user.uid).update(user.toJson());
+      return apiSuccess(message: "User updated successfully!", data: user.toJson());
+    } catch (e) {
+      logError(e);
+      return apiServerError();
+    }
+  }
+
   Future<AppBaseResponse> getUserById(String id) async {
     try {
       var user_collection = await AppConfig.getCollection(AppCollections.USERS);

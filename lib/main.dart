@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
 import 'package:xoecollect/config/firebase_options.dart';
 import 'package:xoecollect/profile/data/logic/profile/profile_cubit.dart';
 import 'package:xoecollect/routes/index.dart';
@@ -76,11 +77,13 @@ class _MyAppState extends State<MyApp> {
   }
 
   ProfileCubit profileCubit = ProfileCubit();
+  AuthCubit authCubit = AuthCubit();
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(value: profileCubit),
+        BlocProvider.value(value: authCubit),
       ],
       child: LayoutBuilder(builder: (context, constrains) {
         return ScreenUtilInit(

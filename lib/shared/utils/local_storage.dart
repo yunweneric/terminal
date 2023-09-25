@@ -39,9 +39,10 @@ class LocalPreferences {
     sharedPreferences.setStringList('n_tokens', []);
   }
 
-  static saveAllUserInfo(String userInfo) async {
+  static saveAllUserInfo(AppUser userInfo) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setString('user_info', userInfo);
+    String user = jsonEncode(userInfo.toJson());
+    sharedPreferences.setString('user_info', user);
   }
 
   static saveToken(String token) async {

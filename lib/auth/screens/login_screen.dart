@@ -77,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             onChanged: (val) {},
                             prefixIcon: Container(
                               margin: EdgeInsets.only(right: 20.w),
-                              width: 100.w,
+                              width: 120.w,
                               child: CountryCodePicker(
                                 onInit: (country) {},
                                 onChanged: (country) {
@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 alignLeft: true,
                                 searchDecoration: InputDecoration(contentPadding: kPadding(10.w, 10.h)),
                                 padding: kPadding(0.w, 10.h),
-                                dialogSize: Size(kWidth(context), 350.h),
+                                dialogSize: Size(kWidth(context), 600.h),
                               ),
                             ),
                           ),

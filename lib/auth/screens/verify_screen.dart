@@ -130,7 +130,7 @@ class _RegisterState extends State<VerifyScreen> {
               if (state is AuthVerifyOTPSuccess) {
                 setState(() => timer = 30);
                 AppUser user = state.res;
-                await LocalPreferences.saveAllUserInfo(jsonEncode(user.toJson()));
+                await LocalPreferences.saveAllUserInfo(user);
                 await LocalPreferences.saveVerificationData(null);
                 await LocalPreferences.saveToken(user.token);
                 AppLoaders.dismissEasyLoader();

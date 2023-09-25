@@ -95,7 +95,7 @@ class InvoiceGenerator {
   static Widget buildInvoice(AppTransaction transaction) => Container(
         width: double.infinity,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          padding: EdgeInsets.symmetric(horizontal: 0.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,21 +110,24 @@ class InvoiceGenerator {
                       children: [
                         Text(
                           "${Formaters.formatCurrency(transaction.amount)} FCFA",
-                          style: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 50.sp, fontWeight: FontWeight.bold),
                         ),
                         k10Spacer(),
-                        Text(transaction.name, style: TextStyle(fontSize: 18.sp)),
-                        Text(transaction.transaction_id, style: TextStyle(fontSize: 18.sp)),
+                        Text(transaction.name, style: TextStyle(fontSize: 25.sp)),
+                        Text(transaction.transaction_id, style: TextStyle(fontSize: 22.sp)),
                       ],
                     ),
                   ),
-                  khSpacer(30.h),
+                  khSpacer(15.h),
+                  Divider(),
+                  khSpacer(15.h),
                   Container(
                     decoration: BoxDecoration(
-                      color: PdfColor(0.9, 0.9, 0.9, 0.5),
+                      // color: PdfColor(0.9, 0.9, 0.9, 0.5),
                       borderRadius: BorderRadius.circular(5.r),
+                      // border: Border.all(color: PdfColor(0.9, 0.9, 0.9, 0.5)),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+                    padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 20.h),
                     child: Column(
                       children: [
                         k10Spacer(),
@@ -144,7 +147,7 @@ class InvoiceGenerator {
                             title("Reference Id", transaction.reference_id),
                             Divider(thickness: 1.0),
                             k10Spacer(),
-                            Text("Office Application Design Bill"),
+                            Text("Office Application Design Bill", style: TextStyle(fontSize: 22.sp)),
                             k10Spacer(),
                           ],
                         ),
@@ -170,13 +173,13 @@ class InvoiceGenerator {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: 14.sp),
+            style: TextStyle(fontSize: 25.sp),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 10.h),
           Expanded(
             child: Text(
               value,
-              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.normal),
+              style: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.normal),
               textAlign: TextAlign.right,
             ),
           ),

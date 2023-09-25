@@ -26,7 +26,7 @@ depositMoney({required BuildContext context, bool loading = false}) {
     isDismissible: false,
     enableDrag: false,
     context: context,
-    height: 700.h,
+    height: kHeight(context),
     alignment: Alignment.topCenter,
     child: BlocProvider(
       create: (context) => HomeDepositCubit(),
@@ -195,7 +195,7 @@ GestureDetector IconInputButton({required IconData icon, void Function()? onTap}
     onTap: onTap,
     child: Container(
       width: 30.w,
-      height: 30.h,
+      height: 40.h,
       decoration: BoxDecoration(color: icon == Icons.add ? kSuccess : kGrey, borderRadius: radiusVal(2.r)),
       child: Icon(icon, size: 18.r),
     ),

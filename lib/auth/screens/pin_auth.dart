@@ -3,17 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pin_plus_keyboard/package/controllers/pin_input_controller.dart';
-import 'package:pin_plus_keyboard/package/pin_plus_keyboard_package.dart';
 import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
+import 'package:xoecollect/auth/data/model/pinn_routing_model.dart';
 import 'package:xoecollect/auth/screens/widget/pin_code_fields.dart';
 import 'package:xoecollect/shared/components/loaders.dart';
 import 'package:xoecollect/shared/components/modals.dart';
-import 'package:xoecollect/shared/components/radius.dart';
+import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:custom_pin_screen/custom_pin_screen.dart';
 
 class PinAuthScreen extends StatefulWidget {
-  const PinAuthScreen({super.key});
+  final PinRoutingModel pinActions;
+  const PinAuthScreen({super.key, required this.pinActions});
 
   @override
   State<PinAuthScreen> createState() => _PinAuthScreenState();
@@ -41,9 +42,13 @@ class _PinAuthScreenState extends State<PinAuthScreen> {
               AppModal.showErrorAlert(context: context, title: "Pin verification", desc: state.res.message);
               AppLoaders.dismissEasyLoader();
             }
-            if (state is AuthAddPinSuccess) {
+            if (state is AuthVerifyPinSuccess) {
               AppLoaders.dismissEasyLoader();
-              context.pop();
+              if (state.res == true) {
+                widget.pinActions.onVerified == null ? context.pop() : widget.pinActions.onVerified!(context);
+              } else {
+                AppModal.showErrorAlert(context: context, title: "Pin verification", desc: "The pin you entered is not correct");
+              }
             }
           },
           child: Container(
@@ -56,6 +61,15 @@ class _PinAuthScreenState extends State<PinAuthScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Column(
+                    children: [
+                      Text(
+                        widget.pinActions.title != null ? widget.pinActions.title! : "Enter Pin",
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                      khSpacer(50.h),
+                    ],
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -72,6 +86,8 @@ class _PinAuthScreenState extends State<PinAuthScreen> {
                   CustomKeyBoard(
                     pinTheme: PinTheme.defaults(),
                     onChanged: (v) {
+                      logI("Pin ${v}");
+
                       setState(() {
                         otpCode = v;
                       });
@@ -82,11 +98,18 @@ class _PinAuthScreenState extends State<PinAuthScreen> {
                     //   color: Theme.of(context).primaryColor,
                     //   size: 50,
                     // ),
+                    specialKey: Icon(
+                      Icons.close,
+                      key: Key('close'),
+                      color: Theme.of(context).primaryColor,
+                      size: 30.r,
+                    ),
                     onCompleted: (p) {
-                      context.pop();
-                      BlocProvider.of<AuthCubit>(context).verifyPin(context, p);
+                      widget.pinActions.onComplete(p, context);
                     },
-                    specialKeyOnTap: () {},
+                    specialKeyOnTap: () {
+                      widget.pinActions.onSpecialKeyPress == null ? context.pop() : widget.pinActions.onSpecialKeyPress!();
+                    },
                     maxLength: 4,
                   ),
                 ],

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
+import 'package:xoecollect/auth/data/model/pinn_routing_model.dart';
 import 'package:xoecollect/home/screens/widgets/deposit_modal.dart';
 import 'package:xoecollect/routes/route_names.dart';
 import 'package:xoecollect/shared/components/bottom_sheets.dart';
@@ -68,61 +71,71 @@ class _HeaderSectionState extends State<HeaderSection> {
                   ],
                 ),
               ),
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) {
+                  if (state is AuthVerifyPinSuccess) {
+                    view_amount = true;
+                  }
+                  if (state is AuthHidePin) {
+                    view_amount = false;
+                  }
+                  return Column(
                     children: [
-                      Stack(
-                        clipBehavior: Clip.none,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Column(
+                          Stack(
+                            clipBehavior: Clip.none,
                             children: [
-                              Container(
-                                child: Text(
-                                  view_amount ? Formaters.formatCurrency(22000) : "****",
-                                  style: Theme.of(context).textTheme.displayLarge!.copyWith(color: kWhite, fontSize: 35.sp),
-                                ),
+                              Column(
+                                children: [
+                                  Container(
+                                    child: Text(
+                                      view_amount ? Formaters.formatCurrency(22000) : "****",
+                                      style: Theme.of(context).textTheme.displayLarge!.copyWith(color: kWhite, fontSize: 35.sp),
+                                    ),
+                                  ),
+                                  Text(
+                                    "Available Balance",
+                                    style: Theme.of(context).textTheme.displaySmall!.copyWith(color: kWhite, fontWeight: FontWeight.w400),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                "Available Balance",
-                                style: Theme.of(context).textTheme.displaySmall!.copyWith(color: kWhite, fontWeight: FontWeight.w400),
+                              Positioned(
+                                top: 0,
+                                right: -30,
+                                child: Text(
+                                  "FCFA",
+                                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kWhite),
+                                ),
                               ),
                             ],
                           ),
-                          Positioned(
-                            top: 0,
-                            right: -30,
-                            child: Text(
-                              "FCFA",
-                              style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kWhite),
+                          kwSpacer(20.w),
+                          Transform.scale(
+                            scale: 1,
+                            child: GestureDetector(
+                              onTap: () {
+                                if (!view_amount)
+                                  context.push(
+                                    AppRoutes.auth_pin_screen,
+                                    extra: PinRoutingModel(
+                                      onComplete: (pin, _) {
+                                        BlocProvider.of<AuthCubit>(context).verifyPin(context, pin);
+                                      },
+                                    ),
+                                  );
+                                else
+                                  BlocProvider.of<AuthCubit>(context).hidePin();
+                              },
+                              child: SvgPicture.asset(AppIcons.visibility_off),
                             ),
-                          ),
+                          )
                         ],
                       ),
-                      kwSpacer(20.w),
-                      Transform.scale(
-                        scale: 1,
-                        child: GestureDetector(
-                          onTap: () {
-                            context.push(AppRoutes.auth_pin_screen);
-                            // AppSheet.showPinSheet(
-                            //   context: context,
-                            //   onValidate: (pin) {
-                            //     logI(pin);
-                            //     setState(() {
-                            //       view_amount = !view_amount;
-                            //     });
-                            //     context.pop();
-                            //   },
-                            // );
-                          },
-                          child: SvgPicture.asset(AppIcons.visibility_off),
-                        ),
-                      )
                     ],
-                  ),
-                ],
+                  );
+                },
               ),
               kh20Spacer(),
               Row(

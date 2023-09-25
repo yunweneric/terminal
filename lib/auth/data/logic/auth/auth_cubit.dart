@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:xoecollect/shared/helpers/encryptor.dart';
 import 'package:xoecollect/shared/models/base/base_res_model.dart';
 import 'package:xoecollect/auth/data/services/auth_service.dart';
 import 'package:xoecollect/shared/models/users/user_model.dart';
+import 'package:xoecollect/shared/utils/local_storage.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 part 'auth_state.dart';
 
@@ -62,12 +65,35 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthVerifyPinInit());
     try {
       AppBaseResponse response = await authService.verifyPin(context, p);
+      logI(response.toJson());
       if (response.statusCode == 200 || response.statusCode == 201) {
         emit(AuthVerifyPinSuccess(response.data['data']));
       } else
         emit(AuthVerifyPinError(response));
     } catch (error) {
+      logError(error);
       emit(AuthVerifyPinError(authService.apiServerError()));
+    }
+  }
+
+  hidePin() {
+    emit(AuthHidePin());
+  }
+
+  void createNewPin(BuildContext context, String pin, String uid) async {
+    emit(AuthCreateNewPinInit());
+    try {
+      AppBaseResponse response = await authService.createNewPin(context, pin, uid);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        AppUser user = AppUser.fromJson(response.data);
+        await LocalPreferences.saveAllUserInfo(user);
+        await LocalPreferences.savePin(user.password!);
+        emit(AuthCreateNewPinSuccess(user));
+      } else
+        emit(AuthCreateNewPinError(response));
+    } catch (error) {
+      logError(error);
+      emit(AuthCreateNewPinError(authService.apiServerError()));
     }
   }
 }

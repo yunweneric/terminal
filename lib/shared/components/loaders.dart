@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
+import 'package:xoecollect/shared/utils/sizing.dart';
 
 class AppLoaders {
   static Widget loadingWidget(context) {
@@ -15,14 +16,14 @@ class AppLoaders {
     );
   }
 
-  static void easySuccess(context) {
+  static void easySuccess(BuildContext context, String? message) {
     EasyLoading.show(
-      dismissOnTap: true,
       status: ' ',
+      dismissOnTap: true,
       maskType: EasyLoadingMaskType.custom,
-      indicator: _successLoader(),
+      indicator: _successLoader(message, context),
     );
-    EasyLoading.dismiss();
+    dismissEasyLoader();
   }
 
   static void dismissEasyLoader() {
@@ -30,12 +31,12 @@ class AppLoaders {
     EasyLoading.dismiss();
   }
 
-  static void easySuccessPop(context) {
+  static void easySuccessPop(BuildContext context, String? message) {
     EasyLoading.show(
       dismissOnTap: true,
       status: ' ',
       maskType: EasyLoadingMaskType.custom,
-      indicator: _successLoader(),
+      indicator: _successLoader(message, context),
     );
     Future.delayed(Duration(seconds: 2), () {
       EasyLoading.dismiss();
@@ -43,10 +44,16 @@ class AppLoaders {
     });
   }
 
-  static SizedBox _successLoader() {
-    return SizedBox(
-      height: 200.h,
-      child: Lottie.asset(AnimationAsset.success),
+  static Widget _successLoader(String? message, BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 200.h,
+          child: Lottie.asset(AnimationAsset.success),
+        ),
+        kh10Spacer(),
+        if (message != null) Text(message, style: Theme.of(context).textTheme.bodyMedium)
+      ],
     );
   }
 

@@ -1,7 +1,11 @@
 import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
+import 'package:xoecollect/auth/data/model/pinn_routing_model.dart';
 import 'package:xoecollect/routes/index.dart';
 import 'package:xoecollect/shared/utils/image_assets.dart';
 import 'package:xoecollect/shared/utils/local_storage.dart';
@@ -35,9 +39,21 @@ class _SplashScreenState extends State<SplashScreen> {
     // }
     // token = null;
     if (token != null) {
-      if (pin != null)
-        context.go(AppRoutes.base);
-      else
+      if (pin != null) {
+        await Future.delayed(2.seconds);
+        context.go(
+          AppRoutes.auth_pin_screen,
+          extra: PinRoutingModel(
+            onComplete: (pin, context) {
+              if (context != null) BlocProvider.of<AuthCubit>(context).verifyPin(context, pin);
+            },
+            onVerified: (context) {
+              if (context != null) context.go(AppRoutes.base);
+            },
+            onSpecialKeyPress: () {},
+          ),
+        );
+      } else
         context.go(AppRoutes.auth_pin_screen);
     } else {
       context.go(AppRoutes.login);

@@ -1,9 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
+import 'package:xoecollect/auth/data/model/pinn_routing_model.dart';
 import 'package:xoecollect/profile/data/logic/profile/profile_cubit.dart';
 import 'package:xoecollect/profile/screens/widgets/profile_tile.dart';
 import 'package:xoecollect/routes/index.dart';
@@ -11,10 +14,13 @@ import 'package:xoecollect/shared/components/appbar.dart';
 import 'package:xoecollect/shared/components/avatar_circle.dart';
 import 'package:xoecollect/shared/components/bottom_sheets.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
+import 'package:xoecollect/shared/components/loaders.dart';
+import 'package:xoecollect/shared/components/modals.dart';
 import 'package:xoecollect/shared/helpers/image_helpers.dart';
 import 'package:xoecollect/shared/models/users/user_model.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/local_storage.dart';
+import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/theme/colors.dart';
 
@@ -28,6 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int souls_count = 0;
   String user_points = "0";
   bool loading = false;
+  String? current_pin;
 
   @override
   void initState() {
@@ -52,84 +59,134 @@ class _ProfileScreenState extends State<ProfileScreen> {
         style: Theme.of(context).textTheme.displayLarge,
         centerTitle: true,
       ),
-      body: BlocConsumer<ProfileCubit, ProfileState>(
-        listener: (context, state) {
-          // if (state is UserFetchDataSuccess) Future.delayed(1200.ms, () => setState(() => loading = false));
-
-          // //Todo:: When alert are all up implement this.
-          // if (state is UserFetchDataError) {}
-          // if (state is UserUpdateProfilePictureSuccess) {
-          //   context.read<ProfileCubit>().fetchUserData(context);
-          // }
-        },
-        builder: (context, state) {
-          if (state is ProfileFetchDataInit) loading = true;
-          if (state is ProfileFetchDataError) loading = true;
-          if (state is ProfileFetchDataSuccess) {
-            user = state.res;
-            loading = false;
-          }
-          return Container(
-            height: kHeight(context),
-            child: Column(
-              children: [
-                kh10Spacer(),
-                Padding(
-                  padding: kAppPadding(),
-                  child: Row(
-                    children: [
-                      avatarNameCircle(
-                        context: context,
-                        radius: 30.r,
-                        name: "A",
-                      ),
-                      kwSpacer(10.w),
-                      Column(
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<ProfileCubit, ProfileState>(
+            listener: (context, state) {
+              if (state is ProfileFetchDataInit) loading = true;
+              if (state is ProfileFetchDataError) loading = true;
+              if (state is ProfileFetchDataSuccess) {
+                setState(() {
+                  user = state.res;
+                  loading = false;
+                });
+              }
+            },
+          ),
+          BlocListener<AuthCubit, AuthState>(
+            listener: (context, state) async {
+              if (state is AuthCreateNewPinInit) {
+                AppLoaders.showLoader(context: context);
+              }
+              if (state is AuthCreateNewPinError) {
+                AppLoaders.dismissEasyLoader();
+                AppModal.showErrorAlert(context: context, title: "Reset New Pin", desc: state.res.message);
+              }
+              if (state is AuthCreateNewPinSuccess) {
+                context.pop();
+                AppLoaders.dismissEasyLoader();
+                AppLoaders.easySuccess(context, "Pin reset successfully!");
+              }
+              if (state is AuthVerifyPinSuccess) {
+                if (state.res) {
+                  await Future.delayed(100.ms);
+                  logI(state);
+                  context.push(
+                    AppRoutes.auth_pin_screen,
+                    extra: PinRoutingModel(
+                      title: "Create new pin",
+                      onComplete: (pin, _) {
+                        BlocProvider.of<AuthCubit>(context).createNewPin(context, pin, user!.uid);
+                      },
+                    ),
+                  );
+                }
+              }
+            },
+          ),
+        ],
+        child: Container(
+          height: kHeight(context),
+          child: Column(
+            children: [
+              kh10Spacer(),
+              Padding(
+                padding: kAppPadding(),
+                child: Row(
+                  children: [
+                    avatarNameCircle(
+                      context: context,
+                      radius: 30.r,
+                      name: user?.username ?? "A",
+                    ),
+                    kwSpacer(10.w),
+                    Expanded(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Andrew Ainsley", style: Theme.of(context).textTheme.displayMedium),
-                          Text("ID 2512541"),
+                          Text(user?.username ?? "---", style: Theme.of(context).textTheme.displayMedium),
+                          SizedBox(child: Text(user?.uid ?? "----", style: Theme.of(context).textTheme.bodySmall)),
                         ],
-                      )
-                    ],
-                  ),
-                ),
-                kh20Spacer(),
-                Container(
-                  padding: kPadding(0.w, 10.h),
-                  margin: kAppPadding(),
-                  child: Column(
-                    children: [
-                      profileInfo(context: context, title: "Change Pin", value: "", icon: AppIcons.lock, scale: 0.8),
-                      profileInfo(
-                        context: context,
-                        title: "Phone",
-                        value: user?.phoneNumber ?? "----",
-                        icon: AppIcons.phone,
-                        scale: 0.8,
                       ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
-                Spacer(),
-                Padding(
-                  padding: kAppPadding(),
-                  child: profileInfo(
-                    context: context,
-                    title: "Log out",
-                    value: "",
-                    icon: AppIcons.lock,
-                    danger: true,
-                    scale: 0.8,
-                    onTap: () => logOutModal(),
-                    showDivider: false,
-                  ),
+              ),
+              kh20Spacer(),
+              Container(
+                padding: kPadding(0.w, 10.h),
+                margin: kAppPadding(),
+                child: Column(
+                  children: [
+                    profileInfo(
+                      context: context,
+                      title: "Change Pin",
+                      value: "",
+                      icon: AppIcons.lock,
+                      scale: 0.8,
+                      onTap: () {
+                        context.push(
+                          AppRoutes.auth_pin_screen,
+                          extra: PinRoutingModel(
+                            onComplete: (pin, _) {
+                              setState(() {
+                                current_pin = pin;
+                              });
+                              BlocProvider.of<AuthCubit>(context).verifyPin(context, pin);
+                            },
+                            title: "Enter old pin",
+                          ),
+                        );
+                      },
+                    ),
+                    profileInfo(
+                      context: context,
+                      title: "Phone",
+                      value: user?.phoneNumber ?? "----",
+                      icon: AppIcons.phone,
+                      scale: 0.8,
+                    ),
+                  ],
                 ),
-                kh20Spacer(),
-              ],
-            ),
-          );
-        },
+              ),
+              Spacer(),
+              Padding(
+                padding: kAppPadding(),
+                child: profileInfo(
+                  context: context,
+                  title: "Log out",
+                  value: "",
+                  icon: AppIcons.lock,
+                  danger: true,
+                  scale: 0.8,
+                  onTap: () => logOutModal(),
+                  showDivider: false,
+                ),
+              ),
+              kh20Spacer(),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -71,3 +71,20 @@ class AuthVerifyPinSuccess extends AuthState {
   final bool res;
   AuthVerifyPinSuccess(this.res);
 }
+
+class AuthHidePin extends AuthState {
+  AuthHidePin();
+}
+
+class AuthCreateNewPinInit extends AuthState {}
+
+class AuthCreateNewPinError extends AuthState {
+  final AppBaseResponse res;
+
+  AuthCreateNewPinError(this.res);
+}
+
+class AuthCreateNewPinSuccess extends AuthState {
+  final AppUser res;
+  AuthCreateNewPinSuccess(this.res);
+}

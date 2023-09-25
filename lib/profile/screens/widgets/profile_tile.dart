@@ -30,8 +30,9 @@ Widget profileInfo({
                 Row(
                   children: [
                     Container(
-                      height: 25.h,
-                      width: 25.h,
+                      padding: EdgeInsets.all(2.r),
+                      height: 30.h,
+                      width: 30.h,
                       decoration: BoxDecoration(
                         color: danger ? kDanger : Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.circular(5.r),

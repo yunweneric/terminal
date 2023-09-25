@@ -96,7 +96,7 @@ class AppModal {
             Container(
               child: Column(
                 children: [
-                  Lottie.asset(AnimationAsset.error, width: 120.h),
+                  Lottie.asset(AnimationAsset.error, width: 100.h, fit: BoxFit.cover),
                   kh10Spacer(),
                   Text(title, style: Theme.of(context).textTheme.displayMedium, textAlign: TextAlign.center),
                   kh10Spacer(),
@@ -196,7 +196,7 @@ class AppModal {
             Container(
               child: Column(
                 children: [
-                  SvgPicture.asset(AnimationAsset.success),
+                  Lottie.asset(AnimationAsset.success, width: 100.h, fit: BoxFit.cover),
                   kh10Spacer(),
                   Text(title, style: Theme.of(context).textTheme.displayMedium, textAlign: TextAlign.center),
                   kh10Spacer(),

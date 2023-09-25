@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
+import 'package:xoecollect/auth/data/model/pinn_routing_model.dart';
 import 'package:xoecollect/auth/screens/login_screen.dart';
 import 'package:xoecollect/auth/screens/pin_auth.dart';
 import 'package:xoecollect/auth/screens/pin_screen.dart';
@@ -90,10 +91,7 @@ final routes = GoRouter(
       path: AppRoutes.login,
       pageBuilder: (context, state) => transitionEffect(
         state: state,
-        child: BlocProvider(
-          create: (context) => AuthCubit(),
-          child: LoginScreen(),
-        ),
+        child: LoginScreen(),
       ),
     ),
 
@@ -104,21 +102,16 @@ final routes = GoRouter(
     GoRoute(
       path: AppRoutes.auth_pin_screen,
       pageBuilder: (context, state) => transitionEffect(
-          state: state,
-          child: BlocProvider(
-            create: (context) => AuthCubit(),
-            child: PinAuthScreen(),
-          )),
+        state: state,
+        child: PinAuthScreen(pinActions: state.extra as PinRoutingModel),
+      ),
     ),
 
     GoRoute(
       path: AppRoutes.verify_screen,
       pageBuilder: (context, state) => transitionEffect(
         state: state,
-        child: BlocProvider(
-          create: (context) => AuthCubit(),
-          child: VerifyScreen(verify_data: state.extra as VerificationRoutingModel),
-        ),
+        child: VerifyScreen(verify_data: state.extra as VerificationRoutingModel),
       ),
     ),
   ],
