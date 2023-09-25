@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:xoecollect/config/app_config.dart';
 import 'package:xoecollect/shared/models/base/base_res_model.dart';
@@ -24,6 +25,24 @@ class BaseService {
       message: "There was an error processing the request. Please verify your internet connection and try again",
       data: {},
     );
+  }
+
+  Future<AppBaseResponse> baseGet({
+    required String collectionRef,
+    bool? innerCollection,
+    String? innerId,
+  }) async {
+    var ref = await AppConfig.getCollection(collectionRef);
+    if (innerCollection == true) {
+      ref = ref.doc(innerId).collection(collectionRef);
+    }
+    try {
+      QuerySnapshot<Map<String, dynamic>> res = await ref.get();
+      List<Map<String, dynamic>> data = res.docs.map((e) => e.data()).toList();
+      return apiSuccess(message: "Data found successfully", data: {'data': data});
+    } catch (e) {
+      return apiServerError();
+    }
   }
 
   Future<AppBaseResponse> baseAdd({
