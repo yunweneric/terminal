@@ -110,6 +110,7 @@ depositMoney({required BuildContext context, bool loading = false}) {
                           Container(
                             margin: EdgeInsets.only(right: 20.w),
                             child: ActionChip(
+                              padding: kPadding(10.w, 0.h),
                               backgroundColor: add_factor == amounts[index] ? Theme.of(context).primaryColor : null,
                               onPressed: () => BlocProvider.of<HomeDepositCubit>(context).changeAddFactor(amounts[index]),
                               label: Text(
@@ -165,7 +166,7 @@ depositMoney({required BuildContext context, bool loading = false}) {
                         },
                         text: "Deposit",
                       ),
-                      kh20Spacer(),
+                      kh10Spacer(),
                       submitButton(
                         textColor: Theme.of(context).primaryColor,
                         color: Theme.of(context).cardColor,

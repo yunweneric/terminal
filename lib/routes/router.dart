@@ -103,7 +103,12 @@ final routes = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.auth_pin_screen,
-      pageBuilder: (context, state) => transitionEffect(state: state, child: PinAuthScreen()),
+      pageBuilder: (context, state) => transitionEffect(
+          state: state,
+          child: BlocProvider(
+            create: (context) => AuthCubit(),
+            child: PinAuthScreen(),
+          )),
     ),
 
     GoRoute(

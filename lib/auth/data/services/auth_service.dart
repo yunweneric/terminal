@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
 import 'package:xoecollect/auth/data/model/verification_routing.dart';
 import 'package:xoecollect/config/app_config.dart';
+import 'package:xoecollect/shared/helpers/encryptor.dart';
 import 'package:xoecollect/shared/models/auth/providers.dart';
 import 'package:xoecollect/shared/models/base/base_res_model.dart';
 import 'package:xoecollect/shared/models/users/user_model.dart';
@@ -110,7 +111,9 @@ class AuthService extends BaseService {
     try {
       AppUser? user = await userService.getCurrentUser();
       if (user == null) return apiError(message: "Could not find user!");
-      return apiSuccess(message: "User found!", data: user.toJson());
+      String enteredPin = EnCryptor.encryptPin(code);
+      bool is_correct_pin = EnCryptor.comparePin(user.password!, enteredPin);
+      return apiSuccess(message: "User found!", data: {'data': is_correct_pin});
     } catch (e) {
       return apiServerError();
     }

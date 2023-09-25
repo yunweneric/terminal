@@ -57,4 +57,17 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthVerifyOTPError(authService.apiServerError()));
     }
   }
+
+  void verifyPin(BuildContext context, String p) async {
+    emit(AuthVerifyPinInit());
+    try {
+      AppBaseResponse response = await authService.verifyPin(context, p);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(AuthVerifyPinSuccess(response.data['data']));
+      } else
+        emit(AuthVerifyPinError(response));
+    } catch (error) {
+      emit(AuthVerifyPinError(authService.apiServerError()));
+    }
+  }
 }

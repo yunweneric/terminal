@@ -105,16 +105,17 @@ class _HeaderSectionState extends State<HeaderSection> {
                         scale: 1,
                         child: GestureDetector(
                           onTap: () {
-                            AppSheet.showPinSheet(
-                              context: context,
-                              onValidate: (pin) {
-                                logI(pin);
-                                setState(() {
-                                  view_amount = !view_amount;
-                                });
-                                context.pop();
-                              },
-                            );
+                            context.push(AppRoutes.auth_pin_screen);
+                            // AppSheet.showPinSheet(
+                            //   context: context,
+                            //   onValidate: (pin) {
+                            //     logI(pin);
+                            //     setState(() {
+                            //       view_amount = !view_amount;
+                            //     });
+                            //     context.pop();
+                            //   },
+                            // );
                           },
                           child: SvgPicture.asset(AppIcons.visibility_off),
                         ),

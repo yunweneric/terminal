@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pin_plus_keyboard/package/controllers/pin_input_controller.dart';
 import 'package:pin_plus_keyboard/package/pin_plus_keyboard_package.dart';
+import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
+import 'package:xoecollect/auth/screens/widget/pin_code_fields.dart';
+import 'package:xoecollect/shared/components/loaders.dart';
+import 'package:xoecollect/shared/components/modals.dart';
 import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
+import 'package:custom_pin_screen/custom_pin_screen.dart';
 
 class PinAuthScreen extends StatefulWidget {
   const PinAuthScreen({super.key});
@@ -25,38 +32,66 @@ class _PinAuthScreenState extends State<PinAuthScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          alignment: Alignment.center,
-          height: kHeight(context),
-          width: kWidth(context),
-          padding: kAppPadding(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: kHeight(context) * 0.05,
+        child: BlocListener<AuthCubit, AuthState>(
+          listener: (context, state) {
+            if (state is AuthVerifyPinError) {
+              AppLoaders.showLoader(context: context);
+            }
+            if (state is AuthVerifyPinError) {
+              AppModal.showErrorAlert(context: context, title: "Pin verification", desc: state.res.message);
+              AppLoaders.dismissEasyLoader();
+            }
+            if (state is AuthAddPinSuccess) {
+              AppLoaders.dismissEasyLoader();
+              context.pop();
+            }
+          },
+          child: Container(
+            alignment: Alignment.center,
+            height: kHeight(context),
+            width: kWidth(context),
+            padding: kAppPadding(),
+            child: SizedBox(
+              height: kHeight(context) / 1.5,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      for (int i = 0; i < 4; i++)
+                        PinCodeField(
+                          key: Key('pinField$i'),
+                          pin: otpCode,
+                          pinCodeFieldIndex: i,
+                          theme: PinTheme(keysColor: Theme.of(context).highlightColor),
+                        ),
+                    ],
+                  ),
+                  kh10Spacer(),
+                  CustomKeyBoard(
+                    pinTheme: PinTheme.defaults(),
+                    onChanged: (v) {
+                      setState(() {
+                        otpCode = v;
+                      });
+                    },
+                    // specialKey: Icon(
+                    //   Icons.fingerprint,
+                    //   key: const Key('fingerprint'),
+                    //   color: Theme.of(context).primaryColor,
+                    //   size: 50,
+                    // ),
+                    onCompleted: (p) {
+                      context.pop();
+                      BlocProvider.of<AuthCubit>(context).verifyPin(context, p);
+                    },
+                    specialKeyOnTap: () {},
+                    maxLength: 4,
+                  ),
+                ],
               ),
-              PinPlusKeyBoardPackage(
-                keyboardFontFamily: "Helvetica",
-                spacing: kWidth(context) * 0.06,
-                // inputShape: InputShape.circular,
-                pinInputController: pinInputController,
-                btnHasBorder: false,
-                inputsMaxWidth: 100.w,
-                inputWidth: 60.w,
-                inputHasBorder: false,
-                inputFillColor: Theme.of(context).highlightColor.withOpacity(0.3),
-                // inputBorderRadius: radiusVal(2.r),
-                focusColor: Theme.of(context).primaryColor,
-                isInputHidden: true,
-                inputHiddenColor: Theme.of(context).primaryColor.withOpacity(0.2),
-                inputTextStyle: TextStyle(),
-                onSubmit: () {
-                  /// ignore: avoid_print
-                  print("Text is : " + pinInputController.text);
-                },
-              ),
-            ],
+            ),
           ),
         ),
       ),

@@ -58,3 +58,16 @@ class AuthResetPasswordSuccess extends AuthState {
   final AppBaseResponse res;
   AuthResetPasswordSuccess(this.res);
 }
+
+class AuthVerifyPinInit extends AuthState {}
+
+class AuthVerifyPinError extends AuthState {
+  final AppBaseResponse res;
+
+  AuthVerifyPinError(this.res);
+}
+
+class AuthVerifyPinSuccess extends AuthState {
+  final bool res;
+  AuthVerifyPinSuccess(this.res);
+}
