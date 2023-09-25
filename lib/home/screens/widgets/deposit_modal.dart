@@ -61,6 +61,11 @@ depositMoney({required BuildContext context, bool loading = false}) {
                         context: context,
                         label: "Account No.",
                         controller: accountController,
+                        onChanged: (val) {
+                          if (val.length > 3) {
+                            BlocProvider.of<HomeDepositCubit>(context).findUser(val, context);
+                          }
+                        },
                       ),
                       Container(
                         // color: Colors.teal,

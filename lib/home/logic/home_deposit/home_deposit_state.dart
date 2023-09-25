@@ -26,3 +26,17 @@ class HomeDepositChangeAddFactor extends HomeDepositState {
 
   HomeDepositChangeAddFactor({required this.factor});
 }
+
+class HomeFindAccountInitial extends HomeDepositState {}
+
+class HomeFindAccountError extends HomeDepositState {
+  final AppBaseResponse res;
+
+  HomeFindAccountError(this.res);
+}
+
+class HomeFindAccountSuccess extends HomeDepositState {
+  final Account account;
+
+  HomeFindAccountSuccess({required this.account});
+}

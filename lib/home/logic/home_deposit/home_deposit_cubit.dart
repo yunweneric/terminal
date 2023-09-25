@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:xoecollect/auth/data/model/verification_res_model.dart';
 import 'package:xoecollect/invoice/services/invoice_generator.dart';
 import 'package:xoecollect/invoice/services/pdf_service.dart';
+import 'package:xoecollect/shared/models/base/base_res_model.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 
@@ -30,4 +32,6 @@ class HomeDepositCubit extends Cubit<HomeDepositState> {
     add_factor = factor;
     emit(HomeDepositChangeAddFactor(factor: add_factor));
   }
+
+  void findUser(String val, BuildContext context) {}
 }
