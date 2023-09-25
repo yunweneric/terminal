@@ -96,4 +96,6 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthCreateNewPinError(authService.apiServerError()));
     }
   }
+
+  void lockApp(BuildContext context) async {}
 }

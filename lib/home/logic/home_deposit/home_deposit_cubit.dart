@@ -30,15 +30,4 @@ class HomeDepositCubit extends Cubit<HomeDepositState> {
     add_factor = factor;
     emit(HomeDepositChangeAddFactor(factor: add_factor));
   }
-
-  generatePdf(String transactionId, int amount, String phoneNumber) async {
-    try {
-      XFile? file = await InvoiceGenerator.generate(AppTransaction.fake());
-      if (file != null) {
-        PdfApi.printFile(file);
-      }
-    } catch (e) {
-      logError("Error generating pdf: ${e}");
-    }
-  }
 }

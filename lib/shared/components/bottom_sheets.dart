@@ -131,6 +131,7 @@ class AppSheet {
     String? cancelText,
     bool? isDismissible,
     bool? enableDrag,
+    List<Widget>? actions,
   }) {
     AppSheet._appStateBaseSheet(
       context: context,

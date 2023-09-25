@@ -14,11 +14,12 @@ import 'package:xoecollect/profile/data/logic/profile/profile_cubit.dart';
 import 'package:xoecollect/routes/index.dart';
 import 'package:xoecollect/theme/colors.dart';
 import 'package:xoecollect/theme/theme.dart';
+import 'package:xoecollect/transactions/logic/cubit/transaction_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
+  // await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
 
   await dotenv.load(fileName: ".env");
 
@@ -78,10 +79,12 @@ class _MyAppState extends State<MyApp> {
 
   ProfileCubit profileCubit = ProfileCubit();
   AuthCubit authCubit = AuthCubit();
+  TransactionCubit transactionCubit = TransactionCubit();
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider.value(value: transactionCubit),
         BlocProvider.value(value: profileCubit),
         BlocProvider.value(value: authCubit),
       ],

@@ -105,7 +105,12 @@ class _PinAuthScreenState extends State<PinAuthScreen> {
                       size: 30.r,
                     ),
                     onCompleted: (p) {
-                      widget.pinActions.onComplete(p, context);
+                      widget.pinActions.onComplete != null
+                          ? widget.pinActions.onComplete!(p, context)
+                          : BlocProvider.of<AuthCubit>(context).verifyPin(
+                              context,
+                              p,
+                            );
                     },
                     specialKeyOnTap: () {
                       widget.pinActions.onSpecialKeyPress == null ? context.pop() : widget.pinActions.onSpecialKeyPress!();

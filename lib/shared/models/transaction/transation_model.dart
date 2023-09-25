@@ -1,5 +1,6 @@
 import 'package:faker/faker.dart';
 import 'package:uuid/uuid.dart';
+import 'package:xoecollect/shared/helpers/formaters.dart';
 import 'package:xoecollect/shared/models/transaction/transaction_status.dart';
 
 class AppTransaction {
@@ -51,16 +52,19 @@ class AppTransaction {
     );
   }
 
-  factory AppTransaction.fromJson(Map<String, dynamic> json) => AppTransaction(
-        name: json["name"],
-        id: json["id"],
-        account_num: json["account_num"],
-        amount: json["amount"],
-        transaction_id: json["transaction_id"],
-        reference_id: json["reference_id"],
-        createdAt: json["createdAt"],
-        status: json["status"],
-      );
+  factory AppTransaction.fromJson(Map<String, dynamic> json) {
+    DateTime date = Formaters.timeStampToDate(json["createdAt"]);
+    return AppTransaction(
+      name: json["name"],
+      id: json["id"],
+      account_num: json["account_num"],
+      amount: json["amount"],
+      transaction_id: json["transaction_id"],
+      reference_id: json["reference_id"],
+      createdAt: date,
+      status: json["status"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "name": name,

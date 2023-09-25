@@ -4,7 +4,9 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xoecollect/shared/components/appbar.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
+import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/transactions/screens/widgets/trannsaction_card.dart';
+import 'package:xoecollect/transactions/screens/widgets/transaction_list.dart';
 
 class Transaction {
   final String name;
@@ -31,21 +33,12 @@ class _TransactionHomeScreenState extends State<TransactionHomeScreen> {
       appBar: appBar(context: context, title: "Transaction History", canPop: true, centerTitle: true),
       body: SafeArea(
         child: Container(
-            child: Column(
-          children: [
-            Expanded(
-              child: ListView.separated(
-                itemCount: transactions.length,
-                padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w),
-                separatorBuilder: (context, index) => Divider(indent: 60.w),
-                itemBuilder: (context, index) {
-                  var transaction = transactions[index];
-                  return transactionCard(context, transaction).animate(delay: (100 * index).ms).slideY().fade();
-                },
-              ).animate(delay: 200.ms),
-            ),
-          ],
-        )),
+          child: Column(
+            children: [
+              TransactionList(height: kHeight(context) / 1.2),
+            ],
+          ),
+        ),
       ),
     );
   }

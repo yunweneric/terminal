@@ -33,28 +33,28 @@ class HeaderSection extends StatelessWidget {
             ),
           ),
           kh10Spacer(),
-          CircleAvatar(
-            radius: 35.r,
-            backgroundColor: kWhite,
-            child: Text(
-              Formaters.formatDateBase(transaction.createdAt, "H:mm"),
-              style: Theme.of(context).textTheme.displayMedium!.copyWith(color: Theme.of(context).primaryColor, fontSize: 18.sp),
-            ),
-          ),
+          // CircleAvatar(
+          //   radius: 35.r,
+          //   backgroundColor: kWhite,
+          //   child: Text(
+          //     Formaters.formatDateBase(transaction.createdAt, "H:mm"),
+          //     style: Theme.of(context).textTheme.displayMedium!.copyWith(color: Theme.of(context).primaryColor, fontSize: 18.sp),
+          //   ),
+          // ),
 
           headerAmount(title: "Available Balance", amount: transaction.amount, context: context),
-          kh10Spacer(),
+          kh20Spacer(),
           // Divider(color: kWhite, endIndent: 50.w, indent: 50.w, thickness: 1.5.h),
-          Divider(color: kWhite.withOpacity(0.5)),
-          Text(
-            transaction.name,
-            style: Theme.of(context).textTheme.displayMedium!.copyWith(color: kWhite, fontWeight: FontWeight.w400),
-          ),
-          Text(
-            transaction.account_num,
-            style: Theme.of(context).textTheme.displaySmall!.copyWith(color: kWhite, fontWeight: FontWeight.w400),
-          ),
-          kh10Spacer(),
+          // Divider(color: kWhite.withOpacity(0.5)),
+          // Text(
+          //   transaction.name,
+          //   style: Theme.of(context).textTheme.displayMedium!.copyWith(color: kWhite, fontWeight: FontWeight.w400),
+          // ),
+          // Text(
+          //   transaction.account_num,
+          //   style: Theme.of(context).textTheme.displaySmall!.copyWith(color: kWhite, fontWeight: FontWeight.w400),
+          // ),
+          // kh10Spacer(),
         ],
       ),
     );

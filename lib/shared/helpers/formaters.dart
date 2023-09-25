@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 class Formaters {
@@ -91,5 +92,10 @@ class Formaters {
     List<String> monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     String monthName = monthNames[now.month - 1];
     return monthName;
+  }
+
+  static timeStampToDate(Timestamp timestamp) {
+    int ms = timestamp.millisecondsSinceEpoch;
+    return DateTime.fromMillisecondsSinceEpoch(ms);
   }
 }

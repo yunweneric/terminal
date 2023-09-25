@@ -109,6 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           kh20Spacer(),
                           CheckboxListTile(
+                            activeColor: Theme.of(context).primaryColor,
                             controlAffinity: ListTileControlAffinity.leading,
                             value: has_accepted_terms,
                             contentPadding: kPadding(0, 0),
@@ -146,8 +147,18 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (state is AuthPhoneLoginError) {
                                 AppLoaders.dismissEasyLoader();
                                 AppSheet.appErrorSheet(
+                                  isDismissible: true,
+                                  enableDrag: true,
                                   context: context,
                                   message: state.res.message,
+                                  okText: "Try Again",
+                                  cancelText: "Cancel",
+                                  okAction: () {
+                                    BlocProvider.of<AuthCubit>(context).phoneLogin(context, phone!);
+                                  },
+                                  onCancel: () {
+                                    context.pop();
+                                  },
                                 );
                               }
                               if (state is AuthPhoneLoginSuccess) {

@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
+import 'package:xoecollect/auth/data/model/pinn_routing_model.dart';
 import 'package:xoecollect/contacts/contact_screen.dart';
 import 'package:xoecollect/contacts/logic/contact/contact_cubit.dart';
 import 'package:xoecollect/home/screens/home_screen.dart';
 import 'package:xoecollect/insights/screens/insights.dart';
 import 'package:xoecollect/profile/screens/profile_screen.dart';
+import 'package:xoecollect/routes/route_names.dart';
+import 'package:xoecollect/shared/services/app_state_service.dart';
 import 'package:xoecollect/shared/utils/index.dart';
+import 'package:xoecollect/shared/utils/logger_util.dart';
 
 class BaseHomeScreen extends StatefulWidget {
   const BaseHomeScreen({super.key});
@@ -47,6 +53,33 @@ class _BaseHomeScreenState extends State<BaseHomeScreen> {
     InsightScreen(),
     ProfileScreen(),
   ];
+
+  listenToAppState() {
+    WidgetsBinding.instance.addObserver(
+      LifecycleEventHandler(
+        resumeCallBack: () {
+          // context.read<AuthCubit>().lockApp(context);
+          logI("Resumed");
+          context.push(
+            AppRoutes.auth_pin_screen,
+            extra: PinRoutingModel(
+              onVerified: (_) {
+                context.pop();
+              },
+            ),
+          );
+          return Future.value();
+        },
+        suspendingCallBack: () async {},
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    listenToAppState();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

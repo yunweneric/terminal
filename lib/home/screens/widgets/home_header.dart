@@ -38,7 +38,7 @@ class _HeaderSectionState extends State<HeaderSection> {
           alignment: widget.alignment ?? Alignment.center,
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30.r), bottomRight: Radius.circular(30.r)),
+            // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30.r), bottomRight: Radius.circular(30.r)),
           ),
           // height: 300.h,
           padding: kPadding(0, 30.h),

@@ -27,7 +27,7 @@ class _ContactScreenState extends State<ContactScreen> {
 
   @override
   void initState() {
-    BlocProvider.of<ContactCubit>(context).getAccounts();
+    BlocProvider.of<ContactCubit>(context).getAccounts(context);
     super.initState();
   }
 
@@ -35,17 +35,21 @@ class _ContactScreenState extends State<ContactScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<ContactCubit, ContactState>(
       builder: (context, state) {
-        if (state is ContactInitial) {
-          loading = true;
-          error = false;
-        }
         if (state is ContactFetchInitial) {
-          accounts = state.contacts;
-          loading = false;
+          loading = true;
           error = false;
         }
         if (state is ContactFiltered) {
           accounts = state.contacts;
+        }
+        if (state is ContactFetchError) {
+          loading = false;
+          error = true;
+        }
+        if (state is ContactFetchSuccess) {
+          accounts = state.accounts;
+          loading = false;
+          error = false;
         }
         return Scaffold(
           appBar: appBar(
