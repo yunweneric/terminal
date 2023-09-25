@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:xoecollect/contacts/data/contact_service.dart';
 import 'package:xoecollect/contacts/models/contact_model.dart';
 import 'package:xoecollect/shared/models/base/base_res_model.dart';

@@ -1,6 +1,7 @@
 import 'package:faker/faker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:xoecollect/shared/helpers/formaters.dart';
+import 'package:xoecollect/shared/helpers/helpers.dart';
 import 'package:xoecollect/shared/models/transaction/transaction_status.dart';
 
 class AppTransaction {
@@ -10,7 +11,7 @@ class AppTransaction {
   final String account_num;
   final String reference_id;
   final String transaction_id;
-  final String status;
+  String status;
   DateTime createdAt;
 
   // AppTransaction();
@@ -44,7 +45,7 @@ class AppTransaction {
       name: faker.person.name(),
       id: Uuid().v1(),
       amount: faker.randomGenerator.integer(32000),
-      account_num: Uuid().v1(),
+      account_num: Helpers.base_account.toString() + faker.randomGenerator.integer(99999, min: 10000).toString(),
       reference_id: Uuid().v1(),
       transaction_id: Uuid().v1(),
       createdAt: DateTime.now(),

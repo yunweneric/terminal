@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:xoecollect/invoice/services/invoice_generator.dart';
-import 'package:xoecollect/invoice/services/pdf_service.dart';
 import 'package:xoecollect/shared/models/base/base_res_model.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
@@ -42,6 +41,20 @@ class TransactionCubit extends Cubit<TransactionState> {
       emit(TransactionGeneratePdfError("We encountered an error while generating the invoice!"));
 
       logError("Error generating pdf: ${e}");
+    }
+  }
+
+  void addTransaction({required BuildContext context, required AppTransaction data}) async {
+    emit(TransactionAddInitial());
+    try {
+      AppBaseResponse response = await _transactionService.addTransaction(context, data);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(TransactionAddSuccess(data));
+      } else
+        emit(TransactionAddError(response));
+    } catch (error) {
+      logError(error);
+      emit(TransactionAddError(_transactionService.apiServerError()));
     }
   }
 }

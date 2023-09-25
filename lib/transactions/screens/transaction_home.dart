@@ -1,11 +1,8 @@
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xoecollect/shared/components/appbar.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
-import 'package:xoecollect/transactions/screens/widgets/trannsaction_card.dart';
 import 'package:xoecollect/transactions/screens/widgets/transaction_list.dart';
 
 class Transaction {

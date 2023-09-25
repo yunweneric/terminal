@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:xoecollect/shared/components/alerts.dart';
 
 class Helpers {
+  static String base_account = "8376";
   static void contactPhone({String? phone, required BuildContext context}) async {
     if (phone == null) {
       Future.delayed(3000.ms);

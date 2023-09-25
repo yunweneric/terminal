@@ -1,19 +1,14 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
-import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:xoecollect/invoice/services/pdf_service.dart';
 import 'package:xoecollect/shared/helpers/formaters.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
-import 'package:xoecollect/shared/utils/image_assets.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 import './docs/logo1.dart' as im1;
-import './docs/payunitlogo.dart' as payunitlogo;
 
 class InvoiceGenerator {
   static Future<XFile?> generate(AppTransaction transaction) async {

@@ -32,3 +32,17 @@ class TransactionGeneratePdfSuccess extends TransactionState {
 
   TransactionGeneratePdfSuccess(this.file);
 }
+
+class TransactionAddInitial extends TransactionState {}
+
+class TransactionAddError extends TransactionState {
+  final AppBaseResponse response;
+
+  TransactionAddError(this.response);
+}
+
+class TransactionAddSuccess extends TransactionState {
+  final AppTransaction transactions;
+
+  TransactionAddSuccess(this.transactions);
+}

@@ -9,23 +9,13 @@ class HomeDepositInitial extends HomeDepositState {
   HomeDepositInitial({required this.amount});
 }
 
-class HomeDepositAdded extends HomeDepositState {
+class HomeDepositAddedValue extends HomeDepositState {
   final int amount;
 
-  HomeDepositAdded({required this.amount});
+  HomeDepositAddedValue({required this.amount});
 }
 
-class HomeDepositMinus extends HomeDepositState {
-  final int amount;
-
-  HomeDepositMinus({required this.amount});
-}
-
-class HomeDepositChangeAddFactor extends HomeDepositState {
-  final int factor;
-
-  HomeDepositChangeAddFactor({required this.factor});
-}
+class HomeDepositChangeOperator extends HomeDepositState {}
 
 class HomeFindAccountInitial extends HomeDepositState {}
 

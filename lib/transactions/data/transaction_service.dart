@@ -1,3 +1,4 @@
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:xoecollect/shared/models/base/base_res_model.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/services/base_service.dart';
@@ -14,5 +15,9 @@ class TransactionService extends BaseService {
 
   Future<AppBaseResponse> getTransactions() async {
     return baseGet(collectionRef: AppCollections.TRANSACTIONS);
+  }
+
+  Future<AppBaseResponse> addTransaction(BuildContext context, AppTransaction data) async {
+    return baseAdd(data: data.toJson(), collectionRef: AppCollections.TRANSACTIONS);
   }
 }

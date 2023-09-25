@@ -9,7 +9,6 @@ import 'package:xoecollect/shared/components/appbar.dart';
 import 'package:xoecollect/shared/components/auth_input.dart';
 import 'package:xoecollect/shared/components/data_builder.dart';
 import 'package:xoecollect/shared/components/loaders.dart';
-import 'package:xoecollect/shared/utils/icons_assets.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 
@@ -114,7 +113,7 @@ class _ContactScreenState extends State<ContactScreen> {
                         builder: (context, index, item) {
                           return ListTile(
                             title: Text(item.name),
-                            subtitle: Text(item.id),
+                            subtitle: Text(item.id.toString()),
                           );
                         },
                       ),

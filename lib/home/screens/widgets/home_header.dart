@@ -7,11 +7,9 @@ import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
 import 'package:xoecollect/auth/data/model/pinn_routing_model.dart';
 import 'package:xoecollect/home/screens/widgets/deposit_modal.dart';
 import 'package:xoecollect/routes/route_names.dart';
-import 'package:xoecollect/shared/components/bottom_sheets.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
 import 'package:xoecollect/shared/helpers/formaters.dart';
 import 'package:xoecollect/shared/utils/index.dart';
-import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/theme/colors.dart';
 

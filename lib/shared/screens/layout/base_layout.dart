@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
 import 'package:xoecollect/auth/data/model/pinn_routing_model.dart';
 import 'package:xoecollect/contacts/contact_screen.dart';
 import 'package:xoecollect/contacts/logic/contact/contact_cubit.dart';

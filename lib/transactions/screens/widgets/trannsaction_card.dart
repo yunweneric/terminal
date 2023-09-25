@@ -37,7 +37,7 @@ Widget transactionCard(BuildContext context, AppTransaction transaction) {
                   Container(
                     constraints: BoxConstraints(maxWidth: 150.w),
                     child: Text(
-                      transaction.id,
+                      transaction.account_num,
                       style: Theme.of(context).textTheme.bodySmall,
                       softWrap: true,
                       maxLines: 2,

@@ -9,6 +9,7 @@ Widget authInput({
   Widget? prefixIcon,
   Widget? sufficIcon,
   int? maxLines,
+  int? maxLength,
   TextInputType? keyboardType,
   bool obscureText = false,
   TextEditingController? controller,
@@ -37,6 +38,7 @@ Widget authInput({
           obscureText: obscureText,
           keyboardType: keyboardType,
           maxLines: maxLines ?? 1,
+          maxLength: maxLength,
           decoration: InputDecoration(
             hintText: hint,
             prefixIcon: prefixIcon,
