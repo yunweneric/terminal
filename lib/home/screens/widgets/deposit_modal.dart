@@ -23,16 +23,13 @@ import 'package:xoecollect/shared/services/sms_service.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/theme/colors.dart';
-import 'package:xoecollect/transactions/data/transaction_service.dart';
 import 'package:xoecollect/transactions/logic/cubit/transaction_cubit.dart';
 
 depositMoney({required BuildContext context, bool loading = false}) {
   List<int> amounts = [25, 50, 100, 200, 500, 1000, 2000, 2500, 3000, 5000, 10000];
-  int add_factor = amounts.first;
 
   TextEditingController accountController = TextEditingController();
   TextEditingController amountController = TextEditingController();
-  bool loading = false;
   return AppSheet.simpleModal(
     onClose: () {},
     isDismissible: false,
@@ -40,48 +37,48 @@ depositMoney({required BuildContext context, bool loading = false}) {
     context: context,
     height: kHeight(context),
     alignment: Alignment.topCenter,
-    child: BlocProvider(
-      create: (context) => HomeDepositCubit(),
-      child: BlocConsumer<HomeDepositCubit, HomeDepositState>(
-        listener: (context, state) {
-          // logI(state);
-          if (state is HomeDepositAddedValue) {
-            // logI(state.amount);
-          }
-        },
-        builder: (context, state) {
-          if (state is HomeDepositInitial) {
-            // amountController.text = Formaters.formatCurrency(state.amount) + " FCFA";
-          }
-          if (state is HomeDepositAddedValue) {
-            // amountController.text = Formaters.formatCurrency(state.amount) + " FCFA";
-          }
+    child: BlocListener<TransactionCubit, TransactionState>(
+      listener: (context, state) async {
+        if (state is TransactionAddInitial) AppLoaders.showLoader(context: context);
+        if (state is TransactionAddError) {
+          AppLoaders.dismissEasyLoader();
+          AppSheet.appErrorSheet(context: context, message: state.response.message);
+        }
+        if (state is TransactionAddSuccess) {
+          SMSService smsService = SMSService();
+          BaseService base_service = BaseService();
+          AppTransaction updated = state.transactions;
+          updated.status = AppTransactionStatus.SUCCESS;
+          await base_service.baseUpdate(data: updated.toJson(), collectionRef: AppRoutes.transactions);
+          await smsService.sendSMS(
+            "+237670912935",
+            "You have successfully deposited a sum of ${context.watch<HomeDepositCubit>().total_amount} to the account ${context.watch<HomeDepositCubit>().account?.name}",
+          );
+          context.pop();
+          successDepositModal(context: context, transaction: AppTransaction.fake());
+        }
+      },
+      child: BlocProvider(
+        create: (context) => HomeDepositCubit(),
+        child: BlocConsumer<HomeDepositCubit, HomeDepositState>(
+          listener: (context, state) {
+            // logI(state);
+            if (state is HomeDepositAddedValue) {
+              // logI(state.amount);
+            }
+          },
+          builder: (context, state) {
+            if (state is HomeDepositInitial) {
+              // amountController.text = Formaters.formatCurrency(state.amount) + " FCFA";
+            }
+            if (state is HomeDepositAddedValue) {
+              // amountController.text = Formaters.formatCurrency(state.amount) + " FCFA";
+            }
 
-          if (state is HomeFindAccountInitial) {}
-          if (state is HomeFindAccountInitial) {}
+            if (state is HomeFindAccountInitial) {}
+            if (state is HomeFindAccountInitial) {}
 
-          return BlocListener<TransactionCubit, TransactionState>(
-            listener: (context, state) async {
-              if (state is TransactionAddInitial) AppLoaders.showLoader(context: context);
-              if (state is TransactionAddError) {
-                AppLoaders.dismissEasyLoader();
-                AppSheet.appErrorSheet(context: context, message: state.response.message);
-              }
-              if (state is TransactionAddSuccess) {
-                SMSService smsService = SMSService();
-                BaseService base_service = BaseService();
-                AppTransaction updated = state.transactions;
-                updated.status = AppTransactionStatus.SUCCESS;
-                await base_service.baseUpdate(data: updated.toJson(), collectionRef: AppRoutes.transactions);
-                await smsService.sendSMS(
-                  "+237672141321",
-                  "You have successfully deposited a sum of ${context.watch<HomeDepositCubit>().initial_amount} to the account ${context.watch<HomeDepositCubit>().account?.name}",
-                );
-                context.pop();
-                successDepositModal(context: context, transaction: AppTransaction.fake());
-              }
-            },
-            child: SingleChildScrollView(
+            return SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -136,19 +133,21 @@ depositMoney({required BuildContext context, bool loading = false}) {
                                 ),
                               ),
                               kwSpacer(10.w),
-                              // Column(
-                              //   children: [
-                              //     IconInputButton(
-                              //       icon: Icons.add,
-                              //       onTap: () => BlocProvider.of<HomeDepositCubit>(context).addOperator(isAddition: true),
-                              //     ),
-                              //     khSpacer(2.h),
-                              //     IconInputButton(
-                              //       icon: Icons.remove,
-                              //       onTap: () => BlocProvider.of<HomeDepositCubit>(context).addOperator(isAddition: false),
-                              //     ),
-                              //   ],
-                              // ),
+                              Column(
+                                children: [
+                                  IconInputButton(
+                                    icon: Icons.add,
+                                    color: context.watch<HomeDepositCubit>().isAdditionOperator ? kSuccess : Theme.of(context).highlightColor,
+                                    onTap: () => BlocProvider.of<HomeDepositCubit>(context).addOperator(isAddition: true),
+                                  ),
+                                  khSpacer(2.h),
+                                  IconInputButton(
+                                    icon: Icons.remove,
+                                    color: !context.watch<HomeDepositCubit>().isAdditionOperator ? kSuccess : Theme.of(context).highlightColor,
+                                    onTap: () => BlocProvider.of<HomeDepositCubit>(context).addOperator(isAddition: false),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -156,33 +155,33 @@ depositMoney({required BuildContext context, bool loading = false}) {
                     ),
                   ),
                   kh20Spacer(),
-                  // Container(
-                  //   height: 30.h,
-                  //   child: ListView.builder(
-                  //     scrollDirection: Axis.horizontal,
-                  //     itemCount: amounts.length,
-                  //     itemBuilder: ((context, index) {
-                  //       return Row(
-                  //         children: [
-                  //           if (index == 0) kwSpacer(20.w),
-                  //           Container(
-                  //             margin: EdgeInsets.only(right: 20.w),
-                  //             child: ActionChip(
-                  //               padding: kPadding(10.w, 0.h),
-                  //               backgroundColor: add_factor == amounts[index] ? Theme.of(context).primaryColor : null,
-                  //               onPressed: () => BlocProvider.of<HomeDepositCubit>(context).addValue(amounts[index]),
-                  //               label: Text(
-                  //                 Formaters.formatCurrency(amounts[index]),
-                  //                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: add_factor == amounts[index] ? kWhite : kDark),
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       );
-                  //     }),
-                  //   ),
-                  // ),
-                  // kh20Spacer(),
+                  Container(
+                    height: 30.h,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: amounts.length,
+                      itemBuilder: ((context, index) {
+                        return Row(
+                          children: [
+                            if (index == 0) kwSpacer(20.w),
+                            Container(
+                              margin: EdgeInsets.only(right: 20.w),
+                              child: ActionChip(
+                                padding: kPadding(10.w, 0.h),
+                                backgroundColor: context.watch<HomeDepositCubit>().add_factor == amounts[index] ? Theme.of(context).primaryColor : null,
+                                onPressed: () => BlocProvider.of<HomeDepositCubit>(context).addValue(amounts[index]),
+                                label: Text(
+                                  Formaters.formatCurrency(amounts[index]),
+                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: context.watch<HomeDepositCubit>().add_factor == amounts[index] ? kWhite : kDark),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
+                    ),
+                  ),
+                  kh20Spacer(),
                   Divider(),
                   Padding(
                     padding: kAppPadding(),
@@ -241,14 +240,14 @@ depositMoney({required BuildContext context, bool loading = false}) {
                               AppModal.showErrorAlert(context: context, title: "Transaction Status", desc: "Please enter a valid account");
                               return;
                             }
-                            if (context.watch<HomeDepositCubit>().initial_amount != 0) {
+                            if (context.watch<HomeDepositCubit>().total_amount != 0) {
                               BlocProvider.of<TransactionCubit>(context).addTransaction(
                                 context: context,
                                 data: AppTransaction(
                                   account_num: context.watch<HomeDepositCubit>().account?.id ?? "",
                                   reference_id: Uuid().v1(),
                                   transaction_id: Uuid().v1(),
-                                  amount: context.watch<HomeDepositCubit>().initial_amount,
+                                  amount: context.watch<HomeDepositCubit>().total_amount,
                                   createdAt: DateTime.now(),
                                   name: context.watch<HomeDepositCubit>().account?.name ?? "",
                                   status: AppTransactionStatus.PENDING,
@@ -265,21 +264,21 @@ depositMoney({required BuildContext context, bool loading = false}) {
                   khSpacer(80.h),
                 ],
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     ),
   );
 }
 
-GestureDetector IconInputButton({required IconData icon, void Function()? onTap}) {
+GestureDetector IconInputButton({required IconData icon, void Function()? onTap, required Color color}) {
   return GestureDetector(
     onTap: onTap,
     child: Container(
       width: 30.w,
       height: 40.h,
-      decoration: BoxDecoration(color: icon == Icons.add ? kSuccess : kGrey, borderRadius: radiusVal(2.r)),
+      decoration: BoxDecoration(color: color, borderRadius: radiusVal(2.r)),
       child: Icon(icon, size: 18.r),
     ),
   );

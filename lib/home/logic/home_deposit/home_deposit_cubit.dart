@@ -9,58 +9,36 @@ part 'home_deposit_state.dart';
 
 class HomeDepositCubit extends Cubit<HomeDepositState> {
   HomeDepositCubit() : super(HomeDepositInitial(amount: 500));
-  int initial_amount = 500;
-  int add_factor = 0;
+  int total_amount = 500;
+  int add_factor = 25;
   String message = "Please type to select account";
   bool loading = false;
-  bool error = true;
+  bool error = false;
   bool isAdditionOperator = true;
   bool isFirstClick = true;
-  List<dynamic> compute = [];
+  List<int> compute = [];
   Account? account;
-  // List<dynamic> input = [0, '+', 0, '+', 4, '+', 1, '+', 0];
+  List<int> amounts = [25, 50, 100, 200, 500, 1000, 2000, 2500, 3000, 5000, 10000];
 
   DepositService _depositService = DepositService();
 
   void addOperator({required bool isAddition}) {
-    isFirstClick = compute.length == 0 ? true : false;
-    if (isFirstClick) {
-      initial_amount = 0;
-      emit(HomeDepositAddedValue(amount: initial_amount));
-    } else if (compute.length > 0) {
-      logI("addOperator is ${isAddition} and last item is: ${compute.last.runtimeType}");
-      isAdditionOperator = isAddition;
-    }
-    // logI([isAddition, compute]);
-    print("-------------------");
-    print(compute);
-    print("-------------------");
+    isAdditionOperator = isAddition;
+    emit(HomeDepositChangeOperator());
   }
 
   void addValue(int value) {
-    print("--------INnit-----------");
-    print(compute);
-    print("-------------------");
     isFirstClick = compute.length == 0 ? true : false;
     if (isFirstClick) {
-      initial_amount = 0;
-      compute.add(value);
-      emit(HomeDepositAddedValue(amount: initial_amount));
+      compute.add(0);
+      emit(HomeDepositAddedValue(amount: total_amount, factor: value));
     }
 
     if (compute.length > 0) {
-      logI("Value is ${value} and last item is: ${compute.last.runtimeType}");
       isAdditionOperator ? compute.add(value) : compute.add(-value);
-      initial_amount = calculateExpression(compute);
-      emit(HomeDepositAddedValue(amount: initial_amount));
-    } else {
-      compute.add(value);
-      initial_amount = calculateExpression(compute);
-      emit(HomeDepositAddedValue(amount: initial_amount));
+      total_amount = calculateExpression(compute);
+      emit(HomeDepositAddedValue(amount: total_amount, factor: value));
     }
-    print("-------------------");
-    print(compute);
-    print("-------------------");
   }
 
   Future<void> findUser(String val, BuildContext context) async {
@@ -98,40 +76,11 @@ class HomeDepositCubit extends Cubit<HomeDepositState> {
     }
   }
 
-  int calculateExpression(List<dynamic> input) {
-    if (input.isEmpty) {
-      logError("Input is empty");
-      return 0;
-    }
-
-    double result = input[0].toDouble(); // Initialize result with the first number
-
-    // Iterate through the array starting from the second element
-    for (int i = 1; i < input.length; i += 2) {
-      if (i + 1 >= input.length) {
-        logError("Input array is not well-formed");
-        return 0;
-      }
-
-      // Get the operator and the next number
-      String operator = input[i];
-      double nextNumber = input[i + 1].toDouble();
-
-      // Perform calculations based on the operator
-      if (operator == '+') {
-        result += nextNumber;
-      } else if (operator == '-') {
-        result -= nextNumber;
-      } else {
-        logError("Invalid operator: $operator");
-        return 0;
-      }
-    }
-    logI(result);
-    return result.toInt();
+  int calculateExpression(List<int> inputs) {
+    return inputs.fold(0, (previousValue, element) => previousValue + element);
   }
 
   void updateSum(String val) {
-    initial_amount = int.parse(val);
+    total_amount = int.parse(val);
   }
 }
