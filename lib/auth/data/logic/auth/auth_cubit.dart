@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:xoecollect/shared/helpers/encryptor.dart';
@@ -64,7 +63,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthVerifyPinInit());
     try {
       AppBaseResponse response = await authService.verifyPin(context, p);
-      logI(response.toJson());
+      // logI(response.toJson());
       if (response.statusCode == 200 || response.statusCode == 201) {
         emit(AuthVerifyPinSuccess(response.data['data']));
       } else

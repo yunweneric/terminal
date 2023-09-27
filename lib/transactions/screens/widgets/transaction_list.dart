@@ -7,9 +7,11 @@ import 'package:xoecollect/shared/components/data_builder.dart';
 import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/components/states_widgets.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
+import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/shared/utils/svgs_assets.dart';
 import 'package:xoecollect/transactions/logic/cubit/transaction_cubit.dart';
+import 'package:xoecollect/transactions/screens/transaction_home.dart';
 import 'package:xoecollect/transactions/screens/widgets/trannsaction_card.dart';
 
 class TransactionList extends StatefulWidget {
@@ -35,6 +37,7 @@ class _TransactionListState extends State<TransactionList> {
   Widget build(BuildContext context) {
     return BlocConsumer<TransactionCubit, TransactionState>(
       listener: (context, state) {
+        logI(state);
         if (state is TransactionFetchInitial) {
           loading = true;
           error = false;
@@ -44,6 +47,11 @@ class _TransactionListState extends State<TransactionList> {
           error = true;
         }
         if (state is TransactionFetchSuccess) {
+          transactions = state.transactions;
+          loading = false;
+          error = false;
+        }
+        if (state is TransactionFilterSuccess) {
           transactions = state.transactions;
           loading = false;
           error = false;

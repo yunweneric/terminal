@@ -7,6 +7,7 @@ import 'package:xoecollect/shared/models/transaction/transaction_status.dart';
 class AppTransaction {
   final String name;
   final String id;
+  final String transaction_type;
   final int amount;
   final String account_num;
   final String reference_id;
@@ -21,6 +22,7 @@ class AppTransaction {
     required this.transaction_id,
     required this.amount,
     required this.createdAt,
+    required this.transaction_type,
     required this.name,
     required this.status,
     required this.id,
@@ -36,6 +38,7 @@ class AppTransaction {
       transaction_id: "",
       createdAt: DateTime.now(),
       status: AppTransactionStatus.PENDING,
+      transaction_type: AppTransactionType.DEPOSIT,
     );
   }
 
@@ -50,6 +53,7 @@ class AppTransaction {
       transaction_id: Uuid().v1(),
       createdAt: DateTime.now(),
       status: faker.randomGenerator.element([AppTransactionStatus.PENDING, AppTransactionStatus.SUCCESS, AppTransactionStatus.FAILED]),
+      transaction_type: faker.randomGenerator.element([AppTransactionType.DEPOSIT, AppTransactionType.WITHDRAW]),
     );
   }
 
@@ -64,6 +68,7 @@ class AppTransaction {
       reference_id: json["reference_id"],
       createdAt: date,
       status: json["status"],
+      transaction_type: json["transaction_type"],
     );
   }
 
@@ -75,6 +80,7 @@ class AppTransaction {
         "amount": amount,
         "reference_id": reference_id,
         "createdAt": createdAt,
+        "transaction_type": transaction_type,
         "status": status,
       };
 }

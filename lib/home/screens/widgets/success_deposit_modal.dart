@@ -105,6 +105,17 @@ successDepositModal({required BuildContext context, required AppTransaction tran
                       },
                       text: "Print Receipt",
                     ),
+                    kh10Spacer(),
+                    submitButton(
+                      color: Theme.of(context).cardColor,
+                      textColor: Theme.of(context).primaryColor,
+                      borderSide: BorderSide(color: Theme.of(context).primaryColor),
+                      context: context,
+                      onPressed: () {
+                        context.pop();
+                      },
+                      text: "Close",
+                    ),
                     kh20Spacer(),
                   ],
                 ),

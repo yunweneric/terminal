@@ -28,8 +28,6 @@ import 'package:xoecollect/transactions/logic/cubit/transaction_cubit.dart';
 depositMoney({required BuildContext context, bool loading = false}) {
   List<int> amounts = [25, 50, 100, 200, 500, 1000, 2000, 2500, 3000, 5000, 10000];
 
-  TextEditingController accountController = TextEditingController();
-  TextEditingController amountController = TextEditingController();
   return AppSheet.simpleModal(
     onClose: () {},
     isDismissible: false,
@@ -45,17 +43,9 @@ depositMoney({required BuildContext context, bool loading = false}) {
           AppSheet.appErrorSheet(context: context, message: state.response.message);
         }
         if (state is TransactionAddSuccess) {
-          SMSService smsService = SMSService();
-          BaseService base_service = BaseService();
-          AppTransaction updated = state.transactions;
-          updated.status = AppTransactionStatus.SUCCESS;
-          await base_service.baseUpdate(data: updated.toJson(), collectionRef: AppRoutes.transactions);
-          await smsService.sendSMS(
-            "+237670912935",
-            "You have successfully deposited a sum of ${context.watch<HomeDepositCubit>().total_amount} to the account ${context.watch<HomeDepositCubit>().account?.name}",
-          );
+          AppLoaders.dismissEasyLoader();
           context.pop();
-          successDepositModal(context: context, transaction: AppTransaction.fake());
+          successDepositModal(context: context, transaction: state.transaction);
         }
       },
       child: BlocProvider(
@@ -102,7 +92,7 @@ depositMoney({required BuildContext context, bool loading = false}) {
                           context: context,
                           label: "Account No.",
                           keyboardType: TextInputType.number,
-                          controller: accountController,
+                          controller: context.watch<HomeDepositCubit>().accountController,
                           maxLength: 5,
                           onChanged: (val) {
                             String value = val.trim();
@@ -121,9 +111,9 @@ depositMoney({required BuildContext context, bool loading = false}) {
                               Expanded(
                                 child: authInput(
                                   hint: "20,000",
-                                  // readOnly: true,
+                                  readOnly: true,
                                   // contentPadding: kPadding(10.w, 25.h),
-                                  controller: amountController,
+                                  controller: context.watch<HomeDepositCubit>().amountController,
                                   context: context,
                                   keyboardType: TextInputType.number,
                                   onChanged: (val) {
@@ -218,7 +208,10 @@ depositMoney({required BuildContext context, bool loading = false}) {
                               kh20Spacer(),
                               ListTile(
                                 leading: Text('Account Name'),
-                                trailing: Text(context.watch<HomeDepositCubit>().account?.name ?? "", style: Theme.of(context).textTheme.titleMedium),
+                                trailing: Text(
+                                  context.watch<HomeDepositCubit>().account?.name ?? "",
+                                  style: Theme.of(context).textTheme.titleMedium,
+                                ),
                               ),
                               ListTile(
                                 leading: Text('Account No'),
@@ -236,27 +229,37 @@ depositMoney({required BuildContext context, bool loading = false}) {
                         submitButton(
                           context: context,
                           onPressed: () {
-                            if (context.watch<HomeDepositCubit>().account == null) {
-                              AppModal.showErrorAlert(context: context, title: "Transaction Status", desc: "Please enter a valid account");
+                            // logI(context.read<HomeDepositCubit>().account == null);
+                            if (context.read<HomeDepositCubit>().account == null) {
+                              AppModal.showErrorAlert(
+                                context: context,
+                                title: "Transaction Status",
+                                desc: "Please enter a valid account",
+                              );
                               return;
                             }
-                            if (context.watch<HomeDepositCubit>().total_amount != 0) {
+                            if (context.read<HomeDepositCubit>().total_amount != 0) {
+                              AppTransaction data = AppTransaction(
+                                account_num: context.read<HomeDepositCubit>().account?.id ?? "",
+                                reference_id: Uuid().v1(),
+                                transaction_id: Uuid().v1(),
+                                amount: context.read<HomeDepositCubit>().total_amount,
+                                createdAt: DateTime.now(),
+                                name: context.read<HomeDepositCubit>().account?.name ?? "",
+                                status: AppTransactionStatus.PENDING,
+                                transaction_type: AppTransactionType.DEPOSIT,
+                                id: Uuid().v1(),
+                              );
+                              logI(data.toJson());
                               BlocProvider.of<TransactionCubit>(context).addTransaction(
                                 context: context,
-                                data: AppTransaction(
-                                  account_num: context.watch<HomeDepositCubit>().account?.id ?? "",
-                                  reference_id: Uuid().v1(),
-                                  transaction_id: Uuid().v1(),
-                                  amount: context.watch<HomeDepositCubit>().total_amount,
-                                  createdAt: DateTime.now(),
-                                  name: context.watch<HomeDepositCubit>().account?.name ?? "",
-                                  status: AppTransactionStatus.PENDING,
-                                  id: Uuid().v1(),
-                                ),
+                                data: data,
                               );
                             }
                           },
+                          color: context.read<HomeDepositCubit>().account == null ? Theme.of(context).highlightColor : Theme.of(context).primaryColor,
                           text: "Deposit",
+                          textColor: context.read<HomeDepositCubit>().account == null ? Theme.of(context).primaryColor : kWhite,
                         ),
                       ],
                     ),

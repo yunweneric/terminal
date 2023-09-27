@@ -19,6 +19,12 @@ class TransactionFetchSuccess extends TransactionState {
   TransactionFetchSuccess(this.transactions);
 }
 
+class TransactionFilterSuccess extends TransactionState {
+  final List<AppTransaction> transactions;
+
+  TransactionFilterSuccess(this.transactions);
+}
+
 class TransactionGeneratePdfInitial extends TransactionState {}
 
 class TransactionGeneratePdfError extends TransactionState {
@@ -42,7 +48,7 @@ class TransactionAddError extends TransactionState {
 }
 
 class TransactionAddSuccess extends TransactionState {
-  final AppTransaction transactions;
+  final AppTransaction transaction;
 
-  TransactionAddSuccess(this.transactions);
+  TransactionAddSuccess(this.transaction);
 }

@@ -11,13 +11,13 @@ import 'package:http/http.dart' as http;
 // String baseUrl = 'http://google.com';
 
 class BaseService {
-  String baseUrl = 'http://44.215.178.10:3000';
-  String baseSMSUrl = 'https://api.avlytext.com/v1/sms?api_key={api_key}';
+  // String baseUrl = 'http://44.215.178.10:3000';
+  String baseSMSUrl = 'https://api.avlytext.com/v1';
   final metadata = SettableMetadata(contentType: "image/jpeg");
 
   Future<String?> getBaseSMSURL() async {
     String? apiKey = await dotenv.env['BASESMS_API_KEY'];
-    return apiKey == null ? null : 'https://api.avlytext.com/v1/sms?api_key=${apiKey}';
+    return apiKey == null ? null : '/sms?api_key=${apiKey}';
   }
 
   AppBaseResponse apiSuccess({required String message, required Map<String, dynamic> data}) {
@@ -157,7 +157,7 @@ class BaseService {
   Future<AppBaseResponse> basePost({required Map<String, dynamic> data, required String urlPath, String? proposedUrl, bool? isSimpleHeaders, bool? encodeRequest}) async {
     logI(data);
 
-    Uri url = Uri.parse(baseUrl + urlPath);
+    Uri url = Uri.parse(baseSMSUrl + urlPath);
 
     String string_res = jsonEncode(data);
 
