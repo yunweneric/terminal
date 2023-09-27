@@ -250,11 +250,9 @@ depositMoney({required BuildContext context, bool loading = false}) {
                                 transaction_type: AppTransactionType.DEPOSIT,
                                 id: Uuid().v1(),
                               );
+
+                              confirmDepositModal(context, data);
                               logI(data.toJson());
-                              BlocProvider.of<TransactionCubit>(context).addTransaction(
-                                context: context,
-                                data: data,
-                              );
                             }
                           },
                           color: context.read<HomeDepositCubit>().account == null ? Theme.of(context).highlightColor : Theme.of(context).primaryColor,
@@ -283,6 +281,46 @@ GestureDetector IconInputButton({required IconData icon, void Function()? onTap,
       height: 40.h,
       decoration: BoxDecoration(color: color, borderRadius: radiusVal(2.r)),
       child: Icon(icon, size: 18.r),
+    ),
+  );
+}
+
+confirmDepositModal(BuildContext context, AppTransaction transaction) {
+  AppSheet.simpleModal(
+    enableDrag: false,
+    isDismissible: false,
+    context: context,
+    height: 300.h,
+    alignment: Alignment.center,
+    padding: kAppPadding(),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("Deposit Money", style: Theme.of(context).textTheme.displayMedium),
+        kh10Spacer(),
+        Text(
+          "Are you sure you want to deposit ${transaction.amount} FCFA to ${transaction.name} with account ID ${transaction.account_num}",
+          textAlign: TextAlign.center,
+        ),
+        kh20Spacer(),
+        submitButton(
+          context: context,
+          onPressed: () {
+            context.pop();
+            BlocProvider.of<TransactionCubit>(context).addTransaction(context: context, data: transaction);
+          },
+          text: "Yes Proceed",
+        ),
+        kh10Spacer(),
+        submitButton(
+          color: Theme.of(context).cardColor,
+          textColor: Theme.of(context).primaryColor,
+          borderSide: BorderSide(color: Theme.of(context).primaryColor),
+          context: context,
+          onPressed: () => context.pop(),
+          text: "No, Cancel",
+        ),
+      ],
     ),
   );
 }
