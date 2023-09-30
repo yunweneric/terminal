@@ -86,18 +86,24 @@ class TransactionCubit extends Cubit<TransactionState> {
     }
   }
 
-  void addTransaction({required BuildContext context, required AppTransaction data}) async {
+  void addTransaction({required BuildContext context, required AppTransaction data, required bool isDeposit}) async {
     emit(TransactionAddInitial());
     try {
       AppBaseResponse response = await _transactionService.addTransaction(context, data);
       if (response.statusCode == 200 || response.statusCode == 201) {
         AppTransaction updated = data;
         String date = Formaters.formatDate(data.createdAt);
-        updated.status = AppTransactionStatus.SUCCESS;
+        if (data.transaction_type == AppTransactionType.DEPOSIT) {
+          updated.status = AppTransactionStatus.SUCCESS;
+        } else if (data.transaction_type == AppTransactionType.WITHDRAW) {
+          updated.status = AppTransactionStatus.PENDING;
+        }
         await base_service.baseUpdate(data: updated.toJson(), collectionRef: AppCollections.TRANSACTIONS);
         await smsService.sendSMS(
           "+237670912935",
-          "You have successfully deposited a sum of ${data.amount} FCFA to ${data.name} with account id ${data.account_num}\n\nTransaction id: ${data.transaction_id}\nDate: ${date}",
+          isDeposit
+              ? "You have successfully deposited a sum of ${data.amount} FCFA to ${data.name} with account id ${data.account_num}\n\nTransaction id: ${data.transaction_id}\nDate: ${date}"
+              : "You have successfully withdrawn a sum of ${data.amount} FCFA from ${data.name} with account id ${data.account_num}\n\nTransaction id: ${data.transaction_id}\nDate: ${date}",
         );
         emit(TransactionAddSuccess(updated));
       } else
@@ -116,5 +122,26 @@ class TransactionCubit extends Cubit<TransactionState> {
     final filtered_transaction = all_transactions.where((element) => element.transaction_type == filter).toList();
     emit(TransactionFilterSuccess(filtered_transaction));
     // logI([all_transactions.length, filtered_transaction.length]);
+  }
+
+  void reconcileTransaction({required BuildContext context, required AppTransaction data, required String code}) async {
+    if (code != data.code) {
+      AppBaseResponse res = _transactionService.apiError(data: {}, message: "The code you entered in incorrect");
+      emit(TransactionReconcileError(res));
+      return;
+    }
+    emit(TransactionReconcileInitial());
+    try {
+      AppTransaction updated = data;
+      updated.status = AppTransactionStatus.SUCCESS;
+      AppBaseResponse response = await _transactionService.baseUpdate(data: updated.toJson(), collectionRef: AppCollections.TRANSACTIONS);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        emit(TransactionReconcileSuccess(updated));
+      } else
+        emit(TransactionReconcileError(response));
+    } catch (error) {
+      logError(error);
+      emit(TransactionReconcileError(_transactionService.apiServerError()));
+    }
   }
 }

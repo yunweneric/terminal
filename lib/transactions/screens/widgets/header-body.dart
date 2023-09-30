@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
 import 'package:xoecollect/shared/helpers/formaters.dart';
+import 'package:xoecollect/shared/models/transaction/transaction_status.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/transactions/deposits/widgets/success_deposit_modal.dart';
@@ -25,28 +26,21 @@ class HeaderBody extends StatelessWidget {
             child: Column(
               children: [
                 kh20Spacer(),
-                Item(context, "You Deposited", Formaters.formatCurrency(transaction.amount) + " Fcfa"),
-                Item(context, "To", transaction.name),
+                Item(context, transaction.transaction_type == AppTransactionType.DEPOSIT ? "You Deposited" : "You've withdrawn", Formaters.formatCurrency(transaction.amount) + " Fcfa"),
+                Item(context, transaction.transaction_type == AppTransactionType.DEPOSIT ? "To" : "From", transaction.name),
                 Item(context, "Account No.", transaction.account_num),
                 Item(context, "Status", transaction.status),
                 Item(context, "Date", Formaters.formatDate(transaction.createdAt)),
                 Item(context, "Transaction ID", transaction.transaction_id),
                 Item(context, "Reference ID", transaction.reference_id),
-                // submitButton(
-                //   context: context,
-                //   onPressed: () {
-                //     BlocProvider.of<TransactionCubit>(context).generatePdf(
-                //       transaction.transaction_id,
-                //       transaction.amount,
-                //       "678308472",
-                //     );
-                //   },
-                //   text: "View Receipt",
-                // ),
                 submitButton(
                   context: context,
                   onPressed: () {
-                    successDepositModal(context: context, transaction: transaction);
+                    successDepositModal(
+                      context: context,
+                      transaction: transaction,
+                      isDeposit: transaction.transaction_type == AppTransactionType.DEPOSIT,
+                    );
                   },
                   text: "View Receipt",
                 ),

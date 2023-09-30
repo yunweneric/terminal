@@ -52,3 +52,17 @@ class TransactionAddSuccess extends TransactionState {
 
   TransactionAddSuccess(this.transaction);
 }
+
+class TransactionReconcileInitial extends TransactionState {}
+
+class TransactionReconcileError extends TransactionState {
+  final AppBaseResponse response;
+
+  TransactionReconcileError(this.response);
+}
+
+class TransactionReconcileSuccess extends TransactionState {
+  final AppTransaction transaction;
+
+  TransactionReconcileSuccess(this.transaction);
+}

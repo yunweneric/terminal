@@ -42,7 +42,7 @@ class DepositModal {
           if (state is TransactionAddSuccess) {
             AppLoaders.dismissEasyLoader();
             context.pop();
-            successDepositModal(context: context, transaction: state.transaction);
+            successDepositModal(context: context, transaction: state.transaction, isDeposit: true);
           }
         },
         child: BlocProvider(
@@ -304,7 +304,7 @@ class DepositModal {
             context: context,
             onPressed: () {
               context.pop();
-              BlocProvider.of<TransactionCubit>(context).addTransaction(context: context, data: transaction);
+              BlocProvider.of<TransactionCubit>(context).addTransaction(context: context, data: transaction, isDeposit: true);
             },
             text: "Yes Proceed",
           ),

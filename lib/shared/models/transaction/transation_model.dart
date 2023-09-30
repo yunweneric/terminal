@@ -9,6 +9,7 @@ class AppTransaction {
   final String id;
   final String transaction_type;
   final int amount;
+  final int? code;
   final String account_num;
   final String reference_id;
   final String transaction_id;
@@ -23,6 +24,7 @@ class AppTransaction {
     required this.amount,
     required this.createdAt,
     required this.transaction_type,
+    this.code,
     required this.name,
     required this.status,
     required this.id,
@@ -33,6 +35,7 @@ class AppTransaction {
       name: "",
       id: "",
       amount: 0,
+      code: 2003,
       account_num: "",
       reference_id: "",
       transaction_id: "",
@@ -49,6 +52,7 @@ class AppTransaction {
       id: Uuid().v1(),
       amount: faker.randomGenerator.integer(32000),
       account_num: Helpers.base_account.toString() + faker.randomGenerator.integer(99999, min: 10000).toString(),
+      code: faker.randomGenerator.integer(9999, min: 1000),
       reference_id: Uuid().v1(),
       transaction_id: Uuid().v1(),
       createdAt: DateTime.now(),
@@ -66,6 +70,7 @@ class AppTransaction {
       amount: json["amount"],
       transaction_id: json["transaction_id"],
       reference_id: json["reference_id"],
+      code: json["code"],
       createdAt: date,
       status: json["status"],
       transaction_type: json["transaction_type"],
@@ -80,6 +85,7 @@ class AppTransaction {
         "amount": amount,
         "reference_id": reference_id,
         "createdAt": createdAt,
+        "code": code,
         "transaction_type": transaction_type,
         "status": status,
       };

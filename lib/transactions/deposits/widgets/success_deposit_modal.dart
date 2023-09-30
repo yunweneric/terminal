@@ -38,7 +38,7 @@ Widget Item(BuildContext context, String title, String value) {
   );
 }
 
-successDepositModal({required BuildContext context, required AppTransaction transaction}) {
+successDepositModal({required BuildContext context, required AppTransaction transaction, required bool isDeposit}) {
   return AppSheet.simpleModal(
     onClose: () {},
     isDismissible: true,
@@ -82,8 +82,8 @@ successDepositModal({required BuildContext context, required AppTransaction tran
                     Column(
                       children: [
                         kh20Spacer(),
-                        Item(context, "You Deposited", Formaters.formatCurrency(transaction.amount) + " Fcfa"),
-                        Item(context, "To", transaction.name),
+                        Item(context, isDeposit ? "You Deposited" : "You have withdrawn", Formaters.formatCurrency(transaction.amount) + " Fcfa"),
+                        Item(context, isDeposit ? "To" : "From", transaction.name),
                         Item(context, "Account No.", transaction.account_num),
                         Item(context, "Status", transaction.status),
                         Item(context, "Date", Formaters.formatDate(transaction.createdAt)),

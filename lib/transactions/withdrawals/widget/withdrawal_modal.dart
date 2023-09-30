@@ -10,7 +10,6 @@ import 'package:xoecollect/shared/components/data_builder.dart';
 import 'package:xoecollect/shared/components/loaders.dart';
 import 'package:xoecollect/shared/components/modals.dart';
 import 'package:xoecollect/shared/components/radius.dart';
-import 'package:xoecollect/shared/helpers/formaters.dart';
 import 'package:xoecollect/shared/helpers/helpers.dart';
 import 'package:xoecollect/shared/models/transaction/transaction_status.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
@@ -23,8 +22,6 @@ import 'package:xoecollect/transactions/logic/cubit/transaction_cubit.dart';
 
 class WithDrawalModal {
   static showWithdrawalModal({required BuildContext context, bool loading = false}) {
-    List<int> amounts = [25, 50, 100, 200, 500, 1000, 2000, 2500, 3000, 5000, 10000];
-
     return AppSheet.simpleModal(
       onClose: () {},
       isDismissible: false,
@@ -42,7 +39,7 @@ class WithDrawalModal {
           if (state is TransactionAddSuccess) {
             AppLoaders.dismissEasyLoader();
             context.pop();
-            successDepositModal(context: context, transaction: state.transaction);
+            successDepositModal(context: context, transaction: state.transaction, isDeposit: false);
           }
         },
         child: BlocProvider(
@@ -194,6 +191,7 @@ class WithDrawalModal {
                                 return;
                               }
                               if (context.read<HomeDepositCubit>().total_amount != 0) {
+                                int code = Helpers.generateCode();
                                 AppTransaction data = AppTransaction(
                                   account_num: context.read<HomeDepositCubit>().account?.id ?? "",
                                   reference_id: Uuid().v1(),
@@ -202,12 +200,12 @@ class WithDrawalModal {
                                   createdAt: DateTime.now(),
                                   name: context.read<HomeDepositCubit>().account?.name ?? "",
                                   status: AppTransactionStatus.PENDING,
-                                  transaction_type: AppTransactionType.DEPOSIT,
+                                  transaction_type: AppTransactionType.WITHDRAW,
                                   id: Uuid().v1(),
+                                  code: code,
                                 );
 
-                                confirmDepositModal(context, data);
-                                logI(data.toJson());
+                                confirmWithdrawalModal(context, data);
                               }
                             },
                             color: context.read<HomeDepositCubit>().account == null ? Theme.of(context).highlightColor : Theme.of(context).primaryColor,
@@ -217,7 +215,7 @@ class WithDrawalModal {
                         ],
                       ),
                     ),
-                    khSpacer(80.h),
+                    khSpacer(20.h),
                   ],
                 ),
               );
@@ -240,7 +238,7 @@ class WithDrawalModal {
     );
   }
 
-  static confirmDepositModal(BuildContext context, AppTransaction transaction) {
+  static confirmWithdrawalModal(BuildContext context, AppTransaction transaction) {
     AppSheet.simpleModal(
       enableDrag: false,
       isDismissible: false,
@@ -251,10 +249,10 @@ class WithDrawalModal {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Deposit Money", style: Theme.of(context).textTheme.displayMedium),
+          Text("Withdraw Money", style: Theme.of(context).textTheme.displayMedium),
           kh10Spacer(),
           Text(
-            "Are you sure you want to deposit ${transaction.amount} FCFA to ${transaction.name} with account ID ${transaction.account_num}",
+            "Are you sure you want to withdraw ${transaction.amount} FCFA from ${transaction.name} with account ID ${transaction.account_num}",
             textAlign: TextAlign.center,
           ),
           kh20Spacer(),
@@ -262,7 +260,7 @@ class WithDrawalModal {
             context: context,
             onPressed: () {
               context.pop();
-              BlocProvider.of<TransactionCubit>(context).addTransaction(context: context, data: transaction);
+              BlocProvider.of<TransactionCubit>(context).addTransaction(context: context, data: transaction, isDeposit: false);
             },
             text: "Yes Proceed",
           ),

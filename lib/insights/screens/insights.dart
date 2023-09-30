@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:xoecollect/insights/screens/widget/areat_chart.dart';
 import 'package:xoecollect/insights/screens/widget/transaction_chart.dart';
+import 'package:xoecollect/shared/components/appbar.dart';
 import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/shared/theme/colors.dart';
@@ -35,11 +36,17 @@ class _InsightScreenState extends State<InsightScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: appBar(
+        context: context,
+        title: "Insight",
+        centerTitle: true,
+        style: Theme.of(context).textTheme.displayMedium,
+        bgColor: Colors.transparent,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              kh20Spacer(),
               kh20Spacer(),
               Container(
                 margin: kPadding(20.w, 0),
@@ -70,8 +77,8 @@ class _InsightScreenState extends State<InsightScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    AreaChart(colors: [kDanger, kDanger], amount: 40000, title: "Expense", percentage: 40),
-                    AreaChart(colors: [Theme.of(context).hoverColor, Theme.of(context).hoverColor], amount: 2000, title: "Income", percentage: 40),
+                    AreaChart(colors: [kDanger, kDanger], amount: 40000, title: "Withdrawals", percentage: 40),
+                    AreaChart(colors: [Theme.of(context).hoverColor, Theme.of(context).hoverColor], amount: 2000, title: "Deposits", percentage: 40),
                   ],
                 ),
               ),

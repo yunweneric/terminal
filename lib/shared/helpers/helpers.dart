@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -34,5 +35,9 @@ class Helpers {
     } else {
       (!await launchUrl(Uri.parse(whatsappURLIos)));
     }
+  }
+
+  static generateCode() {
+    return Random().nextInt(8999) + 1000;
   }
 }
