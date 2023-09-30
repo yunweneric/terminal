@@ -11,7 +11,6 @@ import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/shared/utils/svgs_assets.dart';
 import 'package:xoecollect/transactions/logic/cubit/transaction_cubit.dart';
-import 'package:xoecollect/transactions/screens/transaction_home.dart';
 import 'package:xoecollect/transactions/screens/widgets/trannsaction_card.dart';
 
 class TransactionList extends StatefulWidget {

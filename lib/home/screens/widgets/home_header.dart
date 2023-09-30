@@ -5,13 +5,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
 import 'package:xoecollect/auth/data/model/pinn_routing_model.dart';
-import 'package:xoecollect/home/screens/widgets/deposit_modal.dart';
 import 'package:xoecollect/routes/route_names.dart';
 import 'package:xoecollect/shared/components/buttons.dart';
 import 'package:xoecollect/shared/helpers/formaters.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
-import 'package:xoecollect/theme/colors.dart';
+import 'package:xoecollect/shared/theme/colors.dart';
+import 'package:xoecollect/transactions/deposits/widgets/deposit_modal.dart';
+import 'package:xoecollect/transactions/withdrawals/widget/withdrawal_modal.dart';
 
 class HeaderSection extends StatefulWidget {
   final AlignmentGeometry? alignment;
@@ -139,13 +140,17 @@ class _HeaderSectionState extends State<HeaderSection> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  headerChip(context: context, title: "Withdraw", onTap: () {}),
+                  headerChip(
+                    context: context,
+                    title: "Withdraw",
+                    onTap: () => WithDrawalModal.showWithdrawalModal(context: context),
+                  ),
                   kwSpacer(10.w),
                   headerChip(
                     context: context,
                     title: "Deposit",
                     onTap: () {
-                      depositMoney(context: context, loading: loading);
+                      DepositModal.showDepositMoney(context: context, loading: loading);
                       Future.delayed(Duration(seconds: 2), () {
                         setState(() {
                           loading = false;

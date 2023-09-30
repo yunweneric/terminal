@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:xoecollect/theme/colors.dart';
+import 'package:xoecollect/shared/theme/colors.dart';
 
 showToastSuccess(String msg) {
   Fluttertoast.showToast(

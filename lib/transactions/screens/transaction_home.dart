@@ -1,14 +1,12 @@
-import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:xoecollect/shared/components/appbar.dart';
 import 'package:xoecollect/shared/models/transaction/transaction_status.dart';
-import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
-import 'package:xoecollect/theme/colors.dart';
+import 'package:xoecollect/shared/theme/colors.dart';
 import 'package:xoecollect/transactions/logic/cubit/transaction_cubit.dart';
 import 'package:xoecollect/transactions/screens/widgets/transaction_list.dart';
 

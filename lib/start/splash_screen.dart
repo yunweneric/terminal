@@ -11,7 +11,7 @@ import 'package:xoecollect/shared/utils/image_assets.dart';
 import 'package:xoecollect/shared/utils/local_storage.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
-import 'package:xoecollect/theme/colors.dart';
+import 'package:xoecollect/shared/theme/colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

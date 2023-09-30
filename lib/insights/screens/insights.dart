@@ -5,7 +5,7 @@ import 'package:xoecollect/insights/screens/widget/areat_chart.dart';
 import 'package:xoecollect/insights/screens/widget/transaction_chart.dart';
 import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
-import 'package:xoecollect/theme/colors.dart';
+import 'package:xoecollect/shared/theme/colors.dart';
 
 class _ChartData {
   _ChartData(this.x, this.y);

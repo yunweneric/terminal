@@ -1,9 +1,6 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xoecollect/config/app_config.dart';
 import 'package:xoecollect/shared/models/base/base_res_model.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/services/base_service.dart';

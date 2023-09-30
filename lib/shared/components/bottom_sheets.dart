@@ -12,7 +12,7 @@ import 'package:xoecollect/shared/components/loaders.dart';
 import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
-import 'package:xoecollect/theme/colors.dart';
+import 'package:xoecollect/shared/theme/colors.dart';
 
 class AppSheet {
   static baseBottomSheet({required BuildContext context, bool? enableDrag, bool? isDismissible, required Widget child}) {

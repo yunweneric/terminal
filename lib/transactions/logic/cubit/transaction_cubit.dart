@@ -13,7 +13,6 @@ import 'package:xoecollect/shared/services/collection_service.dart';
 import 'package:xoecollect/shared/services/sms_service.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/transactions/data/transaction_service.dart';
-import 'package:xoecollect/transactions/screens/transaction_home.dart';
 
 part 'transaction_state.dart';
 

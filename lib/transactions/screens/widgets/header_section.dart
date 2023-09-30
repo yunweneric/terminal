@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:xoecollect/shared/components/header_amount.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
-import 'package:xoecollect/theme/colors.dart';
+import 'package:xoecollect/shared/theme/colors.dart';
 
 class HeaderSection extends StatelessWidget {
   final AppTransaction transaction;

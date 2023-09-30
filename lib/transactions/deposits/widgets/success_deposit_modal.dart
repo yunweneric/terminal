@@ -12,7 +12,7 @@ import 'package:xoecollect/shared/helpers/formaters.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
-import 'package:xoecollect/theme/colors.dart';
+import 'package:xoecollect/shared/theme/colors.dart';
 import 'package:xoecollect/transactions/logic/cubit/transaction_cubit.dart';
 
 Widget Item(BuildContext context, String title, String value) {

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:xoecollect/profile/screens/widgets/profile_tile.dart';
 import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/components/shadows.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
+import 'package:xoecollect/users/profile/screens/widgets/profile_tile.dart';
 
 AnimateList<Widget> profileScreenShimmer(BuildContext context) {
   return AnimateList(

@@ -1,6 +1,5 @@
 import 'package:faker/faker.dart';
 import 'package:sticky_az_list/sticky_az_list.dart';
-import 'package:uuid/uuid.dart';
 import 'package:xoecollect/shared/helpers/formaters.dart';
 import 'package:xoecollect/shared/helpers/helpers.dart';
 

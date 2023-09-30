@@ -6,7 +6,7 @@ import 'package:xoecollect/shared/helpers/formaters.dart';
 import 'package:xoecollect/shared/models/transaction/transaction_status.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
-import 'package:xoecollect/theme/colors.dart';
+import 'package:xoecollect/shared/theme/colors.dart';
 
 Widget transactionCard(BuildContext context, AppTransaction transaction) {
   return GestureDetector(

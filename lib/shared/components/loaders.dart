@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:xoecollect/shared/theme/colors.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
@@ -12,6 +13,7 @@ class AppLoaders {
   static Widget loadingWidget(context) {
     return SpinKitFadingCircle(
       color: Theme.of(context).primaryColor,
+      // color: kWhite,
       size: 50.0,
     );
   }
@@ -71,6 +73,19 @@ class AppLoaders {
         ),
       ),
     );
+
+    // showDialog(
+    //   context: context,
+    //   barrierDismissible: dismissOnTap ?? true,
+    //   barrierColor: Colors.black.withOpacity(0.5),
+    //   builder: (c) {
+    //     return Container(
+    //       child: Center(
+    //         child: loadingWidget(context),
+    //       ),
+    //     );
+    //   },
+    // );
   }
 
   static Widget listShimmer(int length, context, bool canScroll) {

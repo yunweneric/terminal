@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:xoecollect/profile/data/services/profile_service.dart';
 import 'package:xoecollect/shared/models/users/user_model.dart';
 import 'package:xoecollect/shared/models/base/base_res_model.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
+import 'package:xoecollect/users/profile/data/services/profile_service.dart';
 
 part 'profile_state.dart';
 

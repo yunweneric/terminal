@@ -10,7 +10,7 @@ import 'package:xoecollect/shared/models/users/user_model.dart';
 import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
-import 'package:xoecollect/theme/colors.dart';
+import 'package:xoecollect/shared/theme/colors.dart';
 
 class AppHome extends StatelessWidget {
   final AppUser? user;

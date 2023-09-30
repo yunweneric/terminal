@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xoecollect/shared/helpers/formaters.dart';
-import 'package:xoecollect/theme/colors.dart';
+import 'package:xoecollect/shared/theme/colors.dart';
 
 headerAmount({required String title, required int amount, required BuildContext context, Color? amountColor, Color? textColor}) {
   return Stack(

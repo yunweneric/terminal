@@ -8,11 +8,11 @@ import 'package:xoecollect/contacts/contact_screen.dart';
 import 'package:xoecollect/contacts/logic/contact/contact_cubit.dart';
 import 'package:xoecollect/home/screens/home_screen.dart';
 import 'package:xoecollect/insights/screens/insights.dart';
-import 'package:xoecollect/profile/screens/profile_screen.dart';
 import 'package:xoecollect/routes/route_names.dart';
 import 'package:xoecollect/shared/services/app_state_service.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
+import 'package:xoecollect/users/profile/screens/profile_screen.dart';
 
 class BaseHomeScreen extends StatefulWidget {
   const BaseHomeScreen({super.key});

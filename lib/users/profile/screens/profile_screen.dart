@@ -7,8 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
 import 'package:xoecollect/auth/data/model/pinn_routing_model.dart';
-import 'package:xoecollect/profile/data/logic/profile/profile_cubit.dart';
-import 'package:xoecollect/profile/screens/widgets/profile_tile.dart';
 import 'package:xoecollect/routes/index.dart';
 import 'package:xoecollect/shared/components/appbar.dart';
 import 'package:xoecollect/shared/components/avatar_circle.dart';
@@ -22,7 +20,9 @@ import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/local_storage.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
-import 'package:xoecollect/theme/colors.dart';
+import 'package:xoecollect/shared/theme/colors.dart';
+import 'package:xoecollect/users/profile/data/logic/profile/profile_cubit.dart';
+import 'package:xoecollect/users/profile/screens/widgets/profile_tile.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override

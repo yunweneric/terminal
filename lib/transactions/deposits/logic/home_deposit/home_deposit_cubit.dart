@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:xoecollect/contacts/models/contact_model.dart';
-import 'package:xoecollect/home/services/deposit_service.dart';
 import 'package:xoecollect/shared/models/base/base_res_model.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
+import 'package:xoecollect/transactions/deposits/data/services/deposit_service.dart';
 
 part 'home_deposit_state.dart';
 

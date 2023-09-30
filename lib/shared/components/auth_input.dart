@@ -41,9 +41,11 @@ Widget authInput({
           maxLength: maxLength,
           decoration: InputDecoration(
             hintText: hint,
+            // labelText: label,
             prefixIcon: prefixIcon,
             suffixIcon: sufficIcon,
             hintStyle: hintStyle ?? Theme.of(context).textTheme.labelMedium!.copyWith(color: Theme.of(context).highlightColor.withOpacity(0.9)),
+            labelStyle: hintStyle ?? Theme.of(context).textTheme.labelMedium!.copyWith(color: Theme.of(context).highlightColor.withOpacity(0.9)),
             contentPadding: contentPadding,
           ),
         ),

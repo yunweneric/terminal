@@ -9,11 +9,12 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xoecollect/auth/data/logic/auth/auth_cubit.dart';
 import 'package:xoecollect/config/firebase_options.dart';
-import 'package:xoecollect/profile/data/logic/profile/profile_cubit.dart';
 import 'package:xoecollect/routes/index.dart';
-import 'package:xoecollect/theme/colors.dart';
-import 'package:xoecollect/theme/theme.dart';
+import 'package:xoecollect/shared/services/service_locator.dart';
+import 'package:xoecollect/shared/theme/colors.dart';
+import 'package:xoecollect/shared/theme/theme.dart';
 import 'package:xoecollect/transactions/logic/cubit/transaction_cubit.dart';
+import 'package:xoecollect/users/profile/data/logic/profile/profile_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +26,7 @@ void main() async {
   // * Initialize firebase
   await Firebase.initializeApp(options: await DefaultFirebaseOptions.currentPlatform);
   configLoading();
+  await ServiceLocator.setup();
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('fr')],

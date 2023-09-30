@@ -1,7 +1,7 @@
 import 'package:custom_pin_screen/custom_pin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:xoecollect/theme/colors.dart';
+import 'package:xoecollect/shared/theme/colors.dart';
 
 /// PinCodeField
 class PinCodeField extends StatelessWidget {
