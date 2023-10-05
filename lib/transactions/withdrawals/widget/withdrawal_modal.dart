@@ -16,9 +16,10 @@ import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/shared/theme/colors.dart';
-import 'package:xoecollect/transactions/deposits/logic/home_deposit/home_deposit_cubit.dart';
-import 'package:xoecollect/transactions/deposits/widgets/success_deposit_modal.dart';
-import 'package:xoecollect/transactions/logic/cubit/transaction_cubit.dart';
+import 'package:xoecollect/transactions/logic/home_deposit/home_deposit_cubit.dart';
+import 'package:xoecollect/transactions/logic/transaction/transaction_cubit.dart';
+import 'package:xoecollect/transactions/logic/withdraw/withdraw_cubit.dart';
+import 'package:xoecollect/transactions/withdrawals/widget/enter_account_code.dart';
 
 class WithDrawalModal {
   static showWithdrawalModal({required BuildContext context, bool loading = false}) {
@@ -38,13 +39,14 @@ class WithDrawalModal {
           }
           if (state is TransactionAddSuccess) {
             AppLoaders.dismissEasyLoader();
-            context.pop();
-            successDepositModal(context: context, transaction: state.transaction, isDeposit: false);
+            // context.pop();
+            enterCodeModal(context, state.transaction);
+            // successDepositModal(context: context, transaction: state.transaction, isDeposit: false);
           }
         },
         child: BlocProvider(
-          create: (context) => HomeDepositCubit(),
-          child: BlocConsumer<HomeDepositCubit, HomeDepositState>(
+          create: (context) => WithdrawCubit(),
+          child: BlocConsumer<WithdrawCubit, WithdrawState>(
             listener: (context, state) {
               // logI(state);
               if (state is HomeDepositAddedValue) {
@@ -58,9 +60,6 @@ class WithDrawalModal {
               if (state is HomeDepositAddedValue) {
                 // amountController.text = Formaters.formatCurrency(state.amount) + " FCFA";
               }
-
-              if (state is HomeFindAccountInitial) {}
-              if (state is HomeFindAccountInitial) {}
 
               return SingleChildScrollView(
                 child: Column(
@@ -86,14 +85,14 @@ class WithDrawalModal {
                             context: context,
                             label: "Account No.",
                             keyboardType: TextInputType.number,
-                            controller: context.watch<HomeDepositCubit>().accountController,
+                            controller: context.watch<WithdrawCubit>().accountController,
                             maxLength: 5,
                             onChanged: (val) {
                               String value = val.trim();
                               String account = "${Helpers.base_account}${value}";
                               logI(account);
                               if (val.length > 4) {
-                                BlocProvider.of<HomeDepositCubit>(context).findUser(account, context);
+                                BlocProvider.of<WithdrawCubit>(context).findUser(account, context);
                               }
                             },
                           ),
@@ -105,13 +104,11 @@ class WithDrawalModal {
                                 Expanded(
                                   child: authInput(
                                     hint: "20,000",
-                                    // readOnly: true,
-                                    // contentPadding: kPadding(10.w, 25.h),
-                                    controller: context.watch<HomeDepositCubit>().amountController,
+                                    controller: context.watch<WithdrawCubit>().amountController,
                                     context: context,
                                     keyboardType: TextInputType.number,
                                     onChanged: (val) {
-                                      BlocProvider.of<HomeDepositCubit>(context).updateSum(val);
+                                      BlocProvider.of<WithdrawCubit>(context).updateAmount(val);
                                     },
                                     label: "Amount",
                                   ),
@@ -133,9 +130,9 @@ class WithDrawalModal {
                           Text("Withdraw from", style: Theme.of(context).textTheme.displayMedium),
                           // loading
                           appLoaderBuilder(
-                            loading: context.watch<HomeDepositCubit>().loading,
-                            error: context.watch<HomeDepositCubit>().error,
-                            hasData: context.watch<HomeDepositCubit>().account != null,
+                            loading: context.watch<WithdrawCubit>().loading,
+                            error: context.watch<WithdrawCubit>().error,
+                            hasData: context.watch<WithdrawCubit>().account != null,
                             loadingShimmer: Column(
                               children: [
                                 kh20Spacer(),
@@ -153,7 +150,7 @@ class WithDrawalModal {
                             noDataWidget: Container(
                               alignment: Alignment.center,
                               height: 100.h,
-                              child: Text(context.watch<HomeDepositCubit>().message),
+                              child: Text(context.watch<WithdrawCubit>().message),
                             ),
                             child: Column(
                               children: [
@@ -161,14 +158,14 @@ class WithDrawalModal {
                                 ListTile(
                                   leading: Text('Account Name'),
                                   trailing: Text(
-                                    context.watch<HomeDepositCubit>().account?.name ?? "",
+                                    context.watch<WithdrawCubit>().account?.name ?? "",
                                     style: Theme.of(context).textTheme.titleMedium,
                                   ),
                                 ),
                                 ListTile(
                                   leading: Text('Account No'),
                                   trailing: Text(
-                                    context.watch<HomeDepositCubit>().account?.id ?? "",
+                                    context.watch<WithdrawCubit>().account?.id ?? "",
                                     style: Theme.of(context).textTheme.titleMedium,
                                   ),
                                 ),
@@ -181,8 +178,8 @@ class WithDrawalModal {
                           submitButton(
                             context: context,
                             onPressed: () {
-                              // logI(context.read<HomeDepositCubit>().account == null);
-                              if (context.read<HomeDepositCubit>().account == null) {
+                              // logI(context.read<WithdrawCubit>().account == null);
+                              if (context.read<WithdrawCubit>().account == null) {
                                 AppModal.showErrorAlert(
                                   context: context,
                                   title: "Transaction Status",
@@ -190,15 +187,15 @@ class WithDrawalModal {
                                 );
                                 return;
                               }
-                              if (context.read<HomeDepositCubit>().total_amount != 0) {
+                              if (context.read<WithdrawCubit>().total_amount != 0) {
                                 int code = Helpers.generateCode();
                                 AppTransaction data = AppTransaction(
-                                  account_num: context.read<HomeDepositCubit>().account?.id ?? "",
+                                  account_num: context.read<WithdrawCubit>().account?.id ?? "",
                                   reference_id: Uuid().v1(),
                                   transaction_id: Uuid().v1(),
-                                  amount: context.read<HomeDepositCubit>().total_amount,
+                                  amount: context.read<WithdrawCubit>().total_amount,
                                   createdAt: DateTime.now(),
-                                  name: context.read<HomeDepositCubit>().account?.name ?? "",
+                                  name: context.read<WithdrawCubit>().account?.name ?? "",
                                   status: AppTransactionStatus.PENDING,
                                   transaction_type: AppTransactionType.WITHDRAW,
                                   id: Uuid().v1(),
@@ -208,9 +205,9 @@ class WithDrawalModal {
                                 confirmWithdrawalModal(context, data);
                               }
                             },
-                            color: context.read<HomeDepositCubit>().account == null ? Theme.of(context).highlightColor : Theme.of(context).primaryColor,
+                            color: context.read<WithdrawCubit>().account == null ? Theme.of(context).highlightColor : Theme.of(context).primaryColor,
                             text: "Withdraw",
-                            textColor: context.read<HomeDepositCubit>().account == null ? Theme.of(context).primaryColor : kWhite,
+                            textColor: context.read<WithdrawCubit>().account == null ? Theme.of(context).primaryColor : kWhite,
                           ),
                         ],
                       ),
@@ -222,18 +219,6 @@ class WithDrawalModal {
             },
           ),
         ),
-      ),
-    );
-  }
-
-  static GestureDetector IconInputButton({required IconData icon, void Function()? onTap, required Color color}) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 30.w,
-        height: 40.h,
-        decoration: BoxDecoration(color: color, borderRadius: radiusVal(2.r)),
-        child: Icon(icon, size: 18.r),
       ),
     );
   }

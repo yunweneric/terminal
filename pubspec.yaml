@@ -50,6 +50,7 @@ dependencies:
   pdf: ^3.5.0
   pin_plus_keyboard: ^2.0.6
   pinput: ^3.0.1
+  printing: ^5.9.3
   share_plus: ^7.1.0
   shared_preferences: ^2.0.18
   shimmer: ^2.0.0

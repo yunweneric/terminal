@@ -71,10 +71,10 @@ class TransactionCubit extends Cubit<TransactionState> {
     // transactionStream?.
   }
 
-  generatePdf(String transactionId, int amount, String phoneNumber) async {
+  generatePdfFile(String transactionId, int amount, String phoneNumber) async {
     emit(TransactionGeneratePdfInitial());
     try {
-      XFile? file = await InvoiceGenerator.generate(AppTransaction.fake());
+      XFile? file = await InvoiceGenerator.generateFile(AppTransaction.fake());
       if (file != null) {
         emit(TransactionGeneratePdfSuccess(file));
       } else
@@ -85,6 +85,21 @@ class TransactionCubit extends Cubit<TransactionState> {
       logError("Error generating pdf: ${e}");
     }
   }
+
+  // generateAppPdf(String transactionId, int amount, String phoneNumber) async {
+  //   emit(TransactionGeneratePdfInitial());
+  //   try {
+  //     XFile? file = await InvoiceGenerator.generate(AppTransaction.fake());
+  //     if (file != null) {
+  //       emit(TransactionGeneratePdfSuccess(file));
+  //     } else
+  //       emit(TransactionGeneratePdfError("We encountered an error while generating the invoice!"));
+  //   } catch (e) {
+  //     emit(TransactionGeneratePdfError("We encountered an error while generating the invoice!"));
+
+  //     logError("Error generating pdf: ${e}");
+  //   }
+  // }
 
   void addTransaction({required BuildContext context, required AppTransaction data, required bool isDeposit}) async {
     emit(TransactionAddInitial());
@@ -103,7 +118,7 @@ class TransactionCubit extends Cubit<TransactionState> {
           "+237670912935",
           isDeposit
               ? "You have successfully deposited a sum of ${data.amount} FCFA to ${data.name} with account id ${data.account_num}\n\nTransaction id: ${data.transaction_id}\nDate: ${date}"
-              : "You have successfully withdrawn a sum of ${data.amount} FCFA from ${data.name} with account id ${data.account_num}\n\nTransaction id: ${data.transaction_id}\nDate: ${date}",
+              : "A sum of ${data.amount} FCFA will be withdrawn from your account\nYour verification code is ${data.code} \n\nTransaction id: ${data.transaction_id}\nDate: ${date}.",
         );
         emit(TransactionAddSuccess(updated));
       } else

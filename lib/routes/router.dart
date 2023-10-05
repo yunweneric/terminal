@@ -11,7 +11,7 @@ import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/screens/layout/base_layout.dart';
 import 'package:xoecollect/start/splash_screen.dart';
 import 'package:xoecollect/start/start_screen.dart';
-import 'package:xoecollect/transactions/deposits/screen/deposit_screen.dart';
+import 'package:xoecollect/transactions/screens/deposit_screen.dart';
 import 'package:xoecollect/transactions/screens/transaction_details.dart';
 import 'package:xoecollect/transactions/screens/transaction_home.dart';
 import 'package:xoecollect/users/profile/screens/profile_screen.dart';

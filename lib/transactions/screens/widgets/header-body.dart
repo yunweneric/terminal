@@ -6,8 +6,8 @@ import 'package:xoecollect/shared/helpers/formaters.dart';
 import 'package:xoecollect/shared/models/transaction/transaction_status.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
+import 'package:xoecollect/transactions/logic/transaction/transaction_cubit.dart';
 import 'package:xoecollect/transactions/deposits/widgets/success_deposit_modal.dart';
-import 'package:xoecollect/transactions/logic/cubit/transaction_cubit.dart';
 
 class HeaderBody extends StatelessWidget {
   final AppTransaction transaction;

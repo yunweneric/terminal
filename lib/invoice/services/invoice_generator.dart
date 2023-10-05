@@ -7,28 +7,38 @@ import 'package:share_plus/share_plus.dart';
 import 'package:xoecollect/invoice/services/pdf_service.dart';
 import 'package:xoecollect/shared/helpers/formaters.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';
-import 'package:xoecollect/shared/utils/logger_util.dart';
 import './docs/logo1.dart' as im1;
 
 class InvoiceGenerator {
-  static Future<XFile?> generate(AppTransaction transaction) async {
-    try {
-      final pdf = Document();
-      pdf.addPage(
-        MultiPage(
-          mainAxisAlignment: pw.MainAxisAlignment.start,
-          build: (context) => [
-            buildInvoice(transaction),
-            buildFooter(),
-          ],
-        ),
-      );
+  static FutureOr<XFile?> generateFile(AppTransaction transaction) async {
+    final pdf = Document();
+    pdf.addPage(
+      MultiPage(
+        mainAxisAlignment: pw.MainAxisAlignment.start,
+        build: (context) => [
+          buildInvoice(transaction),
+          buildFooter(),
+        ],
+      ),
+    );
+    return PdfService.saveDocument(name: 'reciept${DateTime.now()}.pdf', pdf: pdf);
+  }
 
-      return PdfApi.saveDocument(name: 'reciept${DateTime.now()}.pdf', pdf: pdf);
-    } catch (e) {
-      logI("Could not generate pdf:${e}");
-      return null;
-    }
+  static FutureOr<Uint8List> generate(AppTransaction transaction) async {
+    final pdf = Document();
+    pdf.addPage(
+      MultiPage(
+        mainAxisAlignment: pw.MainAxisAlignment.start,
+        build: (context) => [
+          buildInvoice(transaction),
+          buildFooter(),
+        ],
+      ),
+    );
+
+    return pdf.save();
+
+    // return PdfApi.saveDocument(name: 'reciept${DateTime.now()}.pdf', pdf: pdf);
   }
 
   static Widget buildHeader(transactionId) => Column(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xoecollect/home/screens/widgets/home_header.dart';
+import 'package:xoecollect/invoice/services/pdf_service.dart';
+import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/transactions/screens/widgets/transaction_list.dart';
 import 'package:xoecollect/shared/models/users/user_model.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
@@ -31,17 +33,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () async {
-      //     // TransactionService transactionService = TransactionService();
-      //     // ContactService contactService = ContactService();
-      //     // var res = await transactionService.seedTransactions();
-      //     // var res = await contactService.seedContact();
-      //     // logI(res.toJson());
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          // TransactionService transactionService = TransactionService();
+          // ContactService contactService = ContactService();
+          // var res = await transactionService.seedTransactions();
+          // var res = await contactService.seedContact();
+          // logI(res.toJson());
 
-      //     AppLoaders.showLoader(context: context);
-      //   },
-      // ),
+          // AppLoaders.showLoader(context: context);
+
+          PdfService.printTransaction(AppTransaction.fake());
+        },
+      ),
       body: Container(
         height: kHeight(context),
         child: Column(

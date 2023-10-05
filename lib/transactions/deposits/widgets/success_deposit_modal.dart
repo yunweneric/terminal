@@ -13,7 +13,7 @@ import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/shared/theme/colors.dart';
-import 'package:xoecollect/transactions/logic/cubit/transaction_cubit.dart';
+import 'package:xoecollect/transactions/logic/transaction/transaction_cubit.dart';
 
 Widget Item(BuildContext context, String title, String value) {
   return Container(
@@ -56,7 +56,7 @@ successDepositModal({required BuildContext context, required AppTransaction tran
         }
         if (state is TransactionGeneratePdfSuccess) {
           AppLoaders.dismissEasyLoader();
-          PdfApi.printFile(state.file);
+          PdfService.printFile(state.file);
         }
       },
       builder: (context, state) {
@@ -97,7 +97,7 @@ successDepositModal({required BuildContext context, required AppTransaction tran
                       context: context,
                       onPressed: () {
                         context.pop();
-                        BlocProvider.of<TransactionCubit>(context).generatePdf(
+                        BlocProvider.of<TransactionCubit>(context).generatePdfFile(
                           transaction.transaction_id,
                           transaction.amount,
                           "678308472",

@@ -7,7 +7,7 @@ import 'package:xoecollect/shared/models/transaction/transaction_status.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/shared/theme/colors.dart';
-import 'package:xoecollect/transactions/logic/cubit/transaction_cubit.dart';
+import 'package:xoecollect/transactions/logic/transaction/transaction_cubit.dart';
 import 'package:xoecollect/transactions/screens/widgets/transaction_list.dart';
 
 class TransactionHomeScreen extends StatefulWidget {

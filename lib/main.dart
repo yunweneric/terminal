@@ -13,7 +13,7 @@ import 'package:xoecollect/routes/index.dart';
 import 'package:xoecollect/shared/services/service_locator.dart';
 import 'package:xoecollect/shared/theme/colors.dart';
 import 'package:xoecollect/shared/theme/theme.dart';
-import 'package:xoecollect/transactions/logic/cubit/transaction_cubit.dart';
+import 'package:xoecollect/transactions/logic/transaction/transaction_cubit.dart';
 import 'package:xoecollect/users/profile/data/logic/profile/profile_cubit.dart';
 
 void main() async {
@@ -102,6 +102,7 @@ class _MyAppState extends State<MyApp> {
               routerConfig: routes,
               debugShowCheckedModeBanner: false,
               theme: theme,
+              useInheritedMediaQuery: false,
               builder: EasyLoading.init(),
             );
           },

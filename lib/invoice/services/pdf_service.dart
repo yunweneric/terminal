@@ -5,11 +5,15 @@ import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:printing/printing.dart';
+import 'package:xoecollect/invoice/services/invoice_generator.dart';
+import 'package:xoecollect/shared/components/alerts.dart';
+import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 
-class PdfApi {
+class PdfService {
   String logoName;
 
-  PdfApi(this.logoName) {
+  PdfService(this.logoName) {
     getlogo();
   }
 
@@ -36,38 +40,38 @@ class PdfApi {
   }
 
   static Future printFile(XFile file) async {
-    final url = file.path;
     Share.shareXFiles([file], text: 'Your reciept');
-    print('File $url Shared');
+  }
+
+  static Future printTransaction(AppTransaction transaction) async {
+    List<Printer> printers = await Printing.listPrinters();
+    Printing.directPrintPdf(
+      printer: printers.first,
+      onLayout: (format) {
+        return viewPdf(transaction);
+      },
+    );
   }
 
   Future<String> getlogo() async {
     final dir = await getApplicationDocumentsDirectory();
     final dirName = "$dir" + "/payunit.webp";
-    print("dirName: $dirName");
-    updateLogoName(dirName);
+    this.logoName = dirName;
     return dirName;
-  }
-
-  void updateLogoName(logo) {
-    this.logoName = logo;
-  }
-
-  String getLogoName() {
-    getlogo();
-    print(this.logoName);
-    return this.logoName;
   }
 
   static getImage() {
     var url = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_92x30dp.png";
-    var response = get(Uri.parse(url)).then((value) => {
-          print('Api data: ${value.bodyBytes}')
-
-          // value.bodyBytes
-        });
-    // var data = response.bodyBytes;s
-    // Timer.periodic(Duration(seconds: 5), (e) => data);
+    var response = get(Uri.parse(url)).then((value) => {print('Api data: ${value.bodyBytes}')});
     return [];
+  }
+
+  static viewPdf(AppTransaction transaction) {
+    PdfPreview(
+      maxPageWidth: 700,
+      build: (format) => InvoiceGenerator.generate(transaction),
+      onPrinted: (context) => showToastSuccess("Document printed successfully!"),
+      onShared: (context) => showToastSuccess("Document printed successfully!"),
+    );
   }
 }

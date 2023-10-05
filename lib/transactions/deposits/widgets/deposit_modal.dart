@@ -17,9 +17,9 @@ import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/shared/theme/colors.dart';
-import 'package:xoecollect/transactions/deposits/logic/home_deposit/home_deposit_cubit.dart';
+import 'package:xoecollect/transactions/logic/home_deposit/home_deposit_cubit.dart';
+import 'package:xoecollect/transactions/logic/transaction/transaction_cubit.dart';
 import 'package:xoecollect/transactions/deposits/widgets/success_deposit_modal.dart';
-import 'package:xoecollect/transactions/logic/cubit/transaction_cubit.dart';
 
 class DepositModal {
   static showDepositMoney({required BuildContext context, bool loading = false}) {
