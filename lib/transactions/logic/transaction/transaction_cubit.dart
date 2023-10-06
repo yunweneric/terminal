@@ -113,14 +113,18 @@ class TransactionCubit extends Cubit<TransactionState> {
         } else if (data.transaction_type == AppTransactionType.WITHDRAW) {
           updated.status = AppTransactionStatus.PENDING;
         }
-        await base_service.baseUpdate(data: updated.toJson(), collectionRef: AppCollections.TRANSACTIONS);
-        await smsService.sendSMS(
+        var sms_res = await smsService.sendSMS(
           "+237670912935",
-          isDeposit
-              ? "You have successfully deposited a sum of ${data.amount} FCFA to ${data.name} with account id ${data.account_num}\n\nTransaction id: ${data.transaction_id}\nDate: ${date}"
-              : "A sum of ${data.amount} FCFA will be withdrawn from your account\nYour verification code is ${data.code} \n\nTransaction id: ${data.transaction_id}\nDate: ${date}.",
+          isDeposit == true
+              ? "You have successfully deposited a sum of ${data.amount} FCFA to ${data.name} with account ID ${data.account_num}\n\nTransaction ID: ${data.transaction_id}\nDate: ${date}"
+              : "${data.name} is wants to withdraw a sum of ${data.amount} FCFA from your account. You can confirm using this code ${data.code}",
         );
-        emit(TransactionAddSuccess(updated));
+        if (sms_res.statusCode == 200 || sms_res.statusCode == 201) {
+          await base_service.baseUpdate(data: updated.toJson(), collectionRef: AppCollections.TRANSACTIONS);
+          emit(TransactionAddSuccess(updated));
+        } else {
+          emit(TransactionAddError(sms_res));
+        }
       } else
         emit(TransactionAddError(response));
     } catch (error) {

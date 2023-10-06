@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -16,15 +17,35 @@ import 'package:xoecollect/shared/theme/colors.dart';
 
 class AppSheet {
   static baseBottomSheet({required BuildContext context, bool? enableDrag, bool? isDismissible, required Widget child}) {
+    // return showModalBottomSheet(
+    //   backgroundColor: Theme.of(context).cardColor,
+    //   isScrollControlled: true,
+    //   context: context,
+    //   builder: (context) => child,
+    //   // topControl: Container(),
+
+    //   useRootNavigator: false,
+    //   barrierColor: kDark.withOpacity(0.7),
+    //   isDismissible: isDismissible ?? true,
+    //   enableDrag: enableDrag ?? true,
+    //   // overlayStyle: SystemUiOverlayStyle(
+    //   //   systemNavigationBarColor: Theme.of(context).primaryColorLight,
+    //   // ),
+    // );
     return showBarModalBottomSheet(
       backgroundColor: Theme.of(context).cardColor,
+
       context: context,
       builder: (context) => child,
       // topControl: Container(),
+
       useRootNavigator: false,
       barrierColor: kDark.withOpacity(0.7),
       isDismissible: isDismissible ?? true,
       enableDrag: enableDrag ?? true,
+      overlayStyle: SystemUiOverlayStyle(
+        systemNavigationBarColor: Theme.of(context).primaryColorLight,
+      ),
     );
   }
 

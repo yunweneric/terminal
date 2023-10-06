@@ -9,7 +9,7 @@ import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/shared/theme/colors.dart';
 
 Widget transactionCard(BuildContext context, AppTransaction transaction) {
-  return GestureDetector(
+  return InkWell(
     onTap: () {
       context.push(AppRoutes.transaction_details, extra: transaction);
     },
@@ -55,9 +55,21 @@ Widget transactionCard(BuildContext context, AppTransaction transaction) {
               child: Chip(
                 backgroundColor: Theme.of(context).primaryColorLight,
                 avatar: CircleAvatar(
-                  backgroundColor: transaction.status == AppTransactionStatus.SUCCESS ? kSuccess : kDanger,
+                  backgroundColor: transaction.status == AppTransactionStatus.SUCCESS
+                      ? kSuccess
+                      : transaction.status == AppTransactionStatus.PENDING
+                          ? kPending
+                          : kDanger,
                   radius: 5.r,
-                  child: Icon(transaction.status == AppTransactionStatus.SUCCESS ? Icons.check : Icons.close, size: 8.r, color: kWhite),
+                  child: Icon(
+                    transaction.status == AppTransactionStatus.SUCCESS
+                        ? Icons.check
+                        : transaction.status == AppTransactionStatus.PENDING
+                            ? Icons.refresh_rounded
+                            : Icons.close,
+                    size: 8.r,
+                    color: kWhite,
+                  ),
                 ),
                 padding: EdgeInsets.zero,
                 labelPadding: EdgeInsets.zero,

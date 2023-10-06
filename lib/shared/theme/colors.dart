@@ -6,6 +6,7 @@ const Color kSecondaryColor = Color(0xFF028731);
 const Color kSuccess = Color(0xFFA0E86F);
 const Color kDanger = Color(0xFFF75555);
 const Color kDangerLight = Color(0xFFEEA9B4);
+const Color kPending = Color.fromARGB(255, 241, 164, 20);
 const Color kWhite = Color(0xFFFFFFFF);
 const Color kBackground = Colors.white;
 const Color kDarkBackground = Color(0xFF070811);

@@ -20,6 +20,7 @@ class WithdrawCubit extends Cubit<WithdrawState> {
   TextEditingController amountController = TextEditingController();
   DepositService _depositService = DepositService();
   TextEditingController accountController = TextEditingController();
+  TextEditingController codeController = TextEditingController();
 
   Future<void> findUser(String val, BuildContext context) async {
     emit(HomeFindAccountInitial());

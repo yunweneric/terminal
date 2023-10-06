@@ -33,17 +33,30 @@ class HeaderBody extends StatelessWidget {
                 Item(context, "Date", Formaters.formatDate(transaction.createdAt)),
                 Item(context, "Transaction ID", transaction.transaction_id),
                 Item(context, "Reference ID", transaction.reference_id),
-                submitButton(
-                  context: context,
-                  onPressed: () {
-                    successDepositModal(
-                      context: context,
-                      transaction: transaction,
-                      isDeposit: transaction.transaction_type == AppTransactionType.DEPOSIT,
-                    );
-                  },
-                  text: "View Receipt",
-                ),
+                if (transaction.status == AppTransactionStatus.SUCCESS)
+                  submitButton(
+                    context: context,
+                    onPressed: () {
+                      successDepositModal(
+                        context: context,
+                        transaction: transaction,
+                        isDeposit: transaction.transaction_type == AppTransactionType.DEPOSIT,
+                      );
+                    },
+                    text: "View Receipt",
+                  ),
+                if (transaction.status == AppTransactionStatus.PENDING)
+                  submitButton(
+                    context: context,
+                    onPressed: () {
+                      successDepositModal(
+                        context: context,
+                        transaction: transaction,
+                        isDeposit: transaction.transaction_type == AppTransactionType.DEPOSIT,
+                      );
+                    },
+                    text: "Complete transaction",
+                  ),
                 kh20Spacer(),
               ],
             ),

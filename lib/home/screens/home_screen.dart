@@ -10,6 +10,7 @@ import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/transactions/screens/widgets/transaction_list.dart';
 import 'package:xoecollect/shared/models/users/user_model.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
+import 'package:xoecollect/transactions/withdrawals/widget/enter_account_code.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -56,14 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () async {
-      //     try {
-      //       logI("pringt ....");
-      //       PdfService.printDoc();
-      //     } catch (e) {
-      //       logI(e);
-      //     }
+      floatingActionButton: FloatingActionButton(onPressed: () async {
+        enterCodeModal(context, AppTransaction.fake());
+      }),
 
       //     // TransactionService transactionService = TransactionService();
       //     // ContactService contactService = ContactService();
@@ -76,13 +72,15 @@ class _HomeScreenState extends State<HomeScreen> {
       //     // PdfService.printTransaction(AppTransaction.fake());
       //   },
       // ),
-      body: Container(
-        height: kHeight(context),
-        child: Column(
-          children: [
-            HeaderSection(),
-            TransactionList(),
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          height: kHeight(context),
+          child: Column(
+            children: [
+              HeaderSection(),
+              TransactionList(),
+            ],
+          ),
         ),
       ),
     );

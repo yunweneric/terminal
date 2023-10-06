@@ -83,31 +83,29 @@ class _MyAppState extends State<MyApp> {
   TransactionCubit transactionCubit = TransactionCubit();
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider.value(value: transactionCubit),
-        BlocProvider.value(value: profileCubit),
-        BlocProvider.value(value: authCubit),
-      ],
-      child: LayoutBuilder(builder: (context, constrains) {
-        return ScreenUtilInit(
-          useInheritedMediaQuery: true,
-          builder: (context, child) {
-            ThemeData theme = AppTheme.light();
-            return MaterialApp.router(
-              localizationsDelegates: context.localizationDelegates,
-              supportedLocales: context.supportedLocales,
-              locale: context.locale,
-              title: 'Xoe Collect',
-              routerConfig: routes,
-              debugShowCheckedModeBanner: false,
-              theme: theme,
-              useInheritedMediaQuery: false,
-              builder: EasyLoading.init(),
-            );
-          },
+    return ScreenUtilInit(
+      useInheritedMediaQuery: true,
+      builder: (context, child) {
+        ThemeData theme = AppTheme.light();
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: transactionCubit),
+            BlocProvider.value(value: profileCubit),
+            BlocProvider.value(value: authCubit),
+          ],
+          child: MaterialApp.router(
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            title: 'Xoe Collect',
+            routerConfig: routes,
+            debugShowCheckedModeBanner: false,
+            theme: theme,
+            useInheritedMediaQuery: true,
+            builder: EasyLoading.init(),
+          ),
         );
-      }),
+      },
     );
   }
 }
