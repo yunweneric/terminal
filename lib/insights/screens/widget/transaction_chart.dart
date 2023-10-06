@@ -56,14 +56,14 @@ class TransactionChartState extends State<TransactionChart> {
       listener: (context, state) {},
       builder: (context, state) {
         if (state is ChartFetchSuccess) {
-          logI(state.data.max_value);
-          rawBarGroups = state.data.data.map((e) => makeGroupData(e.x, e.y1, e.y2)).toList();
-          showingBarGroups = state.data.data.map((e) => makeGroupData(e.x, e.y1, e.y2)).toList();
-          maxValue = state.data.max_value;
-          range = state.data.range;
-          state.data.data.forEach((element) {
-            logI(element.toJson());
-          });
+          // logI(state.data.max_value);
+          // rawBarGroups = state.data.data.map((e) => makeGroupData(e.x, e.y1, e.y2)).toList();
+          // showingBarGroups = state.data.data.map((e) => makeGroupData(e.x, e.y1, e.y2)).toList();
+          // maxValue = state.data.max_value;
+          // range = state.data.range;
+          // state.data.data.forEach((element) {
+          //   logI(element.toJson());
+          // });
         }
         return AspectRatio(
           aspectRatio: 1.5,
