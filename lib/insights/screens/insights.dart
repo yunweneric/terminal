@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:xoecollect/insights/screens/widget/areat_chart.dart';
 import 'package:xoecollect/insights/screens/widget/transaction_chart.dart';
 import 'package:xoecollect/shared/components/appbar.dart';
@@ -24,12 +23,10 @@ class InsightScreen extends StatefulWidget {
 
 class _InsightScreenState extends State<InsightScreen> {
   late List<_ChartData> data;
-  late TooltipBehavior _tooltip;
 
   @override
   void initState() {
     data = [_ChartData('20', 12), _ChartData('30', 15), _ChartData('22', 30), _ChartData('32', 6.4), _ChartData('8', 14)];
-    _tooltip = TooltipBehavior(enable: true);
     super.initState();
   }
 

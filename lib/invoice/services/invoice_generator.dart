@@ -26,15 +26,15 @@ class InvoiceGenerator {
 
   static FutureOr<Uint8List> generate(AppTransaction transaction) async {
     final pdf = Document();
-    pdf.addPage(
-      MultiPage(
-        mainAxisAlignment: pw.MainAxisAlignment.start,
-        build: (context) => [
-          buildInvoice(transaction),
-          buildFooter(),
-        ],
-      ),
-    );
+    pdf.addPage(Page(build: (context) => buildInvoice(transaction))
+        // MultiPage(
+        //   mainAxisAlignment: pw.MainAxisAlignment.start,
+        //   build: (context) => [
+        //     buildInvoice(transaction),
+        //     // buildFooter(),
+        //   ],
+        // ),
+        );
 
     return pdf.save();
 
