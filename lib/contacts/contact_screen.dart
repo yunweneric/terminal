@@ -107,7 +107,7 @@ class _ContactScreenState extends State<ContactScreen> {
                             background: Theme.of(context).highlightColor.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(20.r),
                             jumpToSymbolsWithNoEntries: true,
-                            heightFactor: 0.84,
+                            heightFactor: 0.95.h,
                           ),
                         ),
                         builder: (context, index, item) {

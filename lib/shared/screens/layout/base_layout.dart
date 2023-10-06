@@ -8,9 +8,12 @@ import 'package:xoecollect/auth/data/model/pinn_routing_model.dart';
 import 'package:xoecollect/contacts/contact_screen.dart';
 import 'package:xoecollect/contacts/logic/contact/contact_cubit.dart';
 import 'package:xoecollect/home/screens/home_screen.dart';
+import 'package:xoecollect/insights/data/services/chart_service.dart';
+import 'package:xoecollect/insights/logic/cubit/chart_cubit.dart';
 import 'package:xoecollect/insights/screens/insights.dart';
 import 'package:xoecollect/routes/route_names.dart';
 import 'package:xoecollect/shared/services/app_state_service.dart';
+import 'package:xoecollect/shared/services/service_locator.dart';
 import 'package:xoecollect/shared/utils/index.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/users/profile/screens/profile_screen.dart';
@@ -50,7 +53,10 @@ class _BaseHomeScreenState extends State<BaseHomeScreen> {
       create: (context) => ContactCubit(),
       child: ContactScreen(),
     ),
-    InsightScreen(),
+    BlocProvider(
+      create: (context) => ChartCubit(chartService: ServiceLocator.getIt<ChartService>()),
+      child: InsightScreen(),
+    ),
     ProfileScreen(),
   ];
 

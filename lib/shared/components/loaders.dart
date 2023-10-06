@@ -28,7 +28,7 @@ class AppLoaders {
   }
 
   static void dismissEasyLoader() {
-    logI("dismiss loader");
+    // logI("dismiss loader");
     EasyLoading.dismiss();
   }
 

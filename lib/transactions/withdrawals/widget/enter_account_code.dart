@@ -67,6 +67,7 @@ enterCodeModal(BuildContext context, AppTransaction transaction) {
                     context: context,
                     keyboardType: TextInputType.number,
                     controller: context.read<WithdrawCubit>().codeController,
+                    maxLength: 5,
                   ),
                   kh20Spacer(),
                   submitButton(

@@ -14,12 +14,14 @@ class AppConfig {
   }
 
   static Future<Reference> getStorage(String title) async {
-    bool isProd = await AppConfig.isProd();
-    return isProd ? _storage.ref(title) : _storage.ref("test_${title}");
+    // bool isProd = await AppConfig.isProd();
+    return _storage.ref(title);
+    // return isProd ? _storage.ref(title) : _storage.ref("test_${title}");
   }
 
   static Future<CollectionReference<Map<String, dynamic>>> getCollection(String field) async {
-    bool isProd = await AppConfig.isProd();
-    return isProd ? _db.collection(field) : _db.collection("test_db").doc("test_db").collection("test_${field}");
+    // bool isProd = await AppConfig.isProd();
+    return _db.collection(field);
+    // return isProd ? _db.collection(field) : _db.collection("test_db").doc("test_db").collection("test_${field}");
   }
 }

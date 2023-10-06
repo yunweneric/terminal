@@ -144,7 +144,8 @@ class TransactionCubit extends Cubit<TransactionState> {
   }
 
   void reconcileTransaction({required BuildContext context, required AppTransaction data, required String code}) async {
-    if (code != data.code) {
+    logI([code, data.code]);
+    if (code != data.code.toString()) {
       AppBaseResponse res = _transactionService.apiError(data: {}, message: "The code you entered in incorrect");
       emit(TransactionReconcileError(res));
       return;

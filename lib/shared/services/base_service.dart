@@ -76,6 +76,24 @@ class BaseService {
     }
   }
 
+  Future<AppBaseResponse> baseQuery({
+    String? name,
+    required QuerySnapshot<Map<String, dynamic>> query,
+  }) async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> res = await query;
+      List<Map<String, dynamic>> data = res.docs.map((e) => e.data()).toList();
+      if (data.length > 0)
+        return apiSuccess(
+          message: name == null ? "Data found successfully" : "$name found successfully!",
+          data: {"data": data},
+        );
+      return apiSuccess(message: name == null ? "No item found!" : "No ${name} found!", data: {});
+    } catch (e) {
+      return apiServerError();
+    }
+  }
+
   Future<AppBaseResponse> baseAdd({
     required Map<String, dynamic> data,
     required String collectionRef,

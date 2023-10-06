@@ -8,6 +8,7 @@ import 'package:xoecollect/shared/models/transaction/transation_model.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
 import 'package:xoecollect/transactions/logic/transaction/transaction_cubit.dart';
 import 'package:xoecollect/transactions/deposits/widgets/success_deposit_modal.dart';
+import 'package:xoecollect/transactions/withdrawals/widget/enter_account_code.dart';
 
 class HeaderBody extends StatelessWidget {
   final AppTransaction transaction;
@@ -49,11 +50,7 @@ class HeaderBody extends StatelessWidget {
                   submitButton(
                     context: context,
                     onPressed: () {
-                      successDepositModal(
-                        context: context,
-                        transaction: transaction,
-                        isDeposit: transaction.transaction_type == AppTransactionType.DEPOSIT,
-                      );
+                      enterCodeModal(context, transaction);
                     },
                     text: "Complete transaction",
                   ),

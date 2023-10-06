@@ -55,7 +55,7 @@ class AppTransaction {
       code: faker.randomGenerator.integer(9999, min: 1000),
       reference_id: Uuid().v1(),
       transaction_id: Uuid().v1(),
-      createdAt: DateTime.now(),
+      createdAt: faker.date.dateTimeBetween(Formaters.lastWeek(), DateTime.now()),
       status: faker.randomGenerator.element([AppTransactionStatus.PENDING, AppTransactionStatus.SUCCESS, AppTransactionStatus.FAILED]),
       transaction_type: faker.randomGenerator.element([AppTransactionType.DEPOSIT, AppTransactionType.WITHDRAW]),
     );

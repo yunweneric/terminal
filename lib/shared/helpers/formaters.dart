@@ -98,4 +98,14 @@ class Formaters {
     int ms = timestamp.millisecondsSinceEpoch;
     return DateTime.fromMillisecondsSinceEpoch(ms);
   }
+
+  static String roundCurrency(double value) {
+    // int round = value.to
+    return formatCurrency(value.toInt());
+  }
+
+  static DateTime lastWeek() {
+    // int round = value.to
+    return DateTime.now().subtract(Duration(days: 6));
+  }
 }
