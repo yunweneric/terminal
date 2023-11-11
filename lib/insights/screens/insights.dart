@@ -26,7 +26,6 @@ class _InsightScreenState extends State<InsightScreen> {
 
   @override
   void initState() {
-    data = [_ChartData('20', 12), _ChartData('30', 15), _ChartData('22', 30), _ChartData('32', 6.4), _ChartData('8', 14)];
     super.initState();
   }
 

@@ -6,4 +6,6 @@ class GetChartDataResponse {
   final double range;
 
   GetChartDataResponse({required this.data, required this.max_value, required this.range});
+
+  factory GetChartDataResponse.empty() => GetChartDataResponse(data: [], max_value: 0, range: 0);
 }

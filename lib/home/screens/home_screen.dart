@@ -1,20 +1,11 @@
-import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
+import 'package:xoecollect/contacts/data/contact_service.dart';
 import 'package:xoecollect/home/screens/widgets/home_header.dart';
-import 'package:xoecollect/insights/data/services/chart_service.dart';
-import 'package:xoecollect/invoice/services/invoice_generator.dart';
-import 'package:xoecollect/invoice/services/pdf_service.dart';
-import 'package:xoecollect/shared/helpers/formaters.dart';
-import 'package:xoecollect/shared/models/transaction/transation_model.dart';
-import 'package:xoecollect/shared/services/service_locator.dart';
 import 'package:xoecollect/shared/utils/logger_util.dart';
 import 'package:xoecollect/transactions/data/transaction_service.dart';
 import 'package:xoecollect/transactions/screens/widgets/transaction_list.dart';
 import 'package:xoecollect/shared/models/users/user_model.dart';
 import 'package:xoecollect/shared/utils/sizing.dart';
-import 'package:xoecollect/transactions/withdrawals/widget/enter_account_code.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -61,28 +52,29 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: () async {
-        // enterCodeModal(context, AppTransaction.fake());
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          // enterCodeModal(context, AppTransaction.fake());
 
-        // var res = await ServiceLocator.getIt<TransactionService>().seedTransactions();
-        // var res = await ServiceLocator.getIt<ChartService>().getChartData();
-        // logI(res.data['data']);
-        // var res = await contactService.seedContact();
-        // var t = AppTransaction.fromJson(res.data);
-        // logI(Formaters.formatDate(t.createdAt));
-      }),
+          // var res = await ServiceLocator.getIt<TransactionService>().seedTransactions();
+          // var res = await ServiceLocator.getIt<ChartService>().getChartData();
+          // logI(res.data['data']);
+          // var res = await contactService.seedContact();
+          // var t = AppTransaction.fromJson(res.data);
+          // logI(Formaters.formatDate(t.createdAt));
+          // }),
+//
+          TransactionService transactionService = TransactionService();
+          ContactService contactService = ContactService();
+          final res = await transactionService.seedTransactions();
+          await contactService.seedContact();
+          logI(res.toJson());
 
-      //     // TransactionService transactionService = TransactionService();
-      //     // ContactService contactService = ContactService();
-      //     // var res = await transactionService.seedTransactions();
-      //     // var res = await contactService.seedContact();
-      //     // logI(res.toJson());
+          // AppLoaders.showLoader(context: context);
 
-      //     // AppLoaders.showLoader(context: context);
-
-      //     // PdfService.printTransaction(AppTransaction.fake());
-      //   },
-      // ),
+          // PdfService.printTransaction(AppTransaction.fake());
+        },
+      ),
       body: SingleChildScrollView(
         child: Container(
           height: kHeight(context),

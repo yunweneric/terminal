@@ -7,6 +7,10 @@ logI(data) {
   if (kDebugMode) logger.i(data);
 }
 
+logD(data) {
+  if (kDebugMode) logger.i(data);
+}
+
 logError(data) {
   if (kDebugMode) logger.e(data);
 }

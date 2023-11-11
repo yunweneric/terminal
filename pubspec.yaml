@@ -15,6 +15,7 @@ dependencies:
   blue_thermal_printer: ^1.2.3
   cached_network_image: ^3.2.3
   cloud_firestore: ^4.9.2
+  # cloud_firestore: ^4.5.2
   country_code_picker: ^3.0.0
   crypto: ^3.0.3
   cupertino_icons: ^1.0.2

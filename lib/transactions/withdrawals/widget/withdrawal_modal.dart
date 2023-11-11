@@ -9,7 +9,6 @@ import 'package:xoecollect/shared/components/buttons.dart';
 import 'package:xoecollect/shared/components/data_builder.dart';
 import 'package:xoecollect/shared/components/loaders.dart';
 import 'package:xoecollect/shared/components/modals.dart';
-import 'package:xoecollect/shared/components/radius.dart';
 import 'package:xoecollect/shared/helpers/helpers.dart';
 import 'package:xoecollect/shared/models/transaction/transaction_status.dart';
 import 'package:xoecollect/shared/models/transaction/transation_model.dart';

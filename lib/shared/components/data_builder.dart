@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 Widget appLoaderBuilder({
@@ -22,6 +23,6 @@ Widget appLoaderBuilder({
     if (!loading && !error && hasData) {
       return child;
     } else
-      return child;
+      return FadeIn(child: child);
   });
 }

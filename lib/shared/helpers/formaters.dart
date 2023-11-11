@@ -58,6 +58,11 @@ class Formaters {
     return formatter.format(amount);
   }
 
+  static String formatCurrencyInKValues(int amount) {
+    final k_value = formatNumber(amount);
+    return k_value;
+  }
+
   static String formatCoordinates(double val) {
     return val.toStringAsFixed(4);
   }

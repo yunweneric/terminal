@@ -90,9 +90,7 @@ class _BaseHomeScreenState extends State<BaseHomeScreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        systemNavigationBarColor: Theme.of(context).primaryColorLight,
-      ),
+      SystemUiOverlayStyle(systemNavigationBarColor: Theme.of(context).primaryColorLight, systemNavigationBarIconBrightness: Brightness.dark),
     );
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
